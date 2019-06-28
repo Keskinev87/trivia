@@ -1,21 +1,28 @@
 import { User } from '../models/User';
-import { UserState } from '../reducers/userReducer';
+import { Friend } from '../models/Friend';
 
 export enum UserActionTypes {
     CHECK_LOGGED_IN = "CHECK_LOGGED_IN",
     TRY_LOGIN = "TRY_LOGIN",
     LOGIN_SUCCESS = "LOGIN_SUCCESS",
-    LOGIN_FAILED = "LOGIN_FAILED"
+    LOGIN_FAILED = "LOGIN_FAILED",
+    LOGOUT = "LOGOUT",
+    FRIEND_IS_ONLINE = "FRIEND_IS_ONLINE",
+    FRIEND_IS_OFFLINE = "FRIEND_IS_OFFLINE",
+    // RECEIVED_CHALLENGE = "RECEIVED_CHALLENGE", //TODO: think of the logic for private games
+    // SEND_CHALLENGE = "SEND_CHALLENGE",
+    TRY_JOIN_RANDOM_ROOM = "",
+    CANCEL_JOIN_RANDOM_ROOM = "",
+    JOIN_RANDOM_ROOM_SUCCESS = "",
+    JOIN_RANDOM_ROOM_FAIL = ""
 }
 
 export interface CheckLoggedIn {
-    type: UserActionTypes.CHECK_LOGGED_IN,
-    token: String
+    type: UserActionTypes.CHECK_LOGGED_IN;
 }
 
 export interface UserTryLogin {
     type: UserActionTypes.TRY_LOGIN;
-    loginCredentials: Object;
 }
 
 export interface UserLoginSuccess {
@@ -29,4 +36,37 @@ export interface UserLoginFailed {
     error: String;
 }
 
-export type UserActions = CheckLoggedIn | UserTryLogin | UserLoginSuccess | UserLoginFailed // | next action
+export interface UserLogout {
+    type: UserActionTypes.LOGOUT;
+}
+
+export interface FriendIsOnline {
+    type: UserActionTypes.FRIEND_IS_ONLINE,
+    friend: Friend
+}
+
+export interface FriendIsOffline {
+    type: UserActionTypes.FRIEND_IS_OFFLINE,
+    friend: Friend
+}
+
+export interface TryJoinRandomRoom {
+    type: UserActionTypes.TRY_JOIN_RANDOM_ROOM
+}
+
+export interface CancelJoinRandomRoom {
+    type: UserActionTypes.CANCEL_JOIN_RANDOM_ROOM
+}
+
+export interface JoinRandomRoomSuccess {
+    type: UserActionTypes.JOIN_RANDOM_ROOM_SUCCESS
+}
+
+export interface JoinRandomRoomFail {
+    type: UserActionTypes.JOIN_RANDOM_ROOM_FAIL
+}
+
+
+
+export type UserActions = CheckLoggedIn | UserTryLogin | UserLoginSuccess | UserLoginFailed | UserLogout
+| FriendIsOnline | FriendIsOffline | TryJoinRandomRoom | CancelJoinRandomRoom | JoinRandomRoomSuccess | JoinRandomRoomFail // | next action

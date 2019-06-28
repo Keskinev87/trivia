@@ -2,10 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import Menu from './components/Menu';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { Store } from 'redux';
 import configureStore, { AppState } from './store/Store';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 interface AppProps {
     store: Store<AppState>
@@ -14,7 +16,10 @@ interface AppProps {
 const Root: React.SFC<AppProps> = props => {
     return (
         <Provider store={props.store}>
-            <App />
+            <Router>
+                <Route exact path="/" component={App} />
+                <Route path = "/menu" component={Menu} />
+            </Router>
         </Provider>
     )
 }

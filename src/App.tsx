@@ -3,31 +3,49 @@ import logo from './logo.svg';
 import './App.css';
 import { connect } from 'react-redux';
 import { User } from './models/User';
+import { UserState } from './reducers/userReducer';
 import { AppState } from './store/Store';
 import io from 'socket.io-client';
-import { UserActions } from './actions/UserActions'
+import { UserActionTypes } from './actions/UserActions'
 
 
-var socket: any;
+export var socket: any;
 
 interface AppProps {
-  user: User | undefined
+  dispatch: any,
+  history: any,
+  userState: UserState
 }
 
 class App extends React.Component<AppProps> {
-  componentWillMount(){
+  componentDidMount() {
+    console.log("Props are")
+    console.log(this.props)
     socket = io('localhost:3001');
-    socket.emit("test");
+    socket.emit("get user");
+    this.props.dispatch({
+      type: UserActionTypes.TRY_LOGIN
+    })
     socket.on("user", (data: User) => {
-      console.log(data);
+      this.props.dispatch({
+        user: data,
+        type: UserActionTypes.LOGIN_SUCCESS,
+      });
+      this.props.history.push('/menu');
     })
   }
   public render() {
-    const user = this.props.user;
+    const userState = this.props.userState;
+    console.log("User state is");
+    console.log(userState)
     return (
       <div className="name-container">
-        <p>There should be a user</p>
-        {user && user.nickName}
+        {userState.isLoading && 
+          <p>Loading...</p>
+        }
+        {userState.user && 
+          <p>Hello {userState.user.nickName}</p>
+        }
       </div>
     );
   }
@@ -36,8 +54,9 @@ class App extends React.Component<AppProps> {
 // Grab the characters from the store and make them available on props
 const mapStateToProps = (store: AppState) => {
   return {
-    user: store.userState.user
+    userState: store.userState
   };
 };
 
 export default connect(mapStateToProps)(App);
+

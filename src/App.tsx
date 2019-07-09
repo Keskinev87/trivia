@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { connect } from 'react-redux';
 import { User } from './models/User';
@@ -7,18 +6,20 @@ import { UserState } from './reducers/userReducer';
 import { AppState } from './store/Store';
 import io from 'socket.io-client';
 import { UserActionTypes } from './actions/UserActions'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import Menu from './components/Menu';
+import LoginSignup from './components/LoginSignup';
 
 
 export var socket: any;
 
 interface AppProps {
   dispatch: any,
-  history: any,
   userState: UserState
 }
 
 class App extends React.Component<AppProps> {
-  componentDidMount() {
+  componentWillMount() {
     console.log("Props are")
     console.log(this.props)
     socket = io('localhost:3001');
@@ -31,21 +32,18 @@ class App extends React.Component<AppProps> {
         user: data,
         type: UserActionTypes.LOGIN_SUCCESS,
       });
-      this.props.history.push('/menu');
-    })
+    });
   }
   public render() {
     const userState = this.props.userState;
-    console.log("User state is");
-    console.log(userState)
+
     return (
-      <div className="name-container">
-        {userState.isLoading && 
-          <p>Loading...</p>
-        }
-        {userState.user && 
-          <p>Hello {userState.user.nickName}</p>
-        }
+      <div className="main">
+        {userState.user ? 
+        <Router>
+          <Route exact path="/" component = { Menu } />
+        </Router> :
+        <LoginSignup />}
       </div>
     );
   }

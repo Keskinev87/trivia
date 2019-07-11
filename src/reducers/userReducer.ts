@@ -3,12 +3,14 @@ import { User } from '../models/User';
 import { UserActionTypes, UserActions } from '../actions/UserActions'
 
 export enum PlayerStatus {
-    NONE = "NONE",
+    IDLE = "IDLE",
     CHALLENGED = "CHALLENGED",
     PLAYING = "PLAYING",
     WAITING = "WAITING",
     OFFLINE = "OFFLINE",
     RECONNECTING = "RECONNECTING",
+    SIGNINGUP = "SIGNINGUP",
+    LOGGINGIN = "LOGGINGIN"
 }
 
 export interface UserState {
@@ -19,16 +21,20 @@ export interface UserState {
     isLoading: Boolean,
     isError: Boolean,
     error: String,
+    email: String,
+    password: String
 }
 
 const initialUserState: UserState = {
     user: undefined,
     token: undefined,
-    status: PlayerStatus.NONE,
+    status: PlayerStatus.IDLE,
     challengeRoomId: undefined,
     isLoading: false,
     isError: false,
-    error: ''
+    error: '',
+    email: '',
+    password: ''
 }
 
 export const userReducer: Reducer<UserState, UserActions> = (
@@ -42,6 +48,18 @@ export const userReducer: Reducer<UserState, UserActions> = (
                 isLoading: true,
             }
         }
+        case UserActionTypes.SELECT_LOGIN: {
+            return {
+                ...state,
+                status: PlayerStatus.LOGGINGIN
+            }
+        }
+        case UserActionTypes.SELECT_SIGNUP: {
+            return {
+                ...state,
+                status: PlayerStatus.SIGNINGUP
+            }
+        }
         case UserActionTypes.TRY_LOGIN: {
             return {
                 ...state,
@@ -50,10 +68,10 @@ export const userReducer: Reducer<UserState, UserActions> = (
         }
         case UserActionTypes.LOGIN_FAILED: {
             return{
+                ...state,
                 isLoading: false,
                 isError: true,
                 error: action.error,
-                ...state
             }
         }
         case UserActionTypes.LOGIN_SUCCESS: {

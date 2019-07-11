@@ -3,6 +3,8 @@ import { Friend } from '../models/Friend';
 
 export enum UserActionTypes {
     CHECK_LOGGED_IN = "CHECK_LOGGED_IN",
+    SELECT_LOGIN = "SELECT_LOGIN",
+    SELECT_SIGNUP = "SELECT_SIGNUP",
     TRY_LOGIN = "TRY_LOGIN",
     LOGIN_SUCCESS = "LOGIN_SUCCESS",
     LOGIN_FAILED = "LOGIN_FAILED",
@@ -19,6 +21,14 @@ export enum UserActionTypes {
 
 export interface CheckLoggedIn {
     type: UserActionTypes.CHECK_LOGGED_IN;
+}
+
+export interface SelectLogin {
+    type: UserActionTypes.SELECT_LOGIN;
+}
+
+export interface SelectSignup {
+    type: UserActionTypes.SELECT_SIGNUP;
 }
 
 export interface UserTryLogin {
@@ -68,5 +78,5 @@ export interface JoinRandomRoomFail {
 
 
 
-export type UserActions = CheckLoggedIn | UserTryLogin | UserLoginSuccess | UserLoginFailed | UserLogout
+export type UserActions = CheckLoggedIn | SelectLogin | SelectSignup | UserTryLogin | UserLoginSuccess | UserLoginFailed | UserLogout
 | FriendIsOnline | FriendIsOffline | TryJoinRandomRoom | CancelJoinRandomRoom | JoinRandomRoomSuccess | JoinRandomRoomFail // | next action

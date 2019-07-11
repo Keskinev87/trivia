@@ -7,7 +7,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.auth-nav {
+  display: block;
+}
+
+.auth-section {
+  display: inline-block;
+  text-align: center;
+  width: 50%;
+  box-sizing: border-box;
+  border: 1px solid black;
+}
+
+.auth-section:hover {
+  background-color: lightblue;
 }

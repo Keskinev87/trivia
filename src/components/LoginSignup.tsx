@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { socket } from '../App';
-import { UserState } from '../reducers/userReducer';
 import { AppState } from '../store/Store'
+import { UserActionTypes } from '../actions/UserActions';
+import Login from './authentication/Login'
 
 // interface UserProps {
 //   dispatch: any,
@@ -11,22 +12,47 @@ import { AppState } from '../store/Store'
 // }
 
 class LoginSignup extends React.Component<any> {
+  componentWillMount() {
+    this.props.dispatch({
+      type: UserActionTypes.SELECT_LOGIN
+    })
+  }
   componentDidMount() {
     socket.emit("test");
     socket.on("test received", () => {
         console.log("Received back the test")
     })
   }
+
+  selectSignup = () => {
+    this.props.dispatch({
+      type: UserActionTypes.SELECT_SIGNUP
+    })
+  }
+
+  selectLogin = () => {
+    this.props.dispatch({
+      type: UserActionTypes.SELECT_LOGIN
+    })
+  }
+
+
   public render() {
     return (
         <div>
-            <p>Login / Signup</p>
+            <div className="auth-nav">
+              <div className="auth-section" onClick={this.selectLogin}><span >Login</span></div>
+              <div className="auth-section" onClick={this.selectSignup}><span >Signup</span></div>
+            </div>
+            <div className="auth-form">
+              {this.props.userState.status === "SIGNINGUP" ? "Signup" : <Login />}
+            </div>
+            {this.props.userState.isError && <p>{this.props.userState.error}</p>}
         </div>
     );
   }
 }
 
-// Grab the characters from the store and make them available on props
 const mapStateToProps = (store: AppState) => {
   return {
     userState: store.userState

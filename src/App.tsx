@@ -22,8 +22,10 @@ class App extends React.Component<AppProps> {
   componentWillMount() {
     console.log("Props are")
     console.log(this.props)
-    socket = io('localhost:3001');
+    // socket = socketIOClient(this.state.endpoint,{query: token ? `auth_token=${token}` : ''});
+    socket = io('localhost:3001', {query: this.props.userState.token ? `auth_token=${this.props.userState.token}` : '1234', reconnection: true});
     socket.emit("get user");
+    console.log(socket)
     this.props.dispatch({
       type: UserActionTypes.TRY_LOGIN
     })
@@ -33,6 +35,18 @@ class App extends React.Component<AppProps> {
         type: UserActionTypes.LOGIN_SUCCESS,
       });
     });
+    socket.on("error", (data: any) => {
+      console.log(data);
+    });
+    socket.on("login success", (data: any) => {
+      socket = io.connect('localhost:3001', {forceNew: true, query: `auth_token=${data.token}`});
+      console.log(socket)
+    })
+    if(this.props.userState.token){
+      console.log("Reconnecting")
+      socket = io.connect('localhost:3001', {forceNew: true, query: `auth_token=${this.props.userState.token}`}); 
+    }
+      
   }
   public render() {
     const userState = this.props.userState;

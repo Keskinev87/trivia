@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { socket } from '../../App';
 import { UserActionTypes } from '../../actions/UserActions'
 
-class Login extends React.Component<any, any> {
+class Signup extends React.Component<any, any> {
     constructor(props:any) {
         super(props);
         
@@ -17,27 +17,24 @@ class Login extends React.Component<any, any> {
     }
 
     componentWillMount() {
-        socket.on("login failed", (data: any) => {
+        socket.on("signup failed", (data: any) => {
             console.log("error")
             console.log(data.reason)
             this.props.dispatch({
-                type: UserActionTypes.LOGIN_FAILED,
+                type: UserActionTypes.SIGNUP_FAILED,
                 error: data.reason
             })
         });
-        socket.on("login success", (data: any) => {
-            console.log("Login succeded");
+        socket.on("signup success", (data: any) => {
+            console.log("Signup was successfull")
             this.props.dispatch({
-                type: UserActionTypes.LOGIN_SUCCESS,
-                user: data.user,
-                token: data.token
+                type: UserActionTypes.SIGNUP_SUCCESS
             })
         })
     }
 
     componentWillUnmount() {
         socket.off("login failed");
-        socket.off("login success");
     }
 
     handleChange(event: any) {
@@ -50,16 +47,15 @@ class Login extends React.Component<any, any> {
     handleSubmit(event : any) {
         event.preventDefault();
         this.props.dispatch({
-            type:UserActionTypes.TRY_LOGIN,
+            type:UserActionTypes.TRY_SIGNUP,
         })
-        socket.emit("login", {email: this.state.email, password: this.state.password});
-        
+        socket.emit("signup", {email: this.state.email, password: this.state.password});
     }
 
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <h2>Login</h2>
+                <h2>Signup</h2>
                 <div className="form-group">
                     <label htmlFor='email'>Email</label>
                     <input type="text" name="email" value={this.state.email} onChange={this.handleChange} /> 
@@ -68,8 +64,7 @@ class Login extends React.Component<any, any> {
                     <label htmlFor='password'>Password</label>
                     <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
                 </div>
-                {this.props.userState.isError && <p>{this.props.userState.error}</p>}
-                <button type="submit" value="Submit">Login</button>
+                <button type="submit" value="Submit">Signup</button>
             </form>
         )
     }
@@ -81,4 +76,4 @@ const mapStateToProps = (store: AppState) => {
     };
   };
   
-export default connect(mapStateToProps)(Login);
+export default connect(mapStateToProps)(Signup);

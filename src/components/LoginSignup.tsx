@@ -47,7 +47,6 @@ class LoginSignup extends React.Component<any> {
             <div className="auth-form">
               {this.props.userState.status === "SIGNINGUP" ? "Signup" : <Login />}
             </div>
-            {this.props.userState.isError && <p>{this.props.userState.error}</p>}
         </div>
     );
   }

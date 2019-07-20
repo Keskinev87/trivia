@@ -13,29 +13,11 @@ interface AppProps {
   gameState: GameState
 }
 
-class Menu extends React.Component<AppProps> {
+class Game extends React.Component<AppProps> {
 
   render() {
-    let randomBtnProps = {
-      btnName: "Random Game",
-      onClick: service.searchForRandomGame
-    }
-    let friendBtnProps = {
-      btnName: "Challenge Friend",
-      onClick: service.challengeFriend
-    }
-    let loading = !this.props.gameState.isLoading;
     return(
-        loading ? (
-            <div className="menu-container">
-              <Button {...randomBtnProps} />
-              <Button {...friendBtnProps} />
-            </div>
-        ) : (
-            <div className="loader">
-              Loading...
-            </div>
-        )
+        <div>I want to play a game</div>
     )
   }
 }
@@ -48,4 +30,4 @@ const mapStateToProps = (store: AppState) => {
   };
 };
 
-export default connect(mapStateToProps)(Menu);
+export default connect(mapStateToProps)(Game);

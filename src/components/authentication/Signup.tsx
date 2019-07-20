@@ -1,8 +1,7 @@
 import React from 'react';
 import { AppState } from '../../store/Store';
 import { connect } from 'react-redux';
-import { socket } from '../../App';
-import { UserActionTypes } from '../../actions/UserActions'
+import { service } from '../../services/socket-service';
 
 class Signup extends React.Component<any, any> {
     constructor(props:any) {
@@ -16,27 +15,6 @@ class Signup extends React.Component<any, any> {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentWillMount() {
-        socket.on("signup failed", (data: any) => {
-            console.log("error")
-            console.log(data.reason)
-            this.props.dispatch({
-                type: UserActionTypes.SIGNUP_FAILED,
-                error: data.reason
-            })
-        });
-        socket.on("signup success", (data: any) => {
-            console.log("Signup was successfull")
-            this.props.dispatch({
-                type: UserActionTypes.SIGNUP_SUCCESS
-            })
-        })
-    }
-
-    componentWillUnmount() {
-        socket.off("login failed");
-    }
-
     handleChange(event: any) {
         let name: any = event.target && event.target.name;
         this.setState({
@@ -46,10 +24,7 @@ class Signup extends React.Component<any, any> {
 
     handleSubmit(event : any) {
         event.preventDefault();
-        this.props.dispatch({
-            type:UserActionTypes.TRY_SIGNUP,
-        })
-        socket.emit("signup", {email: this.state.email, password: this.state.password});
+        service.trySignup(this.state.email, this.state.password);
     }
 
     render() {

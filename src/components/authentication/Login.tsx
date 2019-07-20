@@ -1,8 +1,7 @@
 import React from 'react';
 import { AppState } from '../../store/Store';
 import { connect } from 'react-redux';
-import { socket } from '../../App';
-import { UserActionTypes } from '../../actions/UserActions'
+import { service } from '../../services/socket-service';
 
 class Login extends React.Component<any, any> {
     constructor(props:any) {
@@ -16,30 +15,6 @@ class Login extends React.Component<any, any> {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentWillMount() {
-        socket.on("login failed", (data: any) => {
-            console.log("error")
-            console.log(data.reason)
-            this.props.dispatch({
-                type: UserActionTypes.LOGIN_FAILED,
-                error: data.reason
-            })
-        });
-        socket.on("login success", (data: any) => {
-            console.log("Login succeded");
-            this.props.dispatch({
-                type: UserActionTypes.LOGIN_SUCCESS,
-                user: data.user,
-                token: data.token
-            })
-        })
-    }
-
-    componentWillUnmount() {
-        socket.off("login failed");
-        socket.off("login success");
-    }
-
     handleChange(event: any) {
         let name: any = event.target && event.target.name;
         this.setState({
@@ -49,11 +24,7 @@ class Login extends React.Component<any, any> {
 
     handleSubmit(event : any) {
         event.preventDefault();
-        this.props.dispatch({
-            type:UserActionTypes.TRY_LOGIN,
-        })
-        socket.emit("login", {email: this.state.email, password: this.state.password});
-        
+        service.tryLogin(this.state.email, this.state.password)
     }
 
     render() {

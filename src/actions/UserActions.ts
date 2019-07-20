@@ -2,9 +2,6 @@ import { User } from '../models/User';
 import { Friend } from '../models/Friend';
 
 export enum UserActionTypes {
-    CHECK_LOGGED_IN = "CHECK_LOGGED_IN",
-    SELECT_LOGIN = "SELECT_LOGIN",
-    SELECT_SIGNUP = "SELECT_SIGNUP",
     TRY_LOGIN = "TRY_LOGIN",
     LOGIN_SUCCESS = "LOGIN_SUCCESS",
     LOGIN_FAILED = "LOGIN_FAILED",
@@ -14,24 +11,13 @@ export enum UserActionTypes {
     SIGNUP_FAILED = "SIGNUP_FAILED",
     FRIEND_IS_ONLINE = "FRIEND_IS_ONLINE",
     FRIEND_IS_OFFLINE = "FRIEND_IS_OFFLINE",
+    START_RANDOM_GAME = "START_RANDOM_GAME",
     // RECEIVED_CHALLENGE = "RECEIVED_CHALLENGE", //TODO: think of the logic for private games
     // SEND_CHALLENGE = "SEND_CHALLENGE",
     TRY_JOIN_RANDOM_ROOM = "",
     CANCEL_JOIN_RANDOM_ROOM = "",
     JOIN_RANDOM_ROOM_SUCCESS = "",
     JOIN_RANDOM_ROOM_FAIL = ""
-}
-
-export interface CheckLoggedIn {
-    type: UserActionTypes.CHECK_LOGGED_IN;
-}
-
-export interface SelectLogin {
-    type: UserActionTypes.SELECT_LOGIN;
-}
-
-export interface SelectSignup {
-    type: UserActionTypes.SELECT_SIGNUP;
 }
 
 export interface UserTryLogin {
@@ -75,6 +61,10 @@ export interface FriendIsOffline {
     friend: Friend
 }
 
+export interface StartRandomGame {
+    type: UserActionTypes.START_RANDOM_GAME
+}
+
 export interface TryJoinRandomRoom {
     type: UserActionTypes.TRY_JOIN_RANDOM_ROOM
 }
@@ -93,5 +83,5 @@ export interface JoinRandomRoomFail {
 
 
 
-export type UserActions = CheckLoggedIn | SelectLogin | SelectSignup | UserTryLogin | UserLoginSuccess | UserLoginFailed | UserLogout
-| TrySignup | SignupSuccess | SignupFailed | FriendIsOnline | FriendIsOffline | TryJoinRandomRoom | CancelJoinRandomRoom | JoinRandomRoomSuccess | JoinRandomRoomFail // | next action
+export type UserActions = UserTryLogin | UserLoginSuccess | UserLoginFailed | UserLogout| TrySignup | SignupSuccess | SignupFailed |
+ FriendIsOnline | FriendIsOffline | StartRandomGame | TryJoinRandomRoom | CancelJoinRandomRoom | JoinRandomRoomSuccess | JoinRandomRoomFail // | next action

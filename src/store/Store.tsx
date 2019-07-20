@@ -1,18 +1,20 @@
-import { applyMiddleware, combineReducers, createStore, Store } from 'redux';
-import thunk from 'redux-thunk';
+import { combineReducers, createStore, Store } from 'redux';
 
 import {userReducer, UserState} from '../reducers/userReducer';
+import { GameState, gameReducer } from '../reducers/gameReducer';
 
 
 export interface AppState {
     userState: UserState,
+    gameState: GameState
 }
 
 const rootReducer = combineReducers<AppState>({
-    userState: userReducer
+    userState: userReducer,
+    gameState: gameReducer
 })
 
-export default function configureStore(): Store<AppState, any> {
-    const store = createStore(rootReducer, undefined, applyMiddleware(thunk));
+export default function configureStore(): Store<AppState> {
+    const store = createStore(rootReducer);
     return store;
 }

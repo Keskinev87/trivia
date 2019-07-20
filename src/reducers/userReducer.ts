@@ -9,8 +9,6 @@ export enum PlayerStatus {
     WAITING = "WAITING",
     OFFLINE = "OFFLINE",
     RECONNECTING = "RECONNECTING",
-    SIGNINGUP = "SIGNINGUP",
-    LOGGINGIN = "LOGGINGIN"
 }
 
 export interface UserState {
@@ -42,24 +40,6 @@ export const userReducer: Reducer<UserState, UserActions> = (
     action
 ) => {
     switch (action.type) {
-        case UserActionTypes.CHECK_LOGGED_IN: {
-            return {
-                ...state,
-                isLoading: true,
-            }
-        }
-        case UserActionTypes.SELECT_LOGIN: {
-            return {
-                ...state,
-                status: PlayerStatus.LOGGINGIN
-            }
-        }
-        case UserActionTypes.SELECT_SIGNUP: {
-            return {
-                ...state,
-                status: PlayerStatus.SIGNINGUP
-            }
-        }
         case UserActionTypes.TRY_LOGIN: {
             return {
                 ...state,
@@ -75,6 +55,7 @@ export const userReducer: Reducer<UserState, UserActions> = (
             }
         }
         case UserActionTypes.LOGIN_SUCCESS: {
+            console.log("Login was succ")
             return {
                 ...state,
                 isLoading: false,
@@ -89,6 +70,12 @@ export const userReducer: Reducer<UserState, UserActions> = (
                 ...state,
                 user: undefined,
                 token: ''
+            }
+        }
+        case UserActionTypes.START_RANDOM_GAME: {
+            return {
+                ...state,
+                status: PlayerStatus.PLAYING
             }
         }
         default: {

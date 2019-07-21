@@ -1,4 +1,5 @@
 export interface Question {
+    questionType: String,
     body: String,
     answerA: String,
     answerB: String,

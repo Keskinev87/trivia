@@ -52,7 +52,7 @@ export const gameReducer: Reducer<GameState, GameActions> = (
                 isLoading: false
             }
         }
-        case GameActionTypes.START_RANDOM_GAME: {
+        case GameActionTypes.CREATE_RANDOM_GAME: {
             return {
                 ...state,
                 status: GameStatus.STARTING,
@@ -61,7 +61,13 @@ export const gameReducer: Reducer<GameState, GameActions> = (
                 roomId: action.roomId
             }
         }
-        case GameActionTypes.RECEIVE_QUESTION: {
+        case GameActionTypes.START_RANDOM_GAME: {
+            return {
+                ...state,
+                status: GameStatus.RUNNING
+            }
+        }
+        case GameActionTypes.RECEIVED_QUESTION: {
             return {
                 ...state,
                 currentQuestion: action.question

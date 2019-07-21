@@ -69,11 +69,29 @@ socket.on("logout success", () => {
 // GAME EVENTS
 socket.on("random game created", (data: any) => {
     console.log("Game was created")
+    console.log(data)
     store.dispatch({
-        type: GameActionTypes.START_RANDOM_GAME,
+        type: GameActionTypes.CREATE_RANDOM_GAME,
         roomId: data.roomId,
         players: data.players
     });
+});
+
+socket.on("game started", () => {
+    console.log("Game started");
+    store.dispatch({
+        type: GameActionTypes.START_RANDOM_GAME
+    })
+});
+
+socket.on("new question", (data:any) => {
+    console.log("QUestion is");
+    console.log(data.question);
+    store.dispatch({
+        type: GameActionTypes.RECEIVED_QUESTION,
+        question: data.question
+    });
+    socket.emit("question received");
 })
 
 export const service: any = {
@@ -103,5 +121,9 @@ export const service: any = {
             type: GameActionTypes.REQUEST_RANDOM_GAME_SEARCH
         })
         socket.emit("join random game")
+    },
+    getQuestion: () => {
+        console.log("Getting question");
+        socket.emit("get question");
     }
 }

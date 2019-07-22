@@ -9,13 +9,14 @@ export enum GameStatus {
     WAITING_FOR_PLAYERS = "WAITING_FOR_PLAYERS",
     STARTING = "STARTING",
     RUNNING = "RUNNING",
+    WAITING_FOR_ANSWER = "WAITING_FOR_ANSWER",
     OVER = "OVER"
 }
 
 export interface GameState {
     roomId: Number | null,
     status: GameStatus,
-    currentQuestion: Question | {},
+    currentQuestion: Question | undefined,
     players: object | undefined,
     isLoading: Boolean,
     isError: Boolean,
@@ -25,7 +26,7 @@ export interface GameState {
 const initialGameState: GameState = {
     roomId: null,
     status: GameStatus.NOT_PLAYING,
-    currentQuestion: {},
+    currentQuestion: undefined,
     players: undefined,
     isLoading: false,
     isError: false,
@@ -70,7 +71,8 @@ export const gameReducer: Reducer<GameState, GameActions> = (
         case GameActionTypes.RECEIVED_QUESTION: {
             return {
                 ...state,
-                currentQuestion: action.question
+                currentQuestion: action.question,
+                status: GameStatus.WAITING_FOR_ANSWER
             }
         }
         default: {

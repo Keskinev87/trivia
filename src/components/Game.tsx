@@ -6,6 +6,7 @@ import { AppState } from '../store/Store';
 import Button from './shared/Button';
 import { service } from '../services/socket-service';
 import { GameState, GameStatus } from '../reducers/gameReducer';
+import QuestionComponent from './game/QuestionComponent';
 
 interface AppProps {
   userState: UserState,
@@ -19,8 +20,19 @@ class Game extends React.Component<AppProps> {
   }
 
   render() {
+    let element: any;
+    if (this.props.gameState.status === GameStatus.WAITING_FOR_ANSWER && this.props.gameState.currentQuestion) {
+      console.log("The props for game are")
+      console.log(this.props.gameState.currentQuestion)
+      element = <QuestionComponent {...this.props.gameState.currentQuestion} />
+    } else {
+      element = <span>Loading...</span>
+    }
+      
     return(
-        <div>I want to play a game</div>
+        <div>
+          {element}
+        </div>
     )
   }
 }

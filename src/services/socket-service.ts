@@ -125,5 +125,8 @@ export const service: any = {
     getQuestion: () => {
         console.log("Getting question");
         socket.emit("get question");
+    },
+    sendAnswer: (event: any) => {
+        console.log(event.target.innerText)
     }
 }

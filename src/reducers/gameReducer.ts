@@ -9,7 +9,9 @@ export enum GameStatus {
     WAITING_FOR_PLAYERS = "WAITING_FOR_PLAYERS",
     STARTING = "STARTING",
     RUNNING = "RUNNING",
+    ANSWER_SUBMITTED = "ANSWER_SUBMITTED",
     WAITING_FOR_ANSWER = "WAITING_FOR_ANSWER",
+    RESOLVING_ANSWERS = "RESOLVING_ANSWERS",
     OVER = "OVER"
 }
 
@@ -17,6 +19,8 @@ export interface GameState {
     roomId: Number | null,
     status: GameStatus,
     currentQuestion: Question | undefined,
+    currentAnswer: String | undefined,
+    correctAnswer: Boolean,
     players: object | undefined,
     isLoading: Boolean,
     isError: Boolean,
@@ -27,6 +31,8 @@ const initialGameState: GameState = {
     roomId: null,
     status: GameStatus.NOT_PLAYING,
     currentQuestion: undefined,
+    currentAnswer: undefined,
+    correctAnswer: false,
     players: undefined,
     isLoading: false,
     isError: false,
@@ -72,7 +78,42 @@ export const gameReducer: Reducer<GameState, GameActions> = (
             return {
                 ...state,
                 currentQuestion: action.question,
+            }
+        }
+        case GameActionTypes.SHOW_QUESTION: {
+            return {
+                ...state,
                 status: GameStatus.WAITING_FOR_ANSWER
+            }
+        }
+        case GameActionTypes.SEND_ANSWER: {
+            return {
+                ...state,
+                status: GameStatus.ANSWER_SUBMITTED,
+                currentAnswer: action.answer
+            }
+        }
+        case GameActionTypes.CORRECT_ANSWER: {
+            return {
+                ...state,
+                status: GameStatus.RESOLVING_ANSWERS,
+                correctAnswer: true
+            }
+        }
+        case GameActionTypes.WRONG_ANSWER: {
+            return {
+                ...state,
+                status: GameStatus.RESOLVING_ANSWERS,
+                correctAnswer: false
+            }
+        }
+        case GameActionTypes.START_NEW_ROUND: {
+            return {
+                ...state,
+                status: GameStatus.RUNNING,
+                currentQuestion: undefined,
+                currentAnswer: undefined,
+                correctAnswer: false
             }
         }
         default: {

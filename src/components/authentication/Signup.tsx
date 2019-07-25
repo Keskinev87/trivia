@@ -9,7 +9,8 @@ class Signup extends React.Component<any, any> {
         
         this.state = {
             email:'',
-            password:''
+            password:'',
+            nickName:''
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,7 +25,7 @@ class Signup extends React.Component<any, any> {
 
     handleSubmit(event : any) {
         event.preventDefault();
-        service.trySignup(this.state.email, this.state.password);
+        service.trySignup(this.state.email, this.state.password, this.state.nickName);
     }
 
     render() {
@@ -38,6 +39,10 @@ class Signup extends React.Component<any, any> {
                 <div className="form-group">
                     <label htmlFor='password'>Password</label>
                     <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor='nickName'>Nickname</label>
+                    <input type="text" name="nickName" value={this.state.nickName} onChange={this.handleChange} />
                 </div>
                 <button type="submit" value="Submit">Signup</button>
             </form>

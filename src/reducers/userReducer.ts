@@ -65,6 +65,28 @@ export const userReducer: Reducer<UserState, UserActions> = (
                 error: ''
             }
         }
+        case UserActionTypes.TRY_SIGNUP: {
+            return {
+                ...state,
+                isLoading: true
+            }
+        }
+        case UserActionTypes.SIGNUP_FAILED: {
+            return {
+                ...state,
+                isLoading: false,
+                isError: true,
+                error: action.reason
+            }
+        }
+        case UserActionTypes.SIGNUP_SUCCESS: {
+            return {
+                ...state,
+                isLoading: false,
+                isError: false,
+                error: ''
+            }
+        }
         case UserActionTypes.LOGOUT: {
             return {
                 ...state,

@@ -49,6 +49,7 @@ export interface SignupSuccess {
 
 export interface SignupFailed {
     type: UserActionTypes.SIGNUP_FAILED;
+    reason: String;
 }
 
 export interface FriendIsOnline {

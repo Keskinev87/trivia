@@ -94,6 +94,39 @@ socket.on("new question", (data:any) => {
     socket.emit("question received");
 })
 
+socket.on("show question", () => {
+    store.dispatch({
+        type: GameActionTypes.SHOW_QUESTION
+    })
+})
+
+socket.on("game over", () => {
+    console.log("Game is over")
+})
+
+socket.on("show answer", (data: any) => {
+    console.log("The answer is")
+    console.log(data.answer)
+    console.log("Your answer is");
+    console.log(store.getState().gameState)
+    if(data.answer === store.getState().gameState.currentAnswer) {
+        console.log("Right answer")
+        store.dispatch({
+            type: GameActionTypes.CORRECT_ANSWER
+        })
+    } else {
+        console.log("Wrong answer")
+        store.dispatch({
+            type: GameActionTypes.WRONG_ANSWER
+        })
+    }
+    setTimeout(() => {
+        store.dispatch({
+            type: GameActionTypes.START_NEW_ROUND
+        })
+    }, 3000)
+})
+
 export const service: any = {
     getUser: () => {
         console.log("Trying to get user")
@@ -108,11 +141,11 @@ export const service: any = {
         })
         socket.emit("login", {email: email, password: password});
     },
-    trySignup: (email: string, password: string) => {
+    trySignup: (email: string, password: string, nickName: string) => {
         store.dispatch({
             type:UserActionTypes.TRY_SIGNUP,
         })
-        socket.emit("signup", {email: email, password: password});
+        socket.emit("signup", {email: email, password: password, nickName: nickName});
     },
     //game services
     searchForRandomGame: () => {
@@ -127,6 +160,11 @@ export const service: any = {
         socket.emit("get question");
     },
     sendAnswer: (event: any) => {
-        console.log(event.target.innerText)
+        console.log(event.target.id);
+        store.dispatch({
+            type: GameActionTypes.SEND_ANSWER,
+            answer: event.target.id
+        })
+        socket.emit('set answer', {answer: event.target.id});
     }
 }

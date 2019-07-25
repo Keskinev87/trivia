@@ -7,7 +7,11 @@ export enum GameActionTypes {
     CREATE_RANDOM_GAME = "CREATE_RANDOM_GAME",
     START_RANDOM_GAME = "START_RANDOM_GAME",
     RECEIVED_QUESTION = "RECEIVE_QUESTION",
+    SHOW_QUESTION = "SHOW_QUESTION",
     SEND_ANSWER = "SEND_ANSWER",
+    CORRECT_ANSWER = "CORRECT_ANSWER",
+    WRONG_ANSWER = "WRONG_ANSWER",
+    START_NEW_ROUND = "START_NEW_ROUND",
     END_GAME = "END_GAME"
 }
 
@@ -29,17 +33,32 @@ export interface StartRandomGame {
     type: GameActionTypes.START_RANDOM_GAME;
 }
 
-export interface SendAnswer {
-    type: GameActionTypes.SEND_ANSWER;
-    answer: String;
-}
-
 export interface ReceivedQuestion {
     type: GameActionTypes.RECEIVED_QUESTION;
     question: Question;
 }
 
+export interface ShowQuestion {
+    type: GameActionTypes.SHOW_QUESTION;
+}
+
+export interface SendAnswer {
+    type: GameActionTypes.SEND_ANSWER;
+    answer: String;
+}
+
+export interface CorrectAnswer {
+    type: GameActionTypes.CORRECT_ANSWER;
+}
+
+export interface WrongAnswer {
+    type: GameActionTypes.WRONG_ANSWER;
+}
+
+export interface StartNewRound {
+    type: GameActionTypes.START_NEW_ROUND;
+}
 
 
 export type GameActions = RequestRandomGameSearch | CancelRandomGameSearch | CreateRandomGame | StartRandomGame | ReceivedQuestion
- | SendAnswer  // | next action
+ | ShowQuestion | SendAnswer | CorrectAnswer | WrongAnswer | StartNewRound  // | next action

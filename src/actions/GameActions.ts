@@ -12,7 +12,7 @@ export enum GameActionTypes {
     CORRECT_ANSWER = "CORRECT_ANSWER",
     WRONG_ANSWER = "WRONG_ANSWER",
     START_NEW_ROUND = "START_NEW_ROUND",
-    END_GAME = "END_GAME"
+    GAME_OVER = "GAME_OVER"
 }
 
 export interface RequestRandomGameSearch {
@@ -49,16 +49,22 @@ export interface SendAnswer {
 
 export interface CorrectAnswer {
     type: GameActionTypes.CORRECT_ANSWER;
+    playersAnswers: any;
 }
 
 export interface WrongAnswer {
     type: GameActionTypes.WRONG_ANSWER;
+    playersAnswers: any;
 }
 
 export interface StartNewRound {
     type: GameActionTypes.START_NEW_ROUND;
 }
 
+export interface GameOver {
+    type: GameActionTypes.GAME_OVER;
+}
+
 
 export type GameActions = RequestRandomGameSearch | CancelRandomGameSearch | CreateRandomGame | StartRandomGame | ReceivedQuestion
- | ShowQuestion | SendAnswer | CorrectAnswer | WrongAnswer | StartNewRound  // | next action
+ | ShowQuestion | SendAnswer | CorrectAnswer | WrongAnswer | StartNewRound | GameOver  // | next action

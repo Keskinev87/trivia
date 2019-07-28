@@ -112,12 +112,14 @@ socket.on("show answer", (data: any) => {
     if(data.answer === store.getState().gameState.currentAnswer) {
         console.log("Right answer")
         store.dispatch({
-            type: GameActionTypes.CORRECT_ANSWER
+            type: GameActionTypes.CORRECT_ANSWER,
+            playersAnswers: data.playersAnswers
         })
     } else {
         console.log("Wrong answer")
         store.dispatch({
-            type: GameActionTypes.WRONG_ANSWER
+            type: GameActionTypes.WRONG_ANSWER,
+            playersAnswers: data.playersAnswers
         })
     }
     setTimeout(() => {

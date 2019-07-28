@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 // import { socket } from '../App';
 import { UserState } from '../reducers/userReducer';
 import { AppState } from '../store/Store';
-import Button from './shared/Button';
 import { service } from '../services/socket-service';
 import { GameState, GameStatus } from '../reducers/gameReducer';
 import QuestionComponent from './game/QuestionComponent';
@@ -19,14 +18,59 @@ class Game extends React.Component<AppProps> {
     this.props.gameState.status === GameStatus.RUNNING && service.getQuestion();
   }
 
+  componentDidUpdate() {
+    this.props.gameState.status === GameStatus.RUNNING && service.getQuestion();
+  }
+
   render() {
     let element: any;
-    if (this.props.gameState.status === GameStatus.WAITING_FOR_ANSWER && this.props.gameState.currentQuestion) {
-      console.log("The props for game are")
-      console.log(this.props.gameState.currentQuestion)
-      element = <QuestionComponent {...this.props.gameState.currentQuestion} />
-    } else {
-      element = <span>Loading...</span>
+    let status: GameStatus = this.props.gameState.status
+    switch (status) {
+      case GameStatus.SEARCHING_FOR_GAME: {
+        element = <div>Searching...</div>;
+        break;
+      }
+      case GameStatus.STARTING: {
+        element = <div>Starting...</div>;
+        break;
+      }
+      case GameStatus.RUNNING: {
+        element = <div>Running...</div>
+        break;
+      }
+      case GameStatus.WAITING_FOR_ANSWER: {
+        let props = {
+          active: true,
+          question: this.props.gameState.currentQuestion
+        }
+        element = <QuestionComponent {...props}/>
+        break;
+      }
+      case GameStatus.ANSWER_SUBMITTED: {
+        let props = {
+          active: false,
+          question: this.props.gameState.currentQuestion,
+          answer: this.props.gameState.currentAnswer
+        }
+        element = <QuestionComponent {...props} />
+        break;
+      }
+      case GameStatus.RESOLVING_ANSWERS: {
+        let props = {
+          active: false,
+          question: this.props.gameState.currentQuestion,
+          answer: this.props.gameState.currentAnswer,
+          correctAnswer: this.props.gameState.correctAnswer,
+          players: this.props.gameState.players
+        }
+        element = <QuestionComponent {...props} />
+        break;
+      }
+      default: {
+        element = <div>Unknown status...</div>;
+        break;
+      }
+        
     }
       
     return(

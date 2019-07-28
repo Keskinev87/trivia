@@ -12,7 +12,7 @@ export enum GameStatus {
     ANSWER_SUBMITTED = "ANSWER_SUBMITTED",
     WAITING_FOR_ANSWER = "WAITING_FOR_ANSWER",
     RESOLVING_ANSWERS = "RESOLVING_ANSWERS",
-    OVER = "OVER"
+    GAME_OVER = "GAME_OVER"
 }
 
 export interface GameState {
@@ -21,7 +21,7 @@ export interface GameState {
     currentQuestion: Question | undefined,
     currentAnswer: String | undefined,
     correctAnswer: Boolean,
-    players: object | undefined,
+    players: any,
     isLoading: Boolean,
     isError: Boolean,
     error: String
@@ -94,13 +94,19 @@ export const gameReducer: Reducer<GameState, GameActions> = (
             }
         }
         case GameActionTypes.CORRECT_ANSWER: {
+            Object.keys(state.players).forEach((key) => {
+                state.players[key].currentAnswer = action.playersAnswers[key].currentAnswer;
+            });
             return {
                 ...state,
                 status: GameStatus.RESOLVING_ANSWERS,
-                correctAnswer: true
+                correctAnswer: true,
             }
         }
         case GameActionTypes.WRONG_ANSWER: {
+            Object.keys(state.players).forEach((key) => {
+                state.players[key].currentAnswer = action.playersAnswers[key].currentAnswer;
+            });
             return {
                 ...state,
                 status: GameStatus.RESOLVING_ANSWERS,
@@ -114,6 +120,12 @@ export const gameReducer: Reducer<GameState, GameActions> = (
                 currentQuestion: undefined,
                 currentAnswer: undefined,
                 correctAnswer: false
+            }
+        }
+        case GameActionTypes.GAME_OVER: {
+            return {
+                ...initialGameState,
+                status: GameStatus.GAME_OVER
             }
         }
         default: {

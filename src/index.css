@@ -1,24 +1,59 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.auth-nav {
-  display: block;
-}
-
-.auth-section {
-  display: inline-block;
-  text-align: center;
+.auth-section .auth-tab {
   width: 50%;
-  box-sizing: border-box;
-  border: 1px solid black;
+  float: left;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
-.auth-section:hover {
-  background-color: lightblue;
+.main, .auth-section .auth-form {
+  width: 83.33%;
+  float: left;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
+
+.main, .auth-section .auth-form {
+  margin-left: 8.33%;
+}
+
+.auth-section .auth-nav ::after, .auth-section .form-group ::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+body {
+  color: #ffffff;
+  margin: 0;
+}
+
+.main {
+  background-color: #84ceeb;
+}
+
+.auth-section .auth-tab {
+  text-align: center;
+  border: 1px solid black;
+  cursor: pointer;
+}
+
+.auth-section .active {
+  background-color: #5ab9ea;
+}
+
+.auth-section .inactive {
+  background-color: #c1c8e4;
+}
+
+.auth-section .auth-form {
+  text-align: center;
+}
+
+.auth-section .form-group {
+  margin-top: 20px;
+}
+
+.auth-section .form-group input {
+  height: 20px;
+}
+/*# sourceMappingURL=index.css.map */

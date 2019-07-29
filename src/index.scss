@@ -1,0 +1,93 @@
+$bgcolor: #84ceeb;
+$btncolor: #5680e9;
+$txtcolor: #ffffff;
+$answercolor: #8860d0;
+$inactivecolor: #c1c8e4;
+$activecolor: #5ab9ea;
+
+%col-1 {width: 8.33%; float: left; box-sizing: border-box;}
+%col-2 {width: 16.66%; float: left; box-sizing: border-box;}
+%col-3 {width: 25%; float: left; box-sizing: border-box;}
+%col-4 {width: 33.33%; float: left; box-sizing: border-box;}
+%col-5 {width: 41.66%; float: left; box-sizing: border-box;}
+%col-6 {width: 50%; float: left; box-sizing: border-box;}
+%col-7 {width: 58.33%; float: left; box-sizing: border-box;}
+%col-8 {width: 66.66%; float: left; box-sizing: border-box;}
+%col-9 {width: 75%; float: left; box-sizing: border-box;}
+%col-10 {width: 83.33%; float: left; box-sizing: border-box;}
+%col-11 {width: 91.66%; float: left; box-sizing: border-box;}
+%col-12 {width: 100%; float: left; box-sizing: border-box;}
+
+%col-offset-1 {margin-left: 8.33%;}
+%col-offset-2 {margin-left: 16.66%;}
+%col-offset-3 {margin-left: 25%;}
+%col-offset-4 {margin-left: 33.33%;}
+%col-offset-5 {margin-left: 41.66%;}
+%col-offset-6 {margin-left: 50%;}
+%col-offset-7 {margin-left: 58.33%;}
+%col-offset-8 {margin-left: 66.66%;}
+%col-offset-9 {margin-left: 75%;}
+%col-offset-10 {margin-left: 83.33%;}
+%col-offset-11 {margin-left: 91.66%;}
+%col-offset-12 {margin-left: 100%;}
+
+%row {
+  ::after{
+    content: "";
+    clear: both;
+    display: table;
+  }
+}
+
+body {
+  color: $txtcolor;
+  margin: 0;
+  // font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  //   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  //   sans-serif;
+  // -webkit-font-smoothing: antialiased;
+  // -moz-osx-font-smoothing: grayscale;
+}
+
+.main {
+  @extend %col-10;
+  @extend %col-offset-1;
+  background-color: $bgcolor;
+}
+
+.auth-section {
+  .auth-nav {
+    @extend %row;
+  }
+  
+  .auth-tab {
+    @extend%col-6;
+    text-align: center;
+    border: 1px solid black;
+    cursor: pointer;
+  }
+  
+  .active {
+    background-color: $activecolor;
+  }
+
+  .inactive {
+    background-color: $inactivecolor;
+  }
+
+  .auth-form {
+    @extend %col-10;
+    @extend %col-offset-1;
+    text-align: center;
+  }
+
+  .form-group {
+    @extend %row;
+    margin-top: 20px;
+    input{
+      height: 20px;
+    }
+  }
+  
+  
+}

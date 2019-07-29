@@ -28,10 +28,20 @@ class LoginSignup extends React.Component<any, any> {
 
   public render() {
     return (
-        <div>
+        <div className="auth-section">
             <div className="auth-nav">
-              <div className="auth-section" onClick={this.setIntent}><span >Login</span></div>
-              <div className="auth-section" onClick={this.setIntent}><span >Signup</span></div>
+              <div className={this.state.intent === 'Login' ? "auth-tab active" : "auth-tab inactive"} 
+                  onClick={this.setIntent}>
+                <span>
+                  Login
+                </span>
+              </div>
+              <div className={this.state.intent === 'Signup' ? "auth-tab active" : "auth-tab inactive"}
+                   onClick={this.setIntent}>
+                <span >
+                  Signup
+                </span>
+              </div>
             </div>
             <div className="auth-form">
               {this.state.intent === "Signup" ? <Signup /> : <Login />}

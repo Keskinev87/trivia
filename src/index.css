@@ -1,59 +1,162 @@
-.auth-section .auth-tab {
+.auth-section, .menu-section, .game-section, .loading-section, .auth-section .auth-tab, .auth-section .auth-form button, .auth-section .form-group input, .menu-section button {
   width: 50%;
   float: left;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
 
-.main, .auth-section .auth-form {
+.auth-section .auth-form {
+  width: 66.66%;
+  float: left;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.game-section .question-container, .game-section .answer-container {
   width: 83.33%;
   float: left;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
 
-.main, .auth-section .auth-form {
+.game-section .question-container, .game-section .answer-container {
   margin-left: 8.33%;
 }
 
-.auth-section .auth-nav ::after, .auth-section .form-group ::after {
+.auth-section .auth-form {
+  margin-left: 16.66%;
+}
+
+.auth-section, .menu-section, .game-section, .loading-section, .auth-section .auth-form button, .auth-section .form-group input, .menu-section button {
+  margin-left: 25%;
+}
+
+.auth-section .auth-nav::after, .auth-section .form-group::after {
   content: "";
   clear: both;
   display: table;
 }
 
-body {
+.auth-section .auth-form button, .menu-section button {
+  background-color: #77a6f7;
+  border: none;
+  padding: 10px 15px;
+  text-align: center;
   color: #ffffff;
-  margin: 0;
+  font-size: 16px;
+  cursor: pointer;
 }
 
-.main {
-  background-color: #84ceeb;
+body {
+  background-color: #ffffff;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 45%;
+}
+
+.auth-section, .menu-section, .game-section, .loading-section {
+  position: relative;
+  min-height: 500px;
+  border: 1px solid #d3e3fc;
 }
 
 .auth-section .auth-tab {
   text-align: center;
-  border: 1px solid black;
+  padding-top: 5px;
+  padding-bottom: 10px;
   cursor: pointer;
+  border-bottom: 1px solid #d3e3fc;
 }
 
 .auth-section .active {
-  background-color: #5ab9ea;
+  background-color: #d3e3fc;
 }
 
 .auth-section .inactive {
-  background-color: #c1c8e4;
+  background-color: #ffffff;
 }
 
 .auth-section .auth-form {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  color: #00887a;
+  border: 1px solid #d3e3fc;
   text-align: center;
+}
+
+.auth-section .auth-form button {
+  margin-bottom: 20px;
+  margin-top: 10px;
 }
 
 .auth-section .form-group {
   margin-top: 20px;
 }
 
+.auth-section .form-group label {
+  display: block;
+}
+
 .auth-section .form-group input {
-  height: 20px;
+  height: 30px;
+}
+
+.menu-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.menu-section button {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.game-section .question-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.game-section .question-body, .game-section .answer-container {
+  background-color: #77a6f7;
+  color: white;
+  padding: 10px 20px 10px 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.game-section .answer-container {
+  cursor: pointer;
+}
+
+.game-section .disabled {
+  pointer-events: none;
+}
+
+.game-section .own-answer {
+  background-color: #ffccbc;
 }
 /*# sourceMappingURL=index.css.map */

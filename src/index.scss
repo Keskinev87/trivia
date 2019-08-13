@@ -1,9 +1,13 @@
-$bgcolor: #84ceeb;
-$btncolor: #5680e9;
-$txtcolor: #ffffff;
-$answercolor: #8860d0;
-$inactivecolor: #c1c8e4;
-$activecolor: #5ab9ea;
+$bodybgcolor: #ffffff;
+$bgcolor: #77a6f7;
+$btncolor: #77a6f7;
+$lighttextcolor: #ffffff;
+$darktextcolor: #00887a;
+$bordercolor: #d3e3fc;
+$hovercolor: #f5e6cc;
+$answercolor: #ffccbc;
+$inactivecolor: #ffffff;
+$activecolor: #d3e3fc;
 
 %col-1 {width: 8.33%; float: left; box-sizing: border-box;}
 %col-2 {width: 16.66%; float: left; box-sizing: border-box;}
@@ -31,28 +35,52 @@ $activecolor: #5ab9ea;
 %col-offset-11 {margin-left: 91.66%;}
 %col-offset-12 {margin-left: 100%;}
 
-%row {
-  ::after{
+%row::after{
     content: "";
     clear: both;
     display: table;
-  }
+}
+
+
+%button {
+    background-color: $btncolor;
+    border: none;
+    padding: 10px 15px;
+    text-align: center;
+    // text-decoration: none;
+    color: $lighttextcolor;
+    font-size: 16px;
+    cursor: pointer;
 }
 
 body {
-  color: $txtcolor;
+  background-color: $bodybgcolor;
   margin: 0;
-  // font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-  //   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-  //   sans-serif;
-  // -webkit-font-smoothing: antialiased;
-  // -moz-osx-font-smoothing: grayscale;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-.main {
-  @extend %col-10;
-  @extend %col-offset-1;
-  background-color: $bgcolor;
+// .main {
+//   @extend %col-10;
+//   @extend %col-offset-1;
+//   background-color: $bgcolor;
+// }
+
+.loader {
+  position: absolute;
+  top: 50%;
+  left: 45%;
+}
+
+.auth-section, .menu-section, .game-section, .loading-section {
+  position: relative;
+  @extend %col-6;
+  @extend %col-offset-3;
+  min-height: 500px;
+  border: 1px solid $bordercolor;
 }
 
 .auth-section {
@@ -63,8 +91,10 @@ body {
   .auth-tab {
     @extend%col-6;
     text-align: center;
-    border: 1px solid black;
+    padding-top: 5px;
+    padding-bottom: 10px;
     cursor: pointer;
+    border-bottom: 1px solid $activecolor;
   }
   
   .active {
@@ -76,18 +106,79 @@ body {
   }
 
   .auth-form {
-    @extend %col-10;
-    @extend %col-offset-1;
+    @extend %col-8;
+    @extend %col-offset-2;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    color: $darktextcolor;
+    border: 1px solid $bordercolor;
     text-align: center;
+
+    button {
+      margin-bottom: 20px;
+      margin-top: 10px;
+      @extend%button;
+      @extend%col-6;
+      @extend%col-offset-3;
+    }
   }
 
   .form-group {
     @extend %row;
     margin-top: 20px;
+    label {
+      display: block;
+    }
+
     input{
-      height: 20px;
+      height: 30px;
+      @extend %col-6;
+      @extend %col-offset-3;
     }
   }
-  
-  
+}
+
+.menu-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  button {
+    @extend %button;
+    @extend%col-6;
+    @extend%col-offset-3;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
+
+.game-section {
+  .question-container {
+    @extend %col-10;
+    @extend %col-offset-1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .question-body, .answer-container {
+    background-color: $bgcolor;
+    color: white;
+    padding: 10px 20px 10px 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  .answer-container {
+    @extend %col-10;
+    @extend %col-offset-1;
+    cursor: pointer;
+  }
+
+  .disabled {
+    pointer-events: none;
+  }
+
+  .own-answer {
+    background-color: $answercolor;
+  }
 }

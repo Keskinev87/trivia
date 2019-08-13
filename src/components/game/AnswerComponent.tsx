@@ -1,24 +1,26 @@
 import React from 'react';
 import { service } from '../../services/socket-service';
+import { QuestionProps } from './QuestionComponent'
 
-function AnswerComponent(props: any) {
+function AnswerComponent(questionProps: QuestionProps) {
     console.log("The answer props are")
-    console.log(props)
+    console.log(questionProps, questionProps.id)
     let elementClass: string = 'answer-container';
- 
-        if(props.questionProps.answer && props.questionProps.answer === props.id)
-            elementClass += ' own-answer';
-        if (props.questionProps.correctAnswer && props.questionProps.correctAnswer === props.id)
-            elementClass += ' correct-answer';
-        if(props.questionProps.correctAnswer && props.questionProps.players) {
-            Object.keys(props.questionProps.players).forEach((key, index) => {
-                if(props.questionProps.players[key].currentAnswer === props.questionProps.correctAnswer)
-                    elementClass += ` opponent${index}-answer`
+    if (!questionProps.active)
+        elementClass += ' disabled';
+    if(questionProps.answer && questionProps.answer === questionProps.id)
+        elementClass += ' own-answer';
+    if(questionProps.correctAnswer && questionProps.correctAnswer)
+        elementClass += ' correct-answer';
+    if(questionProps.answer && questionProps.players) {
+        Object.keys(questionProps.players).forEach((key, index) => {
+            if(questionProps.players[key].currentAnswer === questionProps.correctAnswer)
+                elementClass += ` opponent${index}-answer`
             })
-        }
+    }
         
     return (
-       <div className={elementClass} id={props.id} onClick={props.questionProps.active ? service.sendAnswer : void(0)}>{props.questionProps.question[props.id]}</div>
+       <div className={elementClass} id={questionProps.id} onClick={questionProps.active ? service.sendAnswer : void(0)}>{questionProps.question[questionProps.id]}</div>
     )
 }
 

@@ -1,16 +1,25 @@
 import React from 'react';
 import AnswerComponent from './AnswerComponent';
 
-function QuestionComponent(props: any) {
+export interface QuestionProps {
+    id?: any, 
+    active: boolean;
+    answer: string | undefined | null;
+    correctAnswer: Boolean | undefined | null;
+    question: any;
+    players: any;
+}
+
+function QuestionComponent(props: QuestionProps) {
     console.log("The props for question are")
     console.log(props)
         return (
             <div className="question-container">
                 <p>{props.question.body}</p>
-                <AnswerComponent id = {'answerA'} questionProps = {props}/>
-                <AnswerComponent id = {'answerB'} questionProps = {props}/>
-                <AnswerComponent id = {'answerC'} questionProps = {props}/>
-                <AnswerComponent id = {'answerD'} questionProps = {props}/>
+                <AnswerComponent {...Object.assign({id:'answerA'}, props)}/>
+                <AnswerComponent {...Object.assign({id:'answerB'}, props)}/>
+                <AnswerComponent {...Object.assign({id:'answerC'}, props)}/>
+                <AnswerComponent {...Object.assign({id:'answerD'}, props)}/>
             </div>
         )
 }

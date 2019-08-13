@@ -44,7 +44,7 @@ export interface ShowQuestion {
 
 export interface SendAnswer {
     type: GameActionTypes.SEND_ANSWER;
-    answer: String;
+    answer: string;
 }
 
 export interface CorrectAnswer {

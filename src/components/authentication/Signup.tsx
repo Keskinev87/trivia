@@ -44,6 +44,7 @@ class Signup extends React.Component<any, any> {
                     <label htmlFor='nickName'>Nickname</label>
                     <input type="text" name="nickName" value={this.state.nickName} onChange={this.handleChange} />
                 </div>
+                {this.props.userState.isError && <p>{this.props.userState.error}</p>}
                 <button type="submit" value="Submit">Signup</button>
             </form>
         )

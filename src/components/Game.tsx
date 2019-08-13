@@ -15,12 +15,12 @@ interface AppProps {
 class Game extends React.Component<AppProps> {
   componentWillMount() {
     this.props.gameState.status === GameStatus.STARTING && console.log("Game starting");
-    this.props.gameState.status === GameStatus.RUNNING && service.getQuestion();
+    this.props.gameState.status === (GameStatus.RUNNING || GameStatus.GETTING_NEXT_QUESTION) && service.getQuestion();
   }
 
-  componentDidUpdate() {
-    this.props.gameState.status === GameStatus.RUNNING && service.getQuestion();
-  }
+  // componentDidUpdate() {
+  //   this.props.gameState.status === GameStatus.RUNNING && service.getQuestion();
+  // }
 
   render() {
     let element: any;
@@ -41,7 +41,10 @@ class Game extends React.Component<AppProps> {
       case GameStatus.WAITING_FOR_ANSWER: {
         let props = {
           active: true,
-          question: this.props.gameState.currentQuestion
+          question: this.props.gameState.currentQuestion,
+          answer: undefined,
+          correctAnswer: undefined,
+          players: undefined
         }
         element = <QuestionComponent {...props}/>
         break;
@@ -50,7 +53,9 @@ class Game extends React.Component<AppProps> {
         let props = {
           active: false,
           question: this.props.gameState.currentQuestion,
-          answer: this.props.gameState.currentAnswer
+          answer: this.props.gameState.currentAnswer,
+          correctAnswer: undefined,
+          players: undefined
         }
         element = <QuestionComponent {...props} />
         break;
@@ -74,7 +79,7 @@ class Game extends React.Component<AppProps> {
     }
       
     return(
-        <div>
+        <div className="game-section">
           {element}
         </div>
     )

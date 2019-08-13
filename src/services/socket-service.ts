@@ -7,9 +7,10 @@ import { GameActionTypes } from '../actions/GameActions';
 var socket: any;
 let token = localStorage.getItem('token');
 socket = io('localhost:3001', {query: token ? `auth_token=${token}` : '', reconnection: true});
-
+console.log("Socket initialized")
 socket.on("login success", (data: any) => {
     localStorage.setItem("token", data.token);
+    socket = io.connect('localhost:3001', {query: `auth_token=${data.token}`, reconnection: true});
     store.dispatch({
         type: UserActionTypes.LOGIN_SUCCESS,
         user: data.user,
@@ -152,10 +153,10 @@ export const service: any = {
     //game services
     searchForRandomGame: () => {
         console.log("Will search for random game")
+        socket.emit("join random game")
         store.dispatch({
             type: GameActionTypes.REQUEST_RANDOM_GAME_SEARCH
         })
-        socket.emit("join random game")
     },
     getQuestion: () => {
         console.log("Getting question");

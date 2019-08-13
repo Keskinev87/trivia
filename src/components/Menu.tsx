@@ -6,6 +6,7 @@ import { AppState } from '../store/Store';
 import Button from './shared/Button';
 import { service } from '../services/socket-service';
 import { GameState } from '../reducers/gameReducer';
+import GeneralLoader from '../components/shared/GeneralLoader';
 
 interface AppProps {
   dispatch: any,
@@ -16,26 +17,29 @@ interface AppProps {
 class Menu extends React.Component<AppProps> {
 
   render() {
-    let randomBtnProps = {
-      btnName: "Random Game",
-      onClick: service.searchForRandomGame
+    let loading = this.props.gameState.isLoading;
+    let element: any;
+    if (loading) {
+      element = <GeneralLoader />
+    } else {
+      let randomBtnProps = {
+        btnName: "Random Game",
+        onClick: service.searchForRandomGame
+      }
+      let friendBtnProps = {
+        btnName: "Challenge Friend",
+        onClick: service.challengeFriend
+      }
+      element = <div>
+        <Button {...randomBtnProps} />
+        <Button {...friendBtnProps} />
+      </div>
     }
-    let friendBtnProps = {
-      btnName: "Challenge Friend",
-      onClick: service.challengeFriend
-    }
-    let loading = !this.props.gameState.isLoading;
+    
     return(
-        loading ? (
-            <div className="menu-container">
-              <Button {...randomBtnProps} />
-              <Button {...friendBtnProps} />
+            <div className="menu-section">
+              { element }
             </div>
-        ) : (
-            <div className="loader">
-              Loading...
-            </div>
-        )
     )
   }
 }

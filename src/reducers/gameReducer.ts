@@ -12,6 +12,7 @@ export enum GameStatus {
     ANSWER_SUBMITTED = "ANSWER_SUBMITTED",
     WAITING_FOR_ANSWER = "WAITING_FOR_ANSWER",
     RESOLVING_ANSWERS = "RESOLVING_ANSWERS",
+    GETTING_NEXT_QUESTION = "GETTING_NEXT_QUESTION",
     GAME_OVER = "GAME_OVER"
 }
 
@@ -19,12 +20,12 @@ export interface GameState {
     roomId: Number | null,
     status: GameStatus,
     currentQuestion: Question | undefined,
-    currentAnswer: String | undefined,
+    currentAnswer: string | undefined,
     correctAnswer: Boolean,
     players: any,
     isLoading: Boolean,
     isError: Boolean,
-    error: String
+    error: string | undefined
 }
 
 const initialGameState: GameState = {
@@ -36,7 +37,7 @@ const initialGameState: GameState = {
     players: undefined,
     isLoading: false,
     isError: false,
-    error: ''
+    error: undefined
 }
 
 export const gameReducer: Reducer<GameState, GameActions> = (
@@ -116,7 +117,7 @@ export const gameReducer: Reducer<GameState, GameActions> = (
         case GameActionTypes.START_NEW_ROUND: {
             return {
                 ...state,
-                status: GameStatus.RUNNING,
+                status: GameStatus.GETTING_NEXT_QUESTION,
                 currentQuestion: undefined,
                 currentAnswer: undefined,
                 correctAnswer: false

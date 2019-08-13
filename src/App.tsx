@@ -5,13 +5,12 @@ import { UserState, PlayerStatus } from './reducers/userReducer';
 import { AppState } from './store/Store';
 import Menu from './components/Menu';
 import LoginSignup from './components/LoginSignup';
-import { GameState } from './reducers/gameReducer';
 import Game from './components/Game';
+import GeneralLoader from './components/shared/GeneralLoader';
 
 interface AppProps {
   dispatch: any,
-  userState: UserState,
-  gameState: GameState
+  userState: UserState
 }
 
 class App extends React.Component<AppProps> {
@@ -21,7 +20,7 @@ class App extends React.Component<AppProps> {
     let element: any;
     switch (true) {
       case userState.isLoading:
-        element = <div>Loading...</div>;
+        element = <GeneralLoader />;
         break;
       case userState.user === undefined:
         element = <LoginSignup />;
@@ -47,7 +46,6 @@ class App extends React.Component<AppProps> {
 // Grab the characters from the store and make them available on props
 const mapStateToProps = (store: AppState) => {
   return {
-    gameState: store.gameState,
     userState: store.userState
   };
 };

@@ -5,9 +5,11 @@ $lighttextcolor: #ffffff;
 $darktextcolor: #00887a;
 $bordercolor: #d3e3fc;
 $hovercolor: #f5e6cc;
-$answercolor: #ffccbc;
+$ownAnswerColor: #ffccbc;
 $inactivecolor: #ffffff;
 $activecolor: #d3e3fc;
+$firstOpponentColor:#00887a;
+$secondOpponentColor:#d3e3fc;
 
 %col-1 {width: 8.33%; float: left; box-sizing: border-box;}
 %col-2 {width: 16.66%; float: left; box-sizing: border-box;}
@@ -179,6 +181,41 @@ body {
   }
 
   .own-answer {
-    background-color: $answercolor;
+    background-color: $ownAnswerColor;
   }
+
+  .opponent1 {
+    background-color: $firstOpponentColor;
+  }
+
+  .opponent2 {
+    background-color: $secondOpponentColor;
+  }
+
+  .own-answer.opponent1 {
+    background-image: linear-gradient(to right, 
+    $ownAnswerColor 50%, $firstOpponentColor 50%); 
+  }
+
+  .own-answer.opponent2 {
+    background-image: linear-gradient(to right, $ownAnswerColor 50%, $secondOpponentColor 50%); 
+  }
+
+  .opponent1.opponent2 { 
+    background-image: linear-gradient(to right, $firstOpponentColor 50%, $secondOpponentColor 50%); 
+  }
+
+  .own-answer.opponent1.opponent2 {
+    background-image: linear-gradient(to right, $ownAnswerColor 33%, $firstOpponentColor 33%, $firstOpponentColor 66%, $secondOpponentColor 66%);
+  }
+
+  .correct-answer {
+    animation: blink 1s linear 3;
+	}
+  
+}
+@keyframes blink{
+  0%{opacity: 0;}
+  50%{opacity: .5;}
+  100%{opacity: 1;}
 }

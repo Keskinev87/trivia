@@ -6,6 +6,7 @@ export enum PlayerStatus {
     IDLE = "IDLE",
     CHALLENGED = "CHALLENGED",
     PLAYING = "PLAYING",
+    SEARCHING_FOR_RANDOM_GAME = "SEARCHING_FOR_RANDOM_GAME",
     WAITING = "WAITING",
     OFFLINE = "OFFLINE",
     RECONNECTING = "RECONNECTING",
@@ -92,6 +93,12 @@ export const userReducer: Reducer<UserState, UserActions> = (
                 ...state,
                 user: undefined,
                 token: ''
+            }
+        }
+        case UserActionTypes.SEARCHING_FOR_GAME: {
+            return {
+                ...state,
+                status: PlayerStatus.SEARCHING_FOR_RANDOM_GAME
             }
         }
         case UserActionTypes.START_RANDOM_GAME: {

@@ -11,6 +11,7 @@ export enum UserActionTypes {
     SIGNUP_FAILED = "SIGNUP_FAILED",
     FRIEND_IS_ONLINE = "FRIEND_IS_ONLINE",
     FRIEND_IS_OFFLINE = "FRIEND_IS_OFFLINE",
+    SEARCHING_FOR_GAME = "SEARCHING_FOR_GAME",
     START_RANDOM_GAME = "START_RANDOM_GAME",
     EXIT_GAME = "EXIT_GAME",
     // RECEIVED_CHALLENGE = "RECEIVED_CHALLENGE", //TODO: think of the logic for private games
@@ -63,6 +64,10 @@ export interface FriendIsOffline {
     friend: Friend
 }
 
+export interface SearchingForGame {
+    type: UserActionTypes.SEARCHING_FOR_GAME
+}
+
 export interface StartRandomGame {
     type: UserActionTypes.START_RANDOM_GAME
 }
@@ -90,5 +95,5 @@ export interface ExitGame {
 
 
 export type UserActions = UserTryLogin | UserLoginSuccess | UserLoginFailed | UserLogout| TrySignup | SignupSuccess | SignupFailed |
- FriendIsOnline | FriendIsOffline | StartRandomGame | TryJoinRandomRoom | CancelJoinRandomRoom | JoinRandomRoomSuccess | JoinRandomRoomFail |
+ FriendIsOnline | FriendIsOffline | SearchingForGame| StartRandomGame | TryJoinRandomRoom | CancelJoinRandomRoom | JoinRandomRoomSuccess | JoinRandomRoomFail |
  ExitGame // | next action

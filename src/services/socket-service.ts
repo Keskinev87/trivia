@@ -171,6 +171,9 @@ export const service: any = {
         console.log(socket)
         socket.emit("join random game")
         store.dispatch({
+            type: UserActionTypes.SEARCHING_FOR_GAME
+        })
+        store.dispatch({
             type: GameActionTypes.REQUEST_RANDOM_GAME_SEARCH
         })
     },

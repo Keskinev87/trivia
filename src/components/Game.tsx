@@ -7,6 +7,7 @@ import { service } from '../services/socket-service';
 import { GameState, GameStatus } from '../reducers/gameReducer';
 import QuestionComponent from './game/QuestionComponent';
 import Button from './shared/Button';
+import GeneralLoader from'./shared/GeneralLoader';
 
 interface AppProps {
   userState: UserState,
@@ -16,11 +17,11 @@ interface AppProps {
 class Game extends React.Component<AppProps> {
   componentWillMount() {
     this.props.gameState.status === GameStatus.STARTING && console.log("Game starting");
-    this.props.gameState.status === (GameStatus.RUNNING || GameStatus.GETTING_NEXT_QUESTION) && service.getQuestion();
+    
   }
 
   componentDidUpdate() {
-    this.props.gameState.status === GameStatus.GETTING_NEXT_QUESTION && service.getQuestion();
+    this.props.gameState.status === (GameStatus.RUNNING || GameStatus.GETTING_NEXT_QUESTION) && service.getQuestion();
   }
 
   render() {
@@ -29,11 +30,11 @@ class Game extends React.Component<AppProps> {
     console.log("Status is", status)
     switch (status) {
       case GameStatus.SEARCHING_FOR_GAME: {
-        element = <div>Searching...</div>;
+        element = <GeneralLoader text="Searching for a game..." />;
         break;
       }
       case GameStatus.STARTING: {
-        element = <div>Starting...</div>;
+        element = <GeneralLoader text="Starting game..." />;
         break;
       }
       case GameStatus.RUNNING: {

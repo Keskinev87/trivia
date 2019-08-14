@@ -73,8 +73,24 @@ body {
 
 .loader {
   position: absolute;
+  left: 50%;
   top: 50%;
-  left: 45%;
+  // -webkit-transform: translateX(-50%);
+  // transform: translateX(-50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+  .loader-picture {
+    height: 120px;
+    width: 120px;
+    margin-left: auto;
+    margin-right: auto;
+    background-image: url('images/settings.svg');
+    background-size: cover;
+    -webkit-animation:spin 6s linear infinite;
+    -moz-animation:spin 6s linear infinite;
+    animation:spin 6s linear infinite;
+  }
 }
 
 .auth-section, .menu-section, .game-section, .loading-section {
@@ -210,6 +226,8 @@ body {
   }
 
   .correct-answer {
+    -webkit-animation:blink 1s linear 3;
+    -moz-animation:blink 1s linear 3;
     animation: blink 1s linear 3;
 	}
   
@@ -219,3 +237,13 @@ body {
   50%{opacity: .5;}
   100%{opacity: 1;}
 }
+
+@-webkit-keyframes blink {
+  0%{opacity: 0;}
+  50%{opacity: .5;}
+  100%{opacity: 1;}
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }

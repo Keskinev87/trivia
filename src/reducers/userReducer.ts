@@ -100,6 +100,12 @@ export const userReducer: Reducer<UserState, UserActions> = (
                 status: PlayerStatus.PLAYING
             }
         }
+        case UserActionTypes.EXIT_GAME: {
+            return {
+                ...state,
+                status: PlayerStatus.IDLE
+            }
+        }
         default: {
             console.log("Defaulted");
             return state;

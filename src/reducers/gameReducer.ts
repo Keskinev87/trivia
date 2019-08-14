@@ -21,7 +21,7 @@ export interface GameState {
     status: GameStatus,
     currentQuestion: Question | undefined,
     currentAnswer: string | undefined,
-    correctAnswer: Boolean,
+    correctAnswer: string | undefined,
     players: any,
     isLoading: Boolean,
     isError: Boolean,
@@ -33,7 +33,7 @@ const initialGameState: GameState = {
     status: GameStatus.NOT_PLAYING,
     currentQuestion: undefined,
     currentAnswer: undefined,
-    correctAnswer: false,
+    correctAnswer: undefined,
     players: undefined,
     isLoading: false,
     isError: false,
@@ -79,6 +79,7 @@ export const gameReducer: Reducer<GameState, GameActions> = (
             return {
                 ...state,
                 currentQuestion: action.question,
+                status: GameStatus.WAITING_FOR_ANSWER
             }
         }
         case GameActionTypes.SHOW_QUESTION: {
@@ -96,37 +97,39 @@ export const gameReducer: Reducer<GameState, GameActions> = (
         }
         case GameActionTypes.CORRECT_ANSWER: {
             Object.keys(state.players).forEach((key) => {
-                state.players[key].currentAnswer = action.playersAnswers[key].currentAnswer;
+                state.players[key].currentAnswer = action.playersAnswers[key];
             });
             return {
                 ...state,
                 status: GameStatus.RESOLVING_ANSWERS,
-                correctAnswer: true,
+                correctAnswer: action.correctAnswer,
             }
         }
-        case GameActionTypes.WRONG_ANSWER: {
-            Object.keys(state.players).forEach((key) => {
-                state.players[key].currentAnswer = action.playersAnswers[key].currentAnswer;
-            });
-            return {
-                ...state,
-                status: GameStatus.RESOLVING_ANSWERS,
-                correctAnswer: false
-            }
-        }
+        // case GameActionTypes.WRONG_ANSWER: {
+        //     return {
+        //         ...state,
+        //         status: GameStatus.RESOLVING_ANSWERS,
+        //         correctAnswer: false
+        //     }
+        // }
         case GameActionTypes.START_NEW_ROUND: {
             return {
                 ...state,
                 status: GameStatus.GETTING_NEXT_QUESTION,
                 currentQuestion: undefined,
                 currentAnswer: undefined,
-                correctAnswer: false
+                correctAnswer: undefined
             }
         }
         case GameActionTypes.GAME_OVER: {
             return {
-                ...initialGameState,
+                ...state,
                 status: GameStatus.GAME_OVER
+            }
+        }
+        case GameActionTypes.RESET_GAME_STATE: {
+            return {
+                ...initialGameState
             }
         }
         default: {

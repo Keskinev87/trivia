@@ -6,6 +6,7 @@ import { AppState } from '../store/Store';
 import { service } from '../services/socket-service';
 import { GameState, GameStatus } from '../reducers/gameReducer';
 import QuestionComponent from './game/QuestionComponent';
+import Button from './shared/Button';
 
 interface AppProps {
   userState: UserState,
@@ -18,13 +19,14 @@ class Game extends React.Component<AppProps> {
     this.props.gameState.status === (GameStatus.RUNNING || GameStatus.GETTING_NEXT_QUESTION) && service.getQuestion();
   }
 
-  // componentDidUpdate() {
-  //   this.props.gameState.status === GameStatus.RUNNING && service.getQuestion();
-  // }
+  componentDidUpdate() {
+    this.props.gameState.status === GameStatus.GETTING_NEXT_QUESTION && service.getQuestion();
+  }
 
   render() {
     let element: any;
     let status: GameStatus = this.props.gameState.status
+    console.log("Status is", status)
     switch (status) {
       case GameStatus.SEARCHING_FOR_GAME: {
         element = <div>Searching...</div>;
@@ -36,6 +38,10 @@ class Game extends React.Component<AppProps> {
       }
       case GameStatus.RUNNING: {
         element = <div>Running...</div>
+        break;
+      }
+      case GameStatus.GETTING_NEXT_QUESTION: {
+        element = <div>Getting next question...</div>
         break;
       }
       case GameStatus.WAITING_FOR_ANSWER: {
@@ -69,6 +75,13 @@ class Game extends React.Component<AppProps> {
           players: this.props.gameState.players
         }
         element = <QuestionComponent {...props} />
+        break;
+      }
+      case GameStatus.GAME_OVER: {
+        element = <div>
+          <h1>Game Over Screen</h1>
+          <Button {...{btnName: "Return to lobby", onClick: service.endGame}}/>
+        </div>
         break;
       }
       default: {

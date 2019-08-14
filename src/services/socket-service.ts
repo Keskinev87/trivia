@@ -7,128 +7,143 @@ import { GameActionTypes } from '../actions/GameActions';
 var socket: any;
 let token = localStorage.getItem('token');
 socket = io('localhost:3001', {query: token ? `auth_token=${token}` : '', reconnection: true});
+attachSocketEventListeners();
 console.log("Socket initialized")
-socket.on("login success", (data: any) => {
-    localStorage.setItem("token", data.token);
-    socket = io.connect('localhost:3001', {query: `auth_token=${data.token}`, reconnection: true});
-    store.dispatch({
-        type: UserActionTypes.LOGIN_SUCCESS,
-        user: data.user,
-        token: data.token
-    })
-})
 
-socket.on("login failed", (data: any) => {
-    console.log("error")
-    console.log(data.reason)
-    store.dispatch({
-        type: UserActionTypes.LOGIN_FAILED,
-        error: data.reason
-    })
-});
-
-socket.on("user", (user: User) => {
-    console.log("Got user")
-    console.log(user)
-    user ? 
-    store.dispatch({
-      user: user,
-      type: UserActionTypes.LOGIN_SUCCESS,
-    }) :
-    store.dispatch({
-      type: UserActionTypes.LOGIN_FAILED
-    })
-  });
-
-  socket.on("error", (data: any) => {
-    console.log(data);
-  });
-  //if the login succeeds, reconnect the socket in order to add the token to it. 
-
-socket.on("signup failed", (data: any) => {
-    console.log("error")
-    console.log(data.reason)
-    store.dispatch({
-        type: UserActionTypes.SIGNUP_FAILED,
-        error: data.reason
-    })
-});
-
-socket.on("signup success", (data: any) => {
-    console.log("Signup was successfull")
-    store.dispatch({
-        type: UserActionTypes.SIGNUP_SUCCESS
-    })
-})
-
-socket.on("logout success", () => {
-    socket = io.connect('localhost:3001');
-    store.dispatch({
-      type: UserActionTypes.LOGOUT
-    })
-})
-// GAME EVENTS
-socket.on("random game created", (data: any) => {
-    console.log("Game was created")
-    console.log(data)
-    store.dispatch({
-        type: GameActionTypes.CREATE_RANDOM_GAME,
-        roomId: data.roomId,
-        players: data.players
-    });
-});
-
-socket.on("game started", () => {
-    console.log("Game started");
-    store.dispatch({
-        type: GameActionTypes.START_RANDOM_GAME
-    })
-});
-
-socket.on("new question", (data:any) => {
-    console.log("QUestion is");
-    console.log(data.question);
-    store.dispatch({
-        type: GameActionTypes.RECEIVED_QUESTION,
-        question: data.question
-    });
-    socket.emit("question received");
-})
-
-socket.on("show question", () => {
-    store.dispatch({
-        type: GameActionTypes.SHOW_QUESTION
-    })
-})
-
-socket.on("game over", () => {
-    console.log("Game is over")
-})
-
-socket.on("show answer", (data: any) => {
-    console.log("The answer is")
-    console.log(data.answer)
-    console.log("Your answer is");
-    console.log(store.getState().gameState)
-    if(data.answer === store.getState().gameState.currentAnswer) {
-        console.log("Right answer")
+function attachSocketEventListeners() {
+    socket.on("login success", (data: any) => {
+        localStorage.setItem("token", data.token);
+        socket = io.connect('localhost:3001', {query: `auth_token=${data.token}`, reconnection: true});
+        attachSocketEventListeners();
         store.dispatch({
-            type: GameActionTypes.CORRECT_ANSWER,
-            playersAnswers: data.playersAnswers
+            type: UserActionTypes.LOGIN_SUCCESS,
+            user: data.user,
+            token: data.token
         })
-    } else {
-        console.log("Wrong answer")
+    })
+    
+    socket.on("login failed", (data: any) => {
+        console.log("error")
+        console.log(data.reason)
         store.dispatch({
-            type: GameActionTypes.WRONG_ANSWER,
-            playersAnswers: data.playersAnswers
+            type: UserActionTypes.LOGIN_FAILED,
+            error: data.reason
         })
-    }
-    setTimeout(() => {
+    });
+    
+    socket.on("user", (user: User) => {
+        console.log("Got user")
+        console.log(user)
+        user ? 
+        store.dispatch({
+          user: user,
+          type: UserActionTypes.LOGIN_SUCCESS,
+        }) :
+        store.dispatch({
+          type: UserActionTypes.LOGIN_FAILED
+        })
+      });
+    
+      socket.on("error", (data: any) => {
+        console.log(data);
+      });
+      //if the login succeeds, reconnect the socket in order to add the token to it. 
+    
+    socket.on("signup failed", (data: any) => {
+        console.log("error")
+        console.log(data.reason)
+        store.dispatch({
+            type: UserActionTypes.SIGNUP_FAILED,
+            error: data.reason
+        })
+    });
+    
+    socket.on("signup success", (data: any) => {
+        console.log("Signup was successfull")
+        store.dispatch({
+            type: UserActionTypes.SIGNUP_SUCCESS
+        })
+    })
+    
+    socket.on("logout success", () => {
+        socket = io.connect('localhost:3001');
+        attachSocketEventListeners();
+        store.dispatch({
+          type: UserActionTypes.LOGOUT
+        })
+    })
+    // GAME EVENTS
+    socket.on("random game created", (data: any) => {
+        console.log("Game was created")
+        console.log(data)
+        store.dispatch({
+            type: GameActionTypes.CREATE_RANDOM_GAME,
+            roomId: data.roomId,
+            players: data.players
+        });
+    });
+    
+    socket.on("game started", () => {
+        console.log("Game started");
+        store.dispatch({
+            type: GameActionTypes.START_RANDOM_GAME
+        })
+    });
+    
+    socket.on("new question", (data:any) => {
+        console.log("QUestion is");
+        console.log(data.question);
+        store.dispatch({
+            type: GameActionTypes.RECEIVED_QUESTION,
+            question: data.question
+        });
+        socket.emit("question received");
+    })
+    
+    socket.on("show question", () => {
+        store.dispatch({
+            type: GameActionTypes.SHOW_QUESTION
+        })
+    })
+    
+    socket.on("game over", () => {
+        console.log("Game is over")
+        store.dispatch({
+            type: GameActionTypes.GAME_OVER
+        })
+    })
+    
+    socket.on("start new round", () => {
+        console.log("Starting new round")
         store.dispatch({
             type: GameActionTypes.START_NEW_ROUND
         })
-    }, 3000)
-})
+    })
+
+    socket.on("show answer", (data: any) => {
+        console.log("The answer is")
+        console.log(data.answer)
+        console.log("Your answer is");
+        console.log(store.getState().gameState)
+        console.log("Other players' answers")
+        console.log(data.playersAnswers)
+        // if(data.answer === store.getState().gameState.currentAnswer) {
+            console.log("Right answer")
+            store.dispatch({
+                type: GameActionTypes.CORRECT_ANSWER,
+                correctAnswer: data.answer,
+                playersAnswers: data.playersAnswers
+            })
+        // } else {
+        //     console.log("Wrong answer")
+        //     store.dispatch({
+        //         type: GameActionTypes.WRONG_ANSWER,
+        //         playersAnswers: data.playersAnswers
+        //     })
+        // }
+    })
+    
+}
 
 export const service: any = {
     getUser: () => {
@@ -153,6 +168,7 @@ export const service: any = {
     //game services
     searchForRandomGame: () => {
         console.log("Will search for random game")
+        console.log(socket)
         socket.emit("join random game")
         store.dispatch({
             type: GameActionTypes.REQUEST_RANDOM_GAME_SEARCH
@@ -169,5 +185,14 @@ export const service: any = {
             answer: event.target.id
         })
         socket.emit('set answer', {answer: event.target.id});
+    },
+    endGame: () => {
+        console.log("Ending game");
+        store.dispatch({
+            type: UserActionTypes.EXIT_GAME
+        });
+        store.dispatch({
+            type: GameActionTypes.RESET_GAME_STATE
+        })
     }
 }

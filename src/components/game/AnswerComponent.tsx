@@ -1,6 +1,6 @@
 import React from 'react';
 import { service } from '../../services/socket-service';
-import { QuestionProps } from './QuestionComponent'
+import { QuestionProps } from './MultipleAnswerQuestionComponent'
 
 function AnswerComponent(questionProps: QuestionProps) {
     console.log("Rendering answer")

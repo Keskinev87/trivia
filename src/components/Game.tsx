@@ -5,7 +5,8 @@ import { UserState } from '../reducers/userReducer';
 import { AppState } from '../store/Store';
 import { service } from '../services/socket-service';
 import { GameState, GameStatus } from '../reducers/gameReducer';
-import QuestionComponent from './game/QuestionComponent';
+import MultipleAnswerQuestionComponent from './game/MultipleAnswerQuestionComponent';
+import RangeQuestionComponent from './game/RangeQuestionComponent';
 import Button from './shared/Button';
 import GeneralLoader from'./shared/GeneralLoader';
 
@@ -21,12 +22,14 @@ class Game extends React.Component<AppProps> {
   }
 
   componentDidUpdate() {
-    this.props.gameState.status === (GameStatus.RUNNING || GameStatus.GETTING_NEXT_QUESTION) && service.getQuestion();
+    this.props.gameState.status === GameStatus.RUNNING && service.getQuestion();
+    this.props.gameState.status === GameStatus.GETTING_NEXT_QUESTION && service.getQuestion();
   }
 
   render() {
     let element: any;
-    let status: GameStatus = this.props.gameState.status
+    let status: GameStatus = this.props.gameState.status;
+    let question = this.props.gameState.currentQuestion;
     console.log("Status is", status)
     switch (status) {
       case GameStatus.SEARCHING_FOR_GAME: {
@@ -53,7 +56,8 @@ class Game extends React.Component<AppProps> {
           correctAnswer: undefined,
           players: undefined
         }
-        element = <QuestionComponent {...props}/>
+        console.log("Question type is", question && question.questionType)
+        element = question && question.questionType === "multiple" ? <MultipleAnswerQuestionComponent {...props}/> : <RangeQuestionComponent {...props} />;
         break;
       }
       case GameStatus.ANSWER_SUBMITTED: {
@@ -64,7 +68,7 @@ class Game extends React.Component<AppProps> {
           correctAnswer: undefined,
           players: undefined
         }
-        element = <QuestionComponent {...props} />
+        element = question && question.questionType === "multiple" ? <MultipleAnswerQuestionComponent {...props}/> : <RangeQuestionComponent {...props} />;
         break;
       }
       case GameStatus.RESOLVING_ANSWERS: {
@@ -75,7 +79,7 @@ class Game extends React.Component<AppProps> {
           correctAnswer: this.props.gameState.correctAnswer,
           players: this.props.gameState.players
         }
-        element = <QuestionComponent {...props} />
+        element = question && question.questionType === "multiple" ? <MultipleAnswerQuestionComponent {...props}/> : <RangeQuestionComponent {...props} />;
         break;
       }
       case GameStatus.GAME_OVER: {

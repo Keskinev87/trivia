@@ -1,6 +1,6 @@
 import { Reducer } from 'redux';
 // import { Player } from '../models/Player';
-import { Question } from '../models/Question'
+import { MultipleAnswerQuestion, RangeQuestion } from '../models/Question'
 import { GameActionTypes, GameActions } from '../actions/GameActions'
 
 export enum GameStatus {
@@ -19,7 +19,7 @@ export enum GameStatus {
 export interface GameState {
     roomId: Number | null,
     status: GameStatus,
-    currentQuestion: Question | undefined,
+    currentQuestion: MultipleAnswerQuestion | RangeQuestion | undefined,
     currentAnswer: string | undefined,
     correctAnswer: string | undefined,
     players: any,

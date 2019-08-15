@@ -1,4 +1,4 @@
-import { Question } from '../models/Question';
+import { MultipleAnswerQuestion, RangeQuestion } from '../models/Question';
 import { Player } from '../models/Player';
 
 export enum GameActionTypes {
@@ -36,7 +36,7 @@ export interface StartRandomGame {
 
 export interface ReceivedQuestion {
     type: GameActionTypes.RECEIVED_QUESTION;
-    question: Question;
+    question: MultipleAnswerQuestion | RangeQuestion;
 }
 
 export interface ShowQuestion {

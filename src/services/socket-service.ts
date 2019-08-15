@@ -189,6 +189,10 @@ export const service: any = {
         })
         socket.emit('set answer', {answer: event.target.id});
     },
+    sendRangedAnswer: (event: any) => {
+        event.preventDefault();
+        console.log((document.getElementById("ranged-question-answer") as HTMLInputElement).value);
+    },
     endGame: () => {
         console.log("Ending game");
         store.dispatch({

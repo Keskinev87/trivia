@@ -10,7 +10,7 @@ export interface QuestionProps {
     players: any;
 }
 
-function QuestionComponent(props: QuestionProps) {
+function MultipleAnswerQuestionComponent(props: QuestionProps) {
     console.log("Rendering question")
     console.log("The state players in question are")
     console.log(props.players)
@@ -27,4 +27,4 @@ function QuestionComponent(props: QuestionProps) {
         )
 }
 
-export default QuestionComponent
+export default MultipleAnswerQuestionComponent

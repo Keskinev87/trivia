@@ -7,13 +7,13 @@ export interface QuestionProps {
     answer: string | undefined | null;
     correctAnswer: string | undefined;
     question: any;
-    players: any;
+    opponents: any;
 }
 
 function RangeQuestionComponent(props: QuestionProps) {
     console.log("Rendering question")
     console.log("The state players in question are")
-    console.log(props.players)
+    console.log(props.opponents)
         return (
             <div className="question-container">
                 <div className="question-body">
@@ -21,11 +21,11 @@ function RangeQuestionComponent(props: QuestionProps) {
                 </div>
                 <form onSubmit={service.sendRangedAnswer}>
                     <div className="form-group">
-                        <label htmlFor='answer'>Answer:</label>
-                        <input type="number" name="answer" id="ranged-question-answer" /> 
+                        <input autoFocus type="number" name="answer" id="ranged-question-answer" /> 
                     </div>
                     <button type="submit" value="Submit">Submit</button>
                 </form>
+                {props.correctAnswer && <div className="correct-answer">{props.correctAnswer}</div>}
             </div>
         )
 }

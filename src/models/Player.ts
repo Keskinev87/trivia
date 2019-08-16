@@ -1,5 +1,6 @@
 export interface Player {
-    nickName: String,
-    status: String,
-    currentAnswer: String
+    nickName: string,
+    status: string,
+    currentAnswer: string,
+    health: number
 }

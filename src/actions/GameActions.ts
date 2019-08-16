@@ -9,8 +9,9 @@ export enum GameActionTypes {
     RECEIVED_QUESTION = "RECEIVE_QUESTION",
     SHOW_QUESTION = "SHOW_QUESTION",
     SEND_ANSWER = "SEND_ANSWER",
-    CORRECT_ANSWER = "CORRECT_ANSWER",
-    WRONG_ANSWER = "WRONG_ANSWER",
+    ANSWER_RECEIVED = "ANSWER_RECEIVED",
+    // CORRECT_ANSWER = "CORRECT_ANSWER",
+    // WRONG_ANSWER = "WRONG_ANSWER",
     START_NEW_ROUND = "START_NEW_ROUND",
     GAME_OVER = "GAME_OVER",
     RESET_GAME_STATE = "RESET_GAME_STATE"
@@ -27,7 +28,7 @@ export interface CancelRandomGameSearch {
 export interface CreateRandomGame {
     type: GameActionTypes.CREATE_RANDOM_GAME;
     roomId: number;
-    players: Array<Player>;
+    opponents: Array<Player>;
 }
 
 export interface StartRandomGame {
@@ -48,16 +49,16 @@ export interface SendAnswer {
     answer: string;
 }
 
-export interface CorrectAnswer {
-    type: GameActionTypes.CORRECT_ANSWER;
+export interface AnswerReceived {
+    type: GameActionTypes.ANSWER_RECEIVED;
     correctAnswer: string,
-    playersAnswers: any;
+    opponentsAnswers: any;
 }
 
-export interface WrongAnswer {
-    type: GameActionTypes.WRONG_ANSWER;
-    playersAnswers: any;
-}
+// export interface WrongAnswer {
+//     type: GameActionTypes.WRONG_ANSWER;
+//     opponentsAnswers: any;
+// }
 
 export interface StartNewRound {
     type: GameActionTypes.START_NEW_ROUND;
@@ -73,4 +74,4 @@ export interface ResetGameState {
 
 
 export type GameActions = RequestRandomGameSearch | CancelRandomGameSearch | CreateRandomGame | StartRandomGame | ReceivedQuestion
- | ShowQuestion | SendAnswer | CorrectAnswer | WrongAnswer | StartNewRound | GameOver | ResetGameState // | next action
+ | ShowQuestion | SendAnswer | AnswerReceived | StartNewRound | GameOver | ResetGameState // | next action

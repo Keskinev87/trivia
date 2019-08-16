@@ -5,6 +5,7 @@ import { UserState } from '../reducers/userReducer';
 import { AppState } from '../store/Store';
 import { service } from '../services/socket-service';
 import { GameState, GameStatus } from '../reducers/gameReducer';
+import OpponentAvatar from './game/OpponentAvatar';
 import MultipleAnswerQuestionComponent from './game/MultipleAnswerQuestionComponent';
 import RangeQuestionComponent from './game/RangeQuestionComponent';
 import Button from './shared/Button';
@@ -30,6 +31,10 @@ class Game extends React.Component<AppProps> {
     let element: any;
     let status: GameStatus = this.props.gameState.status;
     let question = this.props.gameState.currentQuestion;
+    let opponents = this.props.gameState.opponents;
+    let opponentOneProps: any;
+    let opponentTwoProps: any;
+
     console.log("Status is", status)
     switch (status) {
       case GameStatus.SEARCHING_FOR_GAME: {
@@ -41,11 +46,11 @@ class Game extends React.Component<AppProps> {
         break;
       }
       case GameStatus.RUNNING: {
-        element = <div>Running...</div>
+        element = <GeneralLoader text="Loading next question..." />
         break;
       }
       case GameStatus.GETTING_NEXT_QUESTION: {
-        element = <div>Getting next question...</div>
+        element = <GeneralLoader text="Loading next question..." />
         break;
       }
       case GameStatus.WAITING_FOR_ANSWER: {
@@ -54,7 +59,7 @@ class Game extends React.Component<AppProps> {
           question: this.props.gameState.currentQuestion,
           answer: undefined,
           correctAnswer: undefined,
-          players: undefined
+          opponents: undefined
         }
         console.log("Question type is", question && question.questionType)
         element = question && question.questionType === "multiple" ? <MultipleAnswerQuestionComponent {...props}/> : <RangeQuestionComponent {...props} />;
@@ -66,7 +71,7 @@ class Game extends React.Component<AppProps> {
           question: this.props.gameState.currentQuestion,
           answer: this.props.gameState.currentAnswer,
           correctAnswer: undefined,
-          players: undefined
+          opponents: undefined
         }
         element = question && question.questionType === "multiple" ? <MultipleAnswerQuestionComponent {...props}/> : <RangeQuestionComponent {...props} />;
         break;
@@ -77,7 +82,7 @@ class Game extends React.Component<AppProps> {
           question: this.props.gameState.currentQuestion,
           answer: this.props.gameState.currentAnswer,
           correctAnswer: this.props.gameState.correctAnswer,
-          players: this.props.gameState.players
+          opponents: this.props.gameState.opponents
         }
         element = question && question.questionType === "multiple" ? <MultipleAnswerQuestionComponent {...props}/> : <RangeQuestionComponent {...props} />;
         break;
@@ -93,11 +98,31 @@ class Game extends React.Component<AppProps> {
         element = <div>Unknown status...</div>;
         break;
       }
-        
     }
       
+    if(opponents) {
+      console.log("There are opponents")
+      console.log(opponents)
+      
+      let opponentKeys = Object.keys(opponents);
+      
+      opponentOneProps = {
+        class: "opponent1",
+        nickName: opponents[opponentKeys[0]].nickName
+      }
+      opponentTwoProps = {
+        class: "opponent2",
+        nickName: opponents[opponentKeys[1]].nickName
+      }
+    }
+    
     return(
         <div className="game-section">
+          <div className="opponents-container">
+            {opponents && <span>Opponents: </span>}
+            {opponents && <OpponentAvatar {...opponentOneProps} />}
+            {opponents && <OpponentAvatar {...opponentTwoProps} />}
+          </div>
           {element}
         </div>
     )

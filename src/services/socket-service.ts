@@ -79,7 +79,7 @@ function attachSocketEventListeners() {
         store.dispatch({
             type: GameActionTypes.CREATE_RANDOM_GAME,
             roomId: data.roomId,
-            players: data.players
+            opponents: data.opponents
         });
     });
     
@@ -122,17 +122,17 @@ function attachSocketEventListeners() {
 
     socket.on("show answer", (data: any) => {
         console.log("The answer is")
-        console.log(data.answer)
+        console.log(data.correctAnswer)
         console.log("Your answer is");
         console.log(store.getState().gameState)
         console.log("Other players' answers")
-        console.log(data.playersAnswers)
+        console.log(data.opponentsAnswers)
         // if(data.answer === store.getState().gameState.currentAnswer) {
-            console.log("Right answer")
+            // console.log("Right answer")
             store.dispatch({
-                type: GameActionTypes.CORRECT_ANSWER,
-                correctAnswer: data.answer,
-                playersAnswers: data.playersAnswers
+                type: GameActionTypes.ANSWER_RECEIVED,
+                correctAnswer: data.correctAnswer,
+                opponentsAnswers: data.opponentsAnswers
             })
         // } else {
         //     console.log("Wrong answer")
@@ -181,17 +181,22 @@ export const service: any = {
         console.log("Getting question");
         socket.emit("get question");
     },
-    sendAnswer: (event: any) => {
+    sendMultipleAnswer: (event: any) => {
         console.log(event.target.id);
         store.dispatch({
             type: GameActionTypes.SEND_ANSWER,
             answer: event.target.id
         })
-        socket.emit('set answer', {answer: event.target.id});
+        socket.emit('set multiple answer', {answer: event.target.id});
     },
     sendRangedAnswer: (event: any) => {
         event.preventDefault();
-        console.log((document.getElementById("ranged-question-answer") as HTMLInputElement).value);
+        let answer = (document.getElementById("ranged-question-answer") as HTMLInputElement).value;
+        store.dispatch({
+            type: GameActionTypes.SEND_ANSWER,
+            answer: event.target.id
+        })
+        socket.emit('set ranged answer', {answer: answer});
     },
     endGame: () => {
         console.log("Ending game");

@@ -13,15 +13,15 @@ function AnswerComponent(questionProps: QuestionProps) {
     }
     if(questionProps.correctAnswer === questionProps.id)
         elementClass += ' correct-answer';
-    if(questionProps.answer && questionProps.players) {
-        Object.keys(questionProps.players).forEach((key, index) => {
-            console.log(questionProps.players[key], questionProps.id)
-            if(questionProps.players[key].currentAnswer === questionProps.id)
-                elementClass += ` opponent${index}`
-            })
+    if(questionProps && questionProps.opponents) {
+        Object.keys(questionProps.opponents).forEach((key, index) => {
+            console.log(questionProps, questionProps.id)
+            if(questionProps.opponents[key].currentAnswer === questionProps.id)
+                elementClass += ` opponent${index + 1}`
+        })
     }
     return (
-       <div className={elementClass} id={questionProps.id} onClick={questionProps.active ? service.sendAnswer : void(0)}>{questionProps.question[questionProps.id]}</div>
+       <div className={elementClass} id={questionProps.id} onClick={questionProps.active ? service.sendMultipleAnswer : void(0)}>{questionProps.question[questionProps.id]}</div>
     )
 }
 

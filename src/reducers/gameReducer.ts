@@ -22,7 +22,7 @@ export interface GameState {
     currentQuestion: MultipleAnswerQuestion | RangeQuestion | undefined,
     currentAnswer: string | undefined,
     correctAnswer: string | undefined,
-    players: any,
+    opponents: any,
     isLoading: Boolean,
     isError: Boolean,
     error: string | undefined
@@ -34,7 +34,7 @@ const initialGameState: GameState = {
     currentQuestion: undefined,
     currentAnswer: undefined,
     correctAnswer: undefined,
-    players: undefined,
+    opponents: undefined,
     isLoading: false,
     isError: false,
     error: undefined
@@ -65,7 +65,7 @@ export const gameReducer: Reducer<GameState, GameActions> = (
                 ...state,
                 status: GameStatus.STARTING,
                 isLoading: false,
-                players: action.players,
+                opponents: action.opponents,
                 roomId: action.roomId
             }
         }
@@ -95,9 +95,9 @@ export const gameReducer: Reducer<GameState, GameActions> = (
                 currentAnswer: action.answer
             }
         }
-        case GameActionTypes.CORRECT_ANSWER: {
-            Object.keys(state.players).forEach((key) => {
-                state.players[key].currentAnswer = action.playersAnswers[key];
+        case GameActionTypes.ANSWER_RECEIVED: {
+            Object.keys(state.opponents).forEach((key) => {
+                state.opponents[key].currentAnswer = action.opponentsAnswers[key];
             });
             return {
                 ...state,

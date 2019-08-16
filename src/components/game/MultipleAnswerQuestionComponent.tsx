@@ -7,13 +7,13 @@ export interface QuestionProps {
     answer: string | undefined | null;
     correctAnswer: string | undefined;
     question: any;
-    players: any;
+    opponents: any;
 }
 
 function MultipleAnswerQuestionComponent(props: QuestionProps) {
     console.log("Rendering question")
     console.log("The state players in question are")
-    console.log(props.players)
+    console.log(props.opponents)
         return (
             <div className="question-container">
                 <div className="question-body">

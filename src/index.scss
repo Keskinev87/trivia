@@ -170,6 +170,24 @@ body {
 }
 
 .game-section {
+  .opponents-container {
+    display: block;
+    min-height: 10px;
+    text-align: center;
+    
+    .opponent-container {
+      display: inline-block;
+    }
+    .opponent1, .opponent2 {
+      display: inline-block;
+      height: 15px;
+      width: 15px;
+    }
+    .opponent-name {
+      display: inline-block;
+    }
+    
+  }
   .question-container {
     @extend %col-10;
     @extend %col-offset-1;
@@ -229,7 +247,29 @@ body {
     -webkit-animation:blink 1s linear 3;
     -moz-animation:blink 1s linear 3;
     animation: blink 1s linear 3;
-	}
+  }
+
+  .form-group {
+    @extend %row;
+    margin-top: 20px;
+    label {
+      display: block;
+    }
+
+    input{
+      height: 30px;
+      @extend %col-6;
+      @extend %col-offset-3;
+    }
+  }
+  
+  button {
+    margin-bottom: 20px;
+    margin-top: 10px;
+    @extend%button;
+    @extend%col-6;
+    @extend%col-offset-3;
+  }
   
 }
 @keyframes blink{

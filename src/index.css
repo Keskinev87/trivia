@@ -1,4 +1,4 @@
-.auth-section, .menu-section, .game-section, .loading-section, .auth-section .auth-tab, .auth-section .auth-form button, .auth-section .form-group input, .menu-section button {
+.auth-section, .menu-section, .game-section, .loading-section, .auth-section .auth-tab, .auth-section .auth-form button, .auth-section .form-group input, .menu-section button, .game-section .form-group input, .game-section button {
   width: 50%;
   float: left;
   -webkit-box-sizing: border-box;
@@ -27,17 +27,17 @@
   margin-left: 16.66%;
 }
 
-.auth-section, .menu-section, .game-section, .loading-section, .auth-section .auth-form button, .auth-section .form-group input, .menu-section button {
+.auth-section, .menu-section, .game-section, .loading-section, .auth-section .auth-form button, .auth-section .form-group input, .menu-section button, .game-section .form-group input, .game-section button {
   margin-left: 25%;
 }
 
-.auth-section .auth-nav::after, .auth-section .form-group::after {
+.auth-section .auth-nav::after, .auth-section .form-group::after, .game-section .form-group::after {
   content: "";
   clear: both;
   display: table;
 }
 
-.auth-section .auth-form button, .menu-section button {
+.auth-section .auth-form button, .menu-section button, .game-section button {
   background-color: #77a6f7;
   border: none;
   padding: 10px 15px;
@@ -140,6 +140,26 @@ body {
   margin-bottom: 20px;
 }
 
+.game-section .opponents-container {
+  display: block;
+  min-height: 10px;
+  text-align: center;
+}
+
+.game-section .opponents-container .opponent-container {
+  display: inline-block;
+}
+
+.game-section .opponents-container .opponent1, .game-section .opponents-container .opponent2 {
+  display: inline-block;
+  height: 15px;
+  width: 15px;
+}
+
+.game-section .opponents-container .opponent-name {
+  display: inline-block;
+}
+
 .game-section .question-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -205,6 +225,23 @@ body {
 .game-section .correct-answer {
   -webkit-animation: blink 1s linear 3;
   animation: blink 1s linear 3;
+}
+
+.game-section .form-group {
+  margin-top: 20px;
+}
+
+.game-section .form-group label {
+  display: block;
+}
+
+.game-section .form-group input {
+  height: 30px;
+}
+
+.game-section button {
+  margin-bottom: 20px;
+  margin-top: 10px;
 }
 
 @keyframes blink {

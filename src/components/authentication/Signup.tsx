@@ -44,6 +44,19 @@ class Signup extends React.Component<any, any> {
                     <label htmlFor='nickName'>Nickname</label>
                     <input type="text" name="nickName" value={this.state.nickName} onChange={this.handleChange} />
                 </div>
+                <div className="form-group">
+                    <label htmlFor='avatar'>Avatar</label>
+                    <select>
+                        <option value="boy1">boy1</option>
+                        <option value="boy2">boy2</option>
+                        <option value="boy3">boy3</option>
+                        <option value="boy4">boy4</option>
+                        <option value="girl1">girl1</option>
+                        <option value="girl2">girl1</option>
+                        <option value="girl3">girl1</option>
+                        <option value="girl4">girl1</option>
+                    </select>
+                </div>
                 {this.props.userState.isError && <p>{this.props.userState.error}</p>}
                 <button type="submit" value="Submit">Signup</button>
             </form>

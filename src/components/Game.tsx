@@ -108,22 +108,23 @@ class Game extends React.Component<AppProps> {
       
       opponentOneProps = {
         class: "opponent1",
-        nickName: opponents[opponentKeys[0]].nickName
+        nickName: opponents[opponentKeys[0]].nickName,
+        avatar: opponents[opponentKeys[0]].avatar,
       }
       opponentTwoProps = {
         class: "opponent2",
-        nickName: opponents[opponentKeys[1]].nickName
+        nickName: opponents[opponentKeys[1]].nickName,
+        avatar: opponents[opponentKeys[1]].avatar,
       }
     }
     
     return(
         <div className="game-section">
+          {element}
           <div className="opponents-container">
-            {opponents && <span>Opponents: </span>}
             {opponents && <OpponentAvatar {...opponentOneProps} />}
             {opponents && <OpponentAvatar {...opponentTwoProps} />}
           </div>
-          {element}
         </div>
     )
   }

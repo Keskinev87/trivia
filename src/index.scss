@@ -1,15 +1,17 @@
-$bodybgcolor: #ffffff;
-$bgcolor: #77a6f7;
-$btncolor: #77a6f7;
-$lighttextcolor: #ffffff;
-$darktextcolor: #00887a;
+$bodybgcolor: #07080a;
+$bgcolor: #242831;
+$generaluibgcolor: #384355;
+$btncolor: #8293a7;
+$inputbgcolor: #c9d3df;
+$lighttextcolor: #f8f8f8;
+$darktextcolor: #f8f8f8;
 $bordercolor: #d3e3fc;
 $hovercolor: #f5e6cc;
-$ownAnswerColor: #ffccbc;
-$inactivecolor: #ffffff;
-$activecolor: #d3e3fc;
-$firstOpponentColor:#00887a;
-$secondOpponentColor:#d3e3fc;
+$ownAnswerColor: #8293a7;
+$inactivecolor: #374254;
+$activecolor: #8293a7;
+$firstOpponentColor:#ffb26c;
+$secondOpponentColor:#a143b1;
 
 %col-1 {width: 8.33%; float: left; box-sizing: border-box;}
 %col-2 {width: 16.66%; float: left; box-sizing: border-box;}
@@ -52,6 +54,7 @@ $secondOpponentColor:#d3e3fc;
     // text-decoration: none;
     color: $lighttextcolor;
     font-size: 16px;
+    border-radius: 5px;
     cursor: pointer;
 }
 
@@ -97,20 +100,26 @@ body {
   position: relative;
   @extend %col-6;
   @extend %col-offset-3;
-  min-height: 500px;
-  border: 1px solid $bordercolor;
+  min-height: 600px;
+  background-color: $bgcolor;
+  color: $lighttextcolor;
+  // border: 1px solid $bordercolor;
 }
 
 .auth-section {
   .auth-nav {
     @extend %row;
   }
-  
+
+  h2{
+    margin:0;
+  }
+
   .auth-tab {
     @extend%col-6;
     text-align: center;
-    padding-top: 5px;
-    padding-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 15px;
     cursor: pointer;
     border-bottom: 1px solid $activecolor;
   }
@@ -126,15 +135,23 @@ body {
   .auth-form {
     @extend %col-8;
     @extend %col-offset-2;
-    margin-top: 40px;
-    margin-bottom: 40px;
+    position: absolute;
+    top: 50%; 
+    transform: translateY(-50%);
+    padding-top: 30px;
+    padding-bottom: 50px;
+    background-color: $generaluibgcolor;
     color: $darktextcolor;
-    border: 1px solid $bordercolor;
     text-align: center;
 
+    input {
+      background-color: $inputbgcolor;
+      border-radius: 5px;
+      border: none;
+    }
+
     button {
-      margin-bottom: 20px;
-      margin-top: 10px;
+      margin-top: 20px;
       @extend%button;
       @extend%col-6;
       @extend%col-offset-3;
@@ -171,32 +188,92 @@ body {
 
 .game-section {
   .opponents-container {
-    display: block;
+    @extend %row::after;
+    @extend %col-10;
+    @extend %col-offset-1;
     min-height: 10px;
     text-align: center;
     
-    .opponent-container {
-      display: inline-block;
-    }
-    .opponent1, .opponent2 {
-      display: inline-block;
-      height: 15px;
-      width: 15px;
-    }
-    .opponent-name {
-      display: inline-block;
-    }
     
+    .opponent1, .opponent2 {
+      background-color: $activecolor;
+      border-radius: 3px;
+
+      .opponent-avatar {
+        @extend %col-4;
+        @extend %col-offset-1;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        height: auto;
+      }
+
+      .opponent-name {
+        display: inline-block;
+      }
+    }
+
+    .opponent1 {
+      @extend %col-4;
+      @extend %col-offset-1;
+      color: $firstOpponentColor;
+    }
+
+    .opponent2 {
+      @extend %col-4;
+      @extend %col-offset-2;
+      color: $secondOpponentColor;
+    }
+
   }
   .question-container {
+    @extend %row::after;
     @extend %col-10;
     @extend %col-offset-1;
     display: flex;
     flex-direction: column;
     justify-content: center;
+
+    .disabled {
+      pointer-events: none;
+    }
+  
+    .own-answer {
+      background-color: $ownAnswerColor;
+    }
+  
+    .opponent1 {
+      background-color: $firstOpponentColor;
+    }
+  
+    .opponent2 {
+      background-color: $secondOpponentColor;
+    }
+  
+    .own-answer.opponent1 {
+      background-image: linear-gradient(to right, 
+      $ownAnswerColor 50%, $firstOpponentColor 50%); 
+    }
+  
+    .own-answer.opponent2 {
+      background-image: linear-gradient(to right, $ownAnswerColor 50%, $secondOpponentColor 50%); 
+    }
+  
+    .opponent1.opponent2 { 
+      background-image: linear-gradient(to right, $firstOpponentColor 50%, $secondOpponentColor 50%); 
+    }
+  
+    .own-answer.opponent1.opponent2 {
+      background-image: linear-gradient(to right, $ownAnswerColor 33%, $firstOpponentColor 33%, $firstOpponentColor 66%, $secondOpponentColor 66%);
+    }
+  
+    .correct-answer {
+      -webkit-animation:blink 1s linear 3;
+      -moz-animation:blink 1s linear 3;
+      animation: blink 1s linear 3;
+    }
   }
   .question-body, .answer-container {
-    background-color: $bgcolor;
+    background-color: $inactivecolor;
     color: white;
     padding: 10px 20px 10px 20px;
     margin-top: 20px;
@@ -208,45 +285,6 @@ body {
     @extend %col-10;
     @extend %col-offset-1;
     cursor: pointer;
-  }
-
-  .disabled {
-    pointer-events: none;
-  }
-
-  .own-answer {
-    background-color: $ownAnswerColor;
-  }
-
-  .opponent1 {
-    background-color: $firstOpponentColor;
-  }
-
-  .opponent2 {
-    background-color: $secondOpponentColor;
-  }
-
-  .own-answer.opponent1 {
-    background-image: linear-gradient(to right, 
-    $ownAnswerColor 50%, $firstOpponentColor 50%); 
-  }
-
-  .own-answer.opponent2 {
-    background-image: linear-gradient(to right, $ownAnswerColor 50%, $secondOpponentColor 50%); 
-  }
-
-  .opponent1.opponent2 { 
-    background-image: linear-gradient(to right, $firstOpponentColor 50%, $secondOpponentColor 50%); 
-  }
-
-  .own-answer.opponent1.opponent2 {
-    background-image: linear-gradient(to right, $ownAnswerColor 33%, $firstOpponentColor 33%, $firstOpponentColor 66%, $secondOpponentColor 66%);
-  }
-
-  .correct-answer {
-    -webkit-animation:blink 1s linear 3;
-    -moz-animation:blink 1s linear 3;
-    animation: blink 1s linear 3;
   }
 
   .form-group {

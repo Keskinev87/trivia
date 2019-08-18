@@ -32,15 +32,15 @@ class LoginSignup extends React.Component<any, any> {
             <div className="auth-nav">
               <div className={this.state.intent === 'Login' ? "auth-tab active" : "auth-tab inactive"} 
                   onClick={this.setIntent}>
-                <span>
+                <h2>
                   Login
-                </span>
+                </h2>
               </div>
               <div className={this.state.intent === 'Signup' ? "auth-tab active" : "auth-tab inactive"}
                    onClick={this.setIntent}>
-                <span >
+                <h2>
                   Signup
-                </span>
+                </h2>
               </div>
             </div>
             <div className="auth-form">

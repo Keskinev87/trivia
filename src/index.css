@@ -1,3 +1,10 @@
+.game-section .opponents-container .opponent1 .opponent-avatar, .game-section .opponents-container .opponent2 .opponent-avatar, .game-section .opponents-container .opponent1, .game-section .opponents-container .opponent2 {
+  width: 33.33%;
+  float: left;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
 .auth-section, .menu-section, .game-section, .loading-section, .auth-section .auth-tab, .auth-section .auth-form button, .auth-section .form-group input, .menu-section button, .game-section .form-group input, .game-section button {
   width: 50%;
   float: left;
@@ -12,18 +19,18 @@
           box-sizing: border-box;
 }
 
-.game-section .question-container, .game-section .answer-container {
+.game-section .opponents-container, .game-section .question-container, .game-section .answer-container {
   width: 83.33%;
   float: left;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
 
-.game-section .question-container, .game-section .answer-container {
+.game-section .opponents-container, .game-section .opponents-container .opponent1 .opponent-avatar, .game-section .opponents-container .opponent2 .opponent-avatar, .game-section .opponents-container .opponent1, .game-section .question-container, .game-section .answer-container {
   margin-left: 8.33%;
 }
 
-.auth-section .auth-form {
+.auth-section .auth-form, .game-section .opponents-container .opponent2 {
   margin-left: 16.66%;
 }
 
@@ -31,24 +38,25 @@
   margin-left: 25%;
 }
 
-.auth-section .auth-nav::after, .auth-section .form-group::after, .game-section .form-group::after {
+.auth-section .auth-nav::after, .auth-section .form-group::after, .game-section .opponents-container, .game-section .question-container, .game-section .form-group::after {
   content: "";
   clear: both;
   display: table;
 }
 
 .auth-section .auth-form button, .menu-section button, .game-section button {
-  background-color: #77a6f7;
+  background-color: #8293a7;
   border: none;
   padding: 10px 15px;
   text-align: center;
-  color: #ffffff;
+  color: #f8f8f8;
   font-size: 16px;
+  border-radius: 5px;
   cursor: pointer;
 }
 
 body {
-  background-color: #ffffff;
+  background-color: #07080a;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -77,37 +85,51 @@ body {
 
 .auth-section, .menu-section, .game-section, .loading-section {
   position: relative;
-  min-height: 500px;
-  border: 1px solid #d3e3fc;
+  min-height: 600px;
+  background-color: #242831;
+  color: #f8f8f8;
+}
+
+.auth-section h2 {
+  margin: 0;
 }
 
 .auth-section .auth-tab {
   text-align: center;
-  padding-top: 5px;
-  padding-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom: 15px;
   cursor: pointer;
-  border-bottom: 1px solid #d3e3fc;
+  border-bottom: 1px solid #8293a7;
 }
 
 .auth-section .active {
-  background-color: #d3e3fc;
+  background-color: #8293a7;
 }
 
 .auth-section .inactive {
-  background-color: #ffffff;
+  background-color: #374254;
 }
 
 .auth-section .auth-form {
-  margin-top: 40px;
-  margin-bottom: 40px;
-  color: #00887a;
-  border: 1px solid #d3e3fc;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  padding-top: 30px;
+  padding-bottom: 50px;
+  background-color: #384355;
+  color: #f8f8f8;
   text-align: center;
 }
 
+.auth-section .auth-form input {
+  background-color: #c9d3df;
+  border-radius: 5px;
+  border: none;
+}
+
 .auth-section .auth-form button {
-  margin-bottom: 20px;
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .auth-section .form-group {
@@ -141,23 +163,31 @@ body {
 }
 
 .game-section .opponents-container {
-  display: block;
   min-height: 10px;
   text-align: center;
 }
 
-.game-section .opponents-container .opponent-container {
-  display: inline-block;
-}
-
 .game-section .opponents-container .opponent1, .game-section .opponents-container .opponent2 {
-  display: inline-block;
-  height: 15px;
-  width: 15px;
+  background-color: #8293a7;
+  border-radius: 3px;
 }
 
-.game-section .opponents-container .opponent-name {
+.game-section .opponents-container .opponent1 .opponent-avatar, .game-section .opponents-container .opponent2 .opponent-avatar {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  height: auto;
+}
+
+.game-section .opponents-container .opponent1 .opponent-name, .game-section .opponents-container .opponent2 .opponent-name {
   display: inline-block;
+}
+
+.game-section .opponents-container .opponent1 {
+  color: #ffb26c;
+}
+
+.game-section .opponents-container .opponent2 {
+  color: #a143b1;
 }
 
 .game-section .question-container {
@@ -173,8 +203,49 @@ body {
           justify-content: center;
 }
 
+.game-section .question-container .disabled {
+  pointer-events: none;
+}
+
+.game-section .question-container .own-answer {
+  background-color: #8293a7;
+}
+
+.game-section .question-container .opponent1 {
+  background-color: #ffb26c;
+}
+
+.game-section .question-container .opponent2 {
+  background-color: #a143b1;
+}
+
+.game-section .question-container .own-answer.opponent1 {
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(50%, #8293a7), color-stop(50%, #ffb26c));
+  background-image: linear-gradient(to right, #8293a7 50%, #ffb26c 50%);
+}
+
+.game-section .question-container .own-answer.opponent2 {
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(50%, #8293a7), color-stop(50%, #a143b1));
+  background-image: linear-gradient(to right, #8293a7 50%, #a143b1 50%);
+}
+
+.game-section .question-container .opponent1.opponent2 {
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(50%, #ffb26c), color-stop(50%, #a143b1));
+  background-image: linear-gradient(to right, #ffb26c 50%, #a143b1 50%);
+}
+
+.game-section .question-container .own-answer.opponent1.opponent2 {
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(33%, #8293a7), color-stop(33%, #ffb26c), color-stop(66%, #ffb26c), color-stop(66%, #a143b1));
+  background-image: linear-gradient(to right, #8293a7 33%, #ffb26c 33%, #ffb26c 66%, #a143b1 66%);
+}
+
+.game-section .question-container .correct-answer {
+  -webkit-animation: blink 1s linear 3;
+  animation: blink 1s linear 3;
+}
+
 .game-section .question-body, .game-section .answer-container {
-  background-color: #77a6f7;
+  background-color: #374254;
   color: white;
   padding: 10px 20px 10px 20px;
   margin-top: 20px;
@@ -184,47 +255,6 @@ body {
 
 .game-section .answer-container {
   cursor: pointer;
-}
-
-.game-section .disabled {
-  pointer-events: none;
-}
-
-.game-section .own-answer {
-  background-color: #ffccbc;
-}
-
-.game-section .opponent1 {
-  background-color: #00887a;
-}
-
-.game-section .opponent2 {
-  background-color: #d3e3fc;
-}
-
-.game-section .own-answer.opponent1 {
-  background-image: -webkit-gradient(linear, left top, right top, color-stop(50%, #ffccbc), color-stop(50%, #00887a));
-  background-image: linear-gradient(to right, #ffccbc 50%, #00887a 50%);
-}
-
-.game-section .own-answer.opponent2 {
-  background-image: -webkit-gradient(linear, left top, right top, color-stop(50%, #ffccbc), color-stop(50%, #d3e3fc));
-  background-image: linear-gradient(to right, #ffccbc 50%, #d3e3fc 50%);
-}
-
-.game-section .opponent1.opponent2 {
-  background-image: -webkit-gradient(linear, left top, right top, color-stop(50%, #00887a), color-stop(50%, #d3e3fc));
-  background-image: linear-gradient(to right, #00887a 50%, #d3e3fc 50%);
-}
-
-.game-section .own-answer.opponent1.opponent2 {
-  background-image: -webkit-gradient(linear, left top, right top, color-stop(33%, #ffccbc), color-stop(33%, #00887a), color-stop(66%, #00887a), color-stop(66%, #d3e3fc));
-  background-image: linear-gradient(to right, #ffccbc 33%, #00887a 33%, #00887a 66%, #d3e3fc 66%);
-}
-
-.game-section .correct-answer {
-  -webkit-animation: blink 1s linear 3;
-  animation: blink 1s linear 3;
 }
 
 .game-section .form-group {

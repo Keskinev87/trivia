@@ -1,5 +1,6 @@
 import { MultipleAnswerQuestion, RangeQuestion } from '../models/Question';
 import { Player } from '../models/Player';
+import { GameInfo, PlayerInfo } from '../reducers/gameReducer';
 
 export enum GameActionTypes {
     REQUEST_RANDOM_GAME_SEARCH  = "REQUEST_RANDOM_GAME_SEARCH",
@@ -28,6 +29,8 @@ export interface CancelRandomGameSearch {
 export interface CreateRandomGame {
     type: GameActionTypes.CREATE_RANDOM_GAME;
     roomId: number;
+    gameInfo: GameInfo; 
+    playerInfo: PlayerInfo;
     opponents: Array<Player>;
 }
 

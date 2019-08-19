@@ -5,11 +5,12 @@ import { UserState } from '../reducers/userReducer';
 import { AppState } from '../store/Store';
 import { service } from '../services/socket-service';
 import { GameState, GameStatus } from '../reducers/gameReducer';
-import OpponentAvatar from './game/OpponentAvatar';
+import PlayerAvatar from './game/PlayerAvatar';
 import MultipleAnswerQuestionComponent from './game/MultipleAnswerQuestionComponent';
 import RangeQuestionComponent from './game/RangeQuestionComponent';
 import Button from './shared/Button';
 import GeneralLoader from'./shared/GeneralLoader';
+import GameInfoComponent from './game/GameInfoComponent';
 
 interface AppProps {
   userState: UserState,
@@ -32,8 +33,11 @@ class Game extends React.Component<AppProps> {
     let status: GameStatus = this.props.gameState.status;
     let question = this.props.gameState.currentQuestion;
     let opponents = this.props.gameState.opponents;
-    let opponentOneProps: any;
-    let opponentTwoProps: any;
+    let gameInfo = this.props.gameState.gameInfo;
+    let playerInfo = this.props.gameState.playerInfo;
+    // let opponentOneProps: any;
+    // let opponentTwoProps: any;
+    let gameInfoProps: any;
 
     console.log("Status is", status)
     switch (status) {
@@ -42,7 +46,26 @@ class Game extends React.Component<AppProps> {
         break;
       }
       case GameStatus.STARTING: {
-        element = <GeneralLoader text="Starting game..." />;
+        let opponentKeys = Object.keys(opponents);
+      
+        let opponentOneProps = {
+          class: "opponent1",
+          nickName: opponents[opponentKeys[0]].nickName,
+          avatar: opponents[opponentKeys[0]].avatar,
+          health: opponents[opponentKeys[0]].health
+        }
+        let opponentTwoProps = {
+          class: "opponent2",
+          nickName: opponents[opponentKeys[1]].nickName,
+          avatar: opponents[opponentKeys[1]].avatar,
+          health: opponents[opponentKeys[1]].health
+        }
+        element = <div className="players-announcement-container">
+            <h2>Starting new game with players</h2>
+            <div className="player-info-container"><PlayerAvatar {...Object.assign({class:'player'}, playerInfo)} /></div>
+            <div className="player-info-container"><PlayerAvatar {...opponentOneProps} /></div>
+            <div className="player-info-container"><PlayerAvatar {...opponentTwoProps} /></div>
+          </div>
         break;
       }
       case GameStatus.RUNNING: {
@@ -100,31 +123,43 @@ class Game extends React.Component<AppProps> {
       }
     }
       
-    if(opponents) {
-      console.log("There are opponents")
-      console.log(opponents)
+    // if(opponents) {
+    //   console.log("There are opponents")
+    //   console.log(opponents)
       
-      let opponentKeys = Object.keys(opponents);
+      // let opponentKeys = Object.keys(opponents);
       
-      opponentOneProps = {
-        class: "opponent1",
-        nickName: opponents[opponentKeys[0]].nickName,
-        avatar: opponents[opponentKeys[0]].avatar,
-      }
-      opponentTwoProps = {
-        class: "opponent2",
-        nickName: opponents[opponentKeys[1]].nickName,
-        avatar: opponents[opponentKeys[1]].avatar,
+      // opponentOneProps = {
+      //   class: "opponent1",
+      //   nickName: opponents[opponentKeys[0]].nickName,
+      //   avatar: opponents[opponentKeys[0]].avatar,
+      //   health: opponents[opponentKeys[0]].health
+      // }
+      // opponentTwoProps = {
+      //   class: "opponent2",
+      //   nickName: opponents[opponentKeys[1]].nickName,
+      //   avatar: opponents[opponentKeys[1]].avatar,
+      //   health: opponents[opponentKeys[1]].health
+      // }
+    // }
+
+    if(gameInfo && question) {
+      gameInfoProps = {
+        questionsCount: gameInfo.questionsCount,
+        currenQuestionNumber: gameInfo.currentQuestionNumber,
+        currentQuestionCategory: question.category,
+        playerInfo: playerInfo
       }
     }
     
     return(
         <div className="game-section">
+          {gameInfo && <GameInfoComponent {...gameInfoProps} />}
           {element}
-          <div className="opponents-container">
-            {opponents && <OpponentAvatar {...opponentOneProps} />}
-            {opponents && <OpponentAvatar {...opponentTwoProps} />}
-          </div>
+          {/* <div className="opponents-container">
+            {opponents && <PlayerAvatar {...opponentOneProps} />}
+            {opponents && <PlayerAvatar {...opponentTwoProps} />}
+          </div> */}
         </div>
     )
   }

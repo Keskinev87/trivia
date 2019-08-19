@@ -16,9 +16,24 @@ export enum GameStatus {
     GAME_OVER = "GAME_OVER"
 }
 
+export interface GameInfo {
+    questionsCount: number,
+    currentQuestionNumber: number,
+}
+
+export interface PlayerInfo {
+    // answers: []
+    avatar: string,
+    health: number,
+    id: string,
+    nickName: string
+}
+
 export interface GameState {
     roomId: Number | null,
     status: GameStatus,
+    gameInfo: GameInfo | undefined,
+    playerInfo: PlayerInfo | undefined,
     currentQuestion: MultipleAnswerQuestion | RangeQuestion | undefined,
     currentAnswer: string | undefined,
     correctAnswer: string | undefined,
@@ -31,6 +46,8 @@ export interface GameState {
 const initialGameState: GameState = {
     roomId: null,
     status: GameStatus.NOT_PLAYING,
+    gameInfo: undefined,
+    playerInfo: undefined,
     currentQuestion: undefined,
     currentAnswer: undefined,
     correctAnswer: undefined,
@@ -66,6 +83,8 @@ export const gameReducer: Reducer<GameState, GameActions> = (
                 status: GameStatus.STARTING,
                 isLoading: false,
                 opponents: action.opponents,
+                gameInfo: action.gameInfo,
+                playerInfo: action.playerInfo,
                 roomId: action.roomId
             }
         }

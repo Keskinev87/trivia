@@ -79,6 +79,8 @@ function attachSocketEventListeners() {
         store.dispatch({
             type: GameActionTypes.CREATE_RANDOM_GAME,
             roomId: data.roomId,
+            gameInfo: data.gameInfo,
+            playerInfo: data.playerInfo,
             opponents: data.opponents
         });
     });

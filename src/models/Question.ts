@@ -5,11 +5,13 @@ export interface MultipleAnswerQuestion {
     answerB: string,
     answerC: string,
     answerD: string,
-    correctAnswer: string
+    correctAnswer: string,
+    category: string
 }
 
 export interface RangeQuestion {
     questionType: string,
     body: string,
-    correctAnswer: number
+    correctAnswer: number,
+    category: string
 }

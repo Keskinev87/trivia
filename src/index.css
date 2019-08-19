@@ -1,4 +1,4 @@
-.game-section .opponents-container .opponent1 .opponent-avatar, .game-section .opponents-container .opponent2 .opponent-avatar, .game-section .opponents-container .opponent1, .game-section .opponents-container .opponent2 {
+.game-section .game-info-container .game-progress, .game-section .game-info-container .current-question-category, .game-section .player-info-container, .game-section .player-info-container .player-avatar {
   width: 33.33%;
   float: left;
   -webkit-box-sizing: border-box;
@@ -19,18 +19,25 @@
           box-sizing: border-box;
 }
 
-.game-section .opponents-container, .game-section .question-container, .game-section .answer-container {
+.game-section .question-container, .game-section .answer-container {
   width: 83.33%;
   float: left;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
 
-.game-section .opponents-container, .game-section .opponents-container .opponent1 .opponent-avatar, .game-section .opponents-container .opponent2 .opponent-avatar, .game-section .opponents-container .opponent1, .game-section .question-container, .game-section .answer-container {
+.game-section .game-info-container, .game-section .players-announcement-container {
+  width: 100%;
+  float: left;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.game-section .player-info-container .player-avatar, .game-section .question-container, .game-section .answer-container {
   margin-left: 8.33%;
 }
 
-.auth-section .auth-form, .game-section .opponents-container .opponent2 {
+.auth-section .auth-form {
   margin-left: 16.66%;
 }
 
@@ -38,7 +45,7 @@
   margin-left: 25%;
 }
 
-.auth-section .auth-nav::after, .auth-section .form-group::after, .game-section .opponents-container, .game-section .question-container, .game-section .form-group::after {
+.auth-section .auth-nav::after, .auth-section .form-group::after, .game-section .game-info-container, .game-section .question-container, .game-section .form-group::after {
   content: "";
   clear: both;
   display: table;
@@ -117,7 +124,7 @@ body {
           transform: translateY(-50%);
   padding-top: 30px;
   padding-bottom: 50px;
-  background-color: #384355;
+  background-color: #374355;
   color: #f8f8f8;
   text-align: center;
 }
@@ -162,31 +169,58 @@ body {
   margin-bottom: 20px;
 }
 
-.game-section .opponents-container {
-  min-height: 10px;
+.game-section .game-info-container {
+  background-color: #374355;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: #adb9c9;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.game-section .game-info-container .game-progress, .game-section .game-info-container .current-question-category, .game-section .game-info-container .player-info-container {
+  height: 80px;
+}
+
+.game-section .game-info-container .game-progress, .game-section .game-info-container .current-question-category {
+  border-right: 1px solid #adb9c9;
+}
+
+.game-section .game-info-container .current-question-category span:nth-child(1), .game-section .game-info-container .game-progress span:nth-child(1) {
+  display: block;
+}
+
+.game-section .players-announcement-container {
+  position: absolute;
+  top: 40%;
+}
+
+.game-section .players-announcement-container h2 {
   text-align: center;
 }
 
-.game-section .opponents-container .opponent1, .game-section .opponents-container .opponent2 {
-  background-color: #8293a7;
-  border-radius: 3px;
-}
-
-.game-section .opponents-container .opponent1 .opponent-avatar, .game-section .opponents-container .opponent2 .opponent-avatar {
+.game-section .player-info-container .player-avatar {
   margin-top: 5px;
   margin-bottom: 5px;
-  height: auto;
+  height: 70px;
 }
 
-.game-section .opponents-container .opponent1 .opponent-name, .game-section .opponents-container .opponent2 .opponent-name {
-  display: inline-block;
+.game-section .player-info-container .player-name {
+  display: block;
+  font-weight: bold;
+  font-size: 18px;
 }
 
-.game-section .opponents-container .opponent1 {
+.game-section .player-info-container .player {
+  color: #33bf6b;
+}
+
+.game-section .player-info-container .opponent1 {
   color: #ffb26c;
 }
 
-.game-section .opponents-container .opponent2 {
+.game-section .player-info-container .opponent2 {
   color: #a143b1;
 }
 
@@ -251,6 +285,7 @@ body {
   margin-top: 20px;
   margin-bottom: 20px;
   text-align: center;
+  border-radius: 5px;
 }
 
 .game-section .answer-container {

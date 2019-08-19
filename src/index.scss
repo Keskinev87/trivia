@@ -1,6 +1,6 @@
 $bodybgcolor: #07080a;
 $bgcolor: #242831;
-$generaluibgcolor: #384355;
+$generaluibgcolor: #374355;
 $btncolor: #8293a7;
 $inputbgcolor: #c9d3df;
 $lighttextcolor: #f8f8f8;
@@ -10,6 +10,7 @@ $hovercolor: #f5e6cc;
 $ownAnswerColor: #8293a7;
 $inactivecolor: #374254;
 $activecolor: #8293a7;
+$playerColor: #33bf6b;
 $firstOpponentColor:#ffb26c;
 $secondOpponentColor:#a143b1;
 
@@ -187,44 +188,74 @@ body {
 }
 
 .game-section {
-  .opponents-container {
+  .game-info-container {
     @extend %row::after;
-    @extend %col-10;
-    @extend %col-offset-1;
-    min-height: 10px;
+    @extend %col-12;
+    background-color: $generaluibgcolor;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #adb9c9;
     text-align: center;
-    
-    
-    .opponent1, .opponent2 {
-      background-color: $activecolor;
-      border-radius: 3px;
+    font-size: 20px;
+    font-weight: bold;
 
-      .opponent-avatar {
-        @extend %col-4;
-        @extend %col-offset-1;
-        margin-top: 5px;
-        margin-bottom: 5px;
-        height: auto;
-      }
+    .game-progress, .current-question-category, .player-info-container {
+      height: 80px;
+    }
 
-      .opponent-name {
-        display: inline-block;
+    .game-progress, .current-question-category {
+      @extend %col-4;
+      border-right: 1px solid #adb9c9;
+    }
+
+    .current-question-category, .game-progress {
+      span:nth-child(1) {
+        display: block;
       }
+    }
+  }
+
+  .players-announcement-container {
+    @extend %col-12;
+    position: absolute;
+    top:40%;
+
+    h2{
+      text-align: center;
+    }
+  }
+
+  .player-info-container {
+    @extend %col-4;
+    .player-avatar {
+      @extend %col-4;
+      @extend %col-offset-1;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      height: 70px;
+    }
+
+    .player-name {
+      display: block;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .player {
+      color: $playerColor;
     }
 
     .opponent1 {
-      @extend %col-4;
-      @extend %col-offset-1;
       color: $firstOpponentColor;
     }
 
     .opponent2 {
-      @extend %col-4;
-      @extend %col-offset-2;
       color: $secondOpponentColor;
     }
-
   }
+
+    
+  
   .question-container {
     @extend %row::after;
     @extend %col-10;
@@ -279,6 +310,7 @@ body {
     margin-top: 20px;
     margin-bottom: 20px;
     text-align: center;
+    border-radius: 5px;
   }
 
   .answer-container {

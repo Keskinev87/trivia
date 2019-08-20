@@ -12,8 +12,11 @@ export interface QuestionProps {
 
 function MultipleAnswerQuestionComponent(props: QuestionProps) {
     console.log("Rendering question")
-    console.log("The state players in question are")
-    console.log(props.opponents)
+    console.log("Correct answer", props.correctAnswer);
+    let resolveAnswer: boolean;
+    let correctAnswer: boolean;
+    props.answer && props.correctAnswer ? resolveAnswer = true : resolveAnswer = false;
+    props.answer === props.correctAnswer ? correctAnswer = true : correctAnswer = false;
         return (
             <div className="question-container">
                 <div className="question-body">
@@ -23,6 +26,7 @@ function MultipleAnswerQuestionComponent(props: QuestionProps) {
                 <AnswerComponent {...Object.assign({id:'answerB'}, props)}/>
                 <AnswerComponent {...Object.assign({id:'answerC'}, props)}/>
                 <AnswerComponent {...Object.assign({id:'answerD'}, props)}/>
+                {resolveAnswer && <span className={correctAnswer ? "resolved correct" : "resolved wrong"}>{correctAnswer ? "Correct Answer" : "Wrong Answer"}</span>}
             </div>
         )
 }

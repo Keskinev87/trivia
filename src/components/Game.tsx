@@ -11,6 +11,7 @@ import RangeQuestionComponent from './game/RangeQuestionComponent';
 import Button from './shared/Button';
 import GeneralLoader from'./shared/GeneralLoader';
 import GameInfoComponent from './game/GameInfoComponent';
+import ResolveRoundContainer from './game/ResolveRoundComponent';
 
 interface AppProps {
   userState: UserState,
@@ -37,6 +38,7 @@ class Game extends React.Component<AppProps> {
     let playerInfo = this.props.gameState.playerInfo;
     // let opponentOneProps: any;
     // let opponentTwoProps: any;
+    let showGameInfo = false;
     let gameInfoProps: any;
 
     console.log("Status is", status)
@@ -69,14 +71,17 @@ class Game extends React.Component<AppProps> {
         break;
       }
       case GameStatus.RUNNING: {
+        showGameInfo = true;
         element = <GeneralLoader text="Loading next question..." />
         break;
       }
       case GameStatus.GETTING_NEXT_QUESTION: {
+        showGameInfo = true;
         element = <GeneralLoader text="Loading next question..." />
         break;
       }
       case GameStatus.WAITING_FOR_ANSWER: {
+        showGameInfo = true;
         let props = {
           active: true,
           question: this.props.gameState.currentQuestion,
@@ -89,6 +94,7 @@ class Game extends React.Component<AppProps> {
         break;
       }
       case GameStatus.ANSWER_SUBMITTED: {
+        showGameInfo = true;
         let props = {
           active: false,
           question: this.props.gameState.currentQuestion,
@@ -100,6 +106,7 @@ class Game extends React.Component<AppProps> {
         break;
       }
       case GameStatus.RESOLVING_ANSWERS: {
+        showGameInfo = true;
         let props = {
           active: false,
           question: this.props.gameState.currentQuestion,
@@ -108,6 +115,16 @@ class Game extends React.Component<AppProps> {
           opponents: this.props.gameState.opponents
         }
         element = question && question.questionType === "multiple" ? <MultipleAnswerQuestionComponent {...props}/> : <RangeQuestionComponent {...props} />;
+        break;
+      }
+      case GameStatus.RESOLVING_ROUND: {
+        showGameInfo = true;
+        let resolveRoundProps = {
+          playerInfo: playerInfo,
+          opponents: opponents,
+          resolveData: this.props.gameState.resolveData
+        }
+        element = <ResolveRoundContainer {...resolveRoundProps} />
         break;
       }
       case GameStatus.GAME_OVER: {
@@ -154,7 +171,7 @@ class Game extends React.Component<AppProps> {
     
     return(
         <div className="game-section">
-          {gameInfo && <GameInfoComponent {...gameInfoProps} />}
+          {showGameInfo && <GameInfoComponent {...gameInfoProps} />}
           {element}
           {/* <div className="opponents-container">
             {opponents && <PlayerAvatar {...opponentOneProps} />}

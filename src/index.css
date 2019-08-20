@@ -1,11 +1,11 @@
-.game-section .game-info-container .game-progress, .game-section .game-info-container .current-question-category, .game-section .player-info-container, .game-section .player-info-container .player-avatar {
+.game-section .game-info-container .game-progress, .game-section .game-info-container .current-question-category, .game-section .player-info-container, .game-section .player-avatar {
   width: 33.33%;
   float: left;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
 
-.auth-section, .menu-section, .game-section, .loading-section, .auth-section .auth-tab, .auth-section .auth-form button, .auth-section .form-group input, .menu-section button, .game-section .form-group input, .game-section button {
+.auth-section, .menu-section, .game-section, .loading-section, .auth-section .auth-tab, .auth-section .auth-form button, .auth-section .form-group input, .menu-section button, .game-section .resolve-round-container .resolve-player-container, .game-section .player-stats, .game-section .form-group input, .game-section button {
   width: 50%;
   float: left;
   -webkit-box-sizing: border-box;
@@ -19,21 +19,21 @@
           box-sizing: border-box;
 }
 
-.game-section .question-container, .game-section .answer-container {
+.game-section .player-stats .player-health-container, .game-section .question-container, .game-section .answer-container {
   width: 83.33%;
   float: left;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
 
-.game-section .game-info-container, .game-section .players-announcement-container {
+.game-section .game-info-container, .game-section .players-announcement-container, .game-section .resolve-round-container {
   width: 100%;
   float: left;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
 
-.game-section .player-info-container .player-avatar, .game-section .question-container, .game-section .answer-container {
+.game-section .player-avatar, .game-section .player-stats, .game-section .player-stats .player-health-container, .game-section .question-container, .game-section .answer-container {
   margin-left: 8.33%;
 }
 
@@ -41,7 +41,7 @@
   margin-left: 16.66%;
 }
 
-.auth-section, .menu-section, .game-section, .loading-section, .auth-section .auth-form button, .auth-section .form-group input, .menu-section button, .game-section .form-group input, .game-section button {
+.auth-section, .menu-section, .game-section, .loading-section, .auth-section .auth-form button, .auth-section .form-group input, .menu-section button, .game-section .resolve-round-container .resolve-player-container, .game-section .form-group input, .game-section button {
   margin-left: 25%;
 }
 
@@ -200,27 +200,55 @@ body {
   text-align: center;
 }
 
-.game-section .player-info-container .player-avatar {
+.game-section .resolve-round-container {
+  position: absolute;
+  top: 40%;
+}
+
+.game-section .player-avatar {
   margin-top: 5px;
   margin-bottom: 5px;
   height: 70px;
 }
 
-.game-section .player-info-container .player-name {
+.game-section .player-stats .player-name {
   display: block;
   font-weight: bold;
   font-size: 18px;
 }
 
-.game-section .player-info-container .player {
+.game-section .player-stats .player-health-container {
+  height: 12px;
+  background-color: #373f4b;
+}
+
+.game-section .player-stats .player-health-container .player-health {
+  height: 8px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.game-section .player-stats .player-health-container .player {
+  background-color: #33bf6b;
+}
+
+.game-section .player-stats .player-health-container .opponent1 {
+  background-color: #53657d;
+}
+
+.game-section .player-stats .player-health-container .opponent2 {
+  background-color: #a143b1;
+}
+
+.game-section .player-stats .player {
   color: #33bf6b;
 }
 
-.game-section .player-info-container .opponent1 {
-  color: #ffb26c;
+.game-section .player-stats .opponent1 {
+  color: #53657d;
 }
 
-.game-section .player-info-container .opponent2 {
+.game-section .player-stats .opponent2 {
   color: #a143b1;
 }
 
@@ -246,7 +274,7 @@ body {
 }
 
 .game-section .question-container .opponent1 {
-  background-color: #ffb26c;
+  background-color: #53657d;
 }
 
 .game-section .question-container .opponent2 {
@@ -254,8 +282,8 @@ body {
 }
 
 .game-section .question-container .own-answer.opponent1 {
-  background-image: -webkit-gradient(linear, left top, right top, color-stop(50%, #8293a7), color-stop(50%, #ffb26c));
-  background-image: linear-gradient(to right, #8293a7 50%, #ffb26c 50%);
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(50%, #8293a7), color-stop(50%, #53657d));
+  background-image: linear-gradient(to right, #8293a7 50%, #53657d 50%);
 }
 
 .game-section .question-container .own-answer.opponent2 {
@@ -264,13 +292,25 @@ body {
 }
 
 .game-section .question-container .opponent1.opponent2 {
-  background-image: -webkit-gradient(linear, left top, right top, color-stop(50%, #ffb26c), color-stop(50%, #a143b1));
-  background-image: linear-gradient(to right, #ffb26c 50%, #a143b1 50%);
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(50%, #53657d), color-stop(50%, #a143b1));
+  background-image: linear-gradient(to right, #53657d 50%, #a143b1 50%);
 }
 
 .game-section .question-container .own-answer.opponent1.opponent2 {
-  background-image: -webkit-gradient(linear, left top, right top, color-stop(33%, #8293a7), color-stop(33%, #ffb26c), color-stop(66%, #ffb26c), color-stop(66%, #a143b1));
-  background-image: linear-gradient(to right, #8293a7 33%, #ffb26c 33%, #ffb26c 66%, #a143b1 66%);
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(33%, #8293a7), color-stop(33%, #53657d), color-stop(66%, #53657d), color-stop(66%, #a143b1));
+  background-image: linear-gradient(to right, #8293a7 33%, #53657d 33%, #53657d 66%, #a143b1 66%);
+}
+
+.game-section .question-container .resolved {
+  text-align: center;
+}
+
+.game-section .question-container .correct {
+  color: #33bf6b;
+}
+
+.game-section .question-container .wrong {
+  color: #d1335b;
 }
 
 .game-section .question-container .correct-answer {

@@ -19,7 +19,7 @@ function attachSocketEventListeners() {
             type: UserActionTypes.LOGIN_SUCCESS,
             user: data.user,
             token: data.token
-        })
+        });
     })
     
     socket.on("login failed", (data: any) => {
@@ -28,7 +28,7 @@ function attachSocketEventListeners() {
         store.dispatch({
             type: UserActionTypes.LOGIN_FAILED,
             error: data.reason
-        })
+        });
     });
     
     socket.on("user", (user: User) => {
@@ -55,14 +55,14 @@ function attachSocketEventListeners() {
         store.dispatch({
             type: UserActionTypes.SIGNUP_FAILED,
             error: data.reason
-        })
+        });
     });
     
     socket.on("signup success", (data: any) => {
         console.log("Signup was successfull")
         store.dispatch({
             type: UserActionTypes.SIGNUP_SUCCESS
-        })
+        });
     })
     
     socket.on("logout success", () => {
@@ -89,7 +89,7 @@ function attachSocketEventListeners() {
         console.log("Game started");
         store.dispatch({
             type: GameActionTypes.START_RANDOM_GAME
-        })
+        });
     });
     
     socket.on("new question", (data:any) => {
@@ -105,21 +105,30 @@ function attachSocketEventListeners() {
     socket.on("show question", () => {
         store.dispatch({
             type: GameActionTypes.SHOW_QUESTION
-        })
+        });
     })
     
     socket.on("game over", () => {
         console.log("Game is over")
         store.dispatch({
             type: GameActionTypes.GAME_OVER
-        })
+        });
+    })
+
+    socket.on('resolve round', (data: any) => {
+        console.log("Should resolve round now")
+        console.log(data)
+        store.dispatch({
+            type: GameActionTypes.RESOLVE_ROUND,
+            resolveData: data
+        });
     })
     
     socket.on("start new round", () => {
         console.log("Starting new round")
         store.dispatch({
             type: GameActionTypes.START_NEW_ROUND
-        })
+        });
     })
 
     socket.on("show answer", (data: any) => {

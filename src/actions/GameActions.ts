@@ -11,6 +11,7 @@ export enum GameActionTypes {
     SHOW_QUESTION = "SHOW_QUESTION",
     SEND_ANSWER = "SEND_ANSWER",
     ANSWER_RECEIVED = "ANSWER_RECEIVED",
+    RESOLVE_ROUND = "RESOLVE_ROUND",
     // CORRECT_ANSWER = "CORRECT_ANSWER",
     // WRONG_ANSWER = "WRONG_ANSWER",
     START_NEW_ROUND = "START_NEW_ROUND",
@@ -58,6 +59,11 @@ export interface AnswerReceived {
     opponentsAnswers: any;
 }
 
+export interface ResolveRound {
+    type: GameActionTypes.RESOLVE_ROUND;
+    resolveData: any;
+}
+
 // export interface WrongAnswer {
 //     type: GameActionTypes.WRONG_ANSWER;
 //     opponentsAnswers: any;
@@ -77,4 +83,4 @@ export interface ResetGameState {
 
 
 export type GameActions = RequestRandomGameSearch | CancelRandomGameSearch | CreateRandomGame | StartRandomGame | ReceivedQuestion
- | ShowQuestion | SendAnswer | AnswerReceived | StartNewRound | GameOver | ResetGameState // | next action
+ | ShowQuestion | SendAnswer | AnswerReceived | ResolveRound | StartNewRound | GameOver | ResetGameState // | next action

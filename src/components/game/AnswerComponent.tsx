@@ -3,7 +3,6 @@ import { service } from '../../services/socket-service';
 import { QuestionProps } from './MultipleAnswerQuestionComponent'
 
 function AnswerComponent(questionProps: QuestionProps) {
-    console.log("Rendering answer")
     let elementClass: string = 'answer-container';
     
     if (!questionProps.active)
@@ -21,7 +20,9 @@ function AnswerComponent(questionProps: QuestionProps) {
         })
     }
     return (
-       <div className={elementClass} id={questionProps.id} onClick={questionProps.active ? service.sendMultipleAnswer : void(0)}>{questionProps.question[questionProps.id]}</div>
+       <div className={elementClass} id={questionProps.id} onClick={questionProps.active ? service.sendMultipleAnswer : void(0)}>
+        {questionProps.question[questionProps.id]}
+       </div>
     )
 }
 

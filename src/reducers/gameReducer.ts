@@ -12,6 +12,7 @@ export enum GameStatus {
     ANSWER_SUBMITTED = "ANSWER_SUBMITTED",
     WAITING_FOR_ANSWER = "WAITING_FOR_ANSWER",
     RESOLVING_ANSWERS = "RESOLVING_ANSWERS",
+    RESOLVING_ROUND = "RESOLVING_ROUND",
     GETTING_NEXT_QUESTION = "GETTING_NEXT_QUESTION",
     GAME_OVER = "GAME_OVER"
 }
@@ -38,6 +39,7 @@ export interface GameState {
     currentAnswer: string | undefined,
     correctAnswer: string | undefined,
     opponents: any,
+    resolveData: any,
     isLoading: Boolean,
     isError: Boolean,
     error: string | undefined
@@ -52,6 +54,7 @@ const initialGameState: GameState = {
     currentAnswer: undefined,
     correctAnswer: undefined,
     opponents: undefined,
+    resolveData: undefined,
     isLoading: false,
     isError: false,
     error: undefined
@@ -124,6 +127,21 @@ export const gameReducer: Reducer<GameState, GameActions> = (
                 correctAnswer: action.correctAnswer,
             }
         }
+        case GameActionTypes.RESOLVE_ROUND: {
+            if(state.playerInfo) {
+                state.playerInfo.health -= action.resolveData[state.playerInfo.id].damage;
+                Object.keys(state.opponents).forEach((key) => {
+                    state.opponents[key].health -= action.resolveData[key].damage;
+                })
+
+            }
+            
+            return {
+                ...state,
+                status: GameStatus.RESOLVING_ROUND,
+                resolveData: action.resolveData
+            }
+        }
         // case GameActionTypes.WRONG_ANSWER: {
         //     return {
         //         ...state,
@@ -132,12 +150,14 @@ export const gameReducer: Reducer<GameState, GameActions> = (
         //     }
         // }
         case GameActionTypes.START_NEW_ROUND: {
+            state.gameInfo && state.gameInfo.currentQuestionNumber++;
             return {
                 ...state,
                 status: GameStatus.GETTING_NEXT_QUESTION,
                 currentQuestion: undefined,
                 currentAnswer: undefined,
-                correctAnswer: undefined
+                correctAnswer: undefined,
+                resolveData: undefined
             }
         }
         case GameActionTypes.GAME_OVER: {

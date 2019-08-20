@@ -29,8 +29,8 @@ export interface GameInfoProps {
 }
 
 function GameInfoComponent(props: GameInfoProps) {
-        console.log("Curren question category is:")
-        console.log(props.currentQuestionCategory)
+        // console.log("Curren question category is:")
+        // console.log(props.currentQuestionCategory)
         return (
             <div className="game-info-container">
                 <div className="game-progress">

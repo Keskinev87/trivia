@@ -11,8 +11,10 @@ $ownAnswerColor: #8293a7;
 $inactivecolor: #374254;
 $activecolor: #8293a7;
 $playerColor: #33bf6b;
-$firstOpponentColor:#ffb26c;
+$firstOpponentColor:#53657d;
 $secondOpponentColor:#a143b1;
+$correctAnswerColor: #33bf6b;
+$wrongAnswerColor:#d1335b;
 
 %col-1 {width: 8.33%; float: left; box-sizing: border-box;}
 %col-2 {width: 16.66%; float: left; box-sizing: border-box;}
@@ -225,20 +227,59 @@ body {
     }
   }
 
+  .resolve-round-container {
+    @extend %col-12;
+    position: absolute;
+    top:40%;
+    .resolve-player-container {
+      @extend %col-6;
+      @extend %col-offset-3;
+    }
+  }
+
   .player-info-container {
     @extend %col-4;
-    .player-avatar {
-      @extend %col-4;
-      @extend %col-offset-1;
-      margin-top: 5px;
-      margin-bottom: 5px;
-      height: 70px;
-    }
+  }
+  .player-avatar {
+    @extend %col-4;
+    @extend %col-offset-1;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 70px;
+  }
 
+  .player-stats {
+    @extend %col-6;
+    @extend %col-offset-1;
     .player-name {
       display: block;
       font-weight: bold;
       font-size: 18px;
+    }
+
+    .player-health-container {
+      @extend %col-10;
+      @extend %col-offset-1;
+      height: 12px;
+      background-color: #373f4b;
+
+      .player-health {
+        height: 8px;
+        margin-top: 2px;
+        margin-bottom: 2px;
+      }
+
+      .player {
+        background-color: $playerColor;
+      }
+  
+      .opponent1 {
+        background-color: $firstOpponentColor;
+      }
+  
+      .opponent2 {
+        background-color: $secondOpponentColor;
+      }
     }
 
     .player {
@@ -253,8 +294,6 @@ body {
       color: $secondOpponentColor;
     }
   }
-
-    
   
   .question-container {
     @extend %row::after;
@@ -296,7 +335,19 @@ body {
     .own-answer.opponent1.opponent2 {
       background-image: linear-gradient(to right, $ownAnswerColor 33%, $firstOpponentColor 33%, $firstOpponentColor 66%, $secondOpponentColor 66%);
     }
-  
+    
+    .resolved {
+      text-align: center;
+    }
+
+    .correct {
+      color: $correctAnswerColor;
+    }
+
+    .wrong {
+      color: $wrongAnswerColor;
+    }
+
     .correct-answer {
       -webkit-animation:blink 1s linear 3;
       -moz-animation:blink 1s linear 3;

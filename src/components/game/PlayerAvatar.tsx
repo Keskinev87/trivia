@@ -29,17 +29,19 @@ interface AvatarProps {
 }
 
 function PlayerAvatar(props: AvatarProps) {
-    console.log("The avatar props are")
-    console.log(props)
-        return (
-            <div className="player-avatar-container ">
-                <img className="player-avatar" alt="avatar" src={props.avatar ? avatars[props.avatar] : avatars[empty]}></img>
-                <div className={"player-stats " + props.class}>
-                    <div className="player-name">{props.nickName}</div>
-                    <div className="player-health">{props.health}</div>
-                </div>
+    const healthStyle = {
+        width: props.health + '%'
+    }
+
+    return (
+        <div className="player-avatar-container ">
+            <img className="player-avatar" alt="avatar" src={props.avatar ? avatars[props.avatar] : avatars[empty]}></img>
+            <div className={"player-stats " + props.class}>
+                <div className="player-name">{props.nickName}</div>
+                <div className="player-health-container"><div className={"player-health " + props.class} style={healthStyle}></div></div>
             </div>
-        )
+        </div>
+    )
 }
 
 export default PlayerAvatar

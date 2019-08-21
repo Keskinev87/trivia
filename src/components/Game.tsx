@@ -51,16 +51,12 @@ class Game extends React.Component<AppProps> {
         let opponentKeys = Object.keys(opponents);
       
         let opponentOneProps = {
-          class: "opponent1",
-          nickName: opponents[opponentKeys[0]].nickName,
-          avatar: opponents[opponentKeys[0]].avatar,
-          health: opponents[opponentKeys[0]].health
+          ...opponents[opponentKeys[0]],
+          class: "opponent1"
         }
         let opponentTwoProps = {
-          class: "opponent2",
-          nickName: opponents[opponentKeys[1]].nickName,
-          avatar: opponents[opponentKeys[1]].avatar,
-          health: opponents[opponentKeys[1]].health
+          ...opponents[opponentKeys[1]],
+          class: "opponent2"
         }
         element = <div className="players-announcement-container">
             <h2>Starting new game with players</h2>
@@ -160,11 +156,11 @@ class Game extends React.Component<AppProps> {
       // }
     // }
 
-    if(gameInfo && question) {
+    if(gameInfo) {
       gameInfoProps = {
         questionsCount: gameInfo.questionsCount,
         currenQuestionNumber: gameInfo.currentQuestionNumber,
-        currentQuestionCategory: question.category,
+        currentQuestionCategory: question && question.category,
         playerInfo: playerInfo
       }
     }

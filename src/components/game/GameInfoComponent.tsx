@@ -34,13 +34,11 @@ function GameInfoComponent(props: GameInfoProps) {
         return (
             <div className="game-info-container">
                 <div className="game-progress">
-                    <span>Progress:</span>
-                    <span>{props.currenQuestionNumber}</span>
-                    /
-                    <span>{props.questionsCount}</span>
+                    <span className="block">Progress:</span>
+                    <span className="block">{props.currenQuestionNumber}/{props.questionsCount}</span>
                 </div>
                 <div className="current-question-category"> 
-                    <span>Category:</span>
+                    <span className="block">Category:</span>
                     <span>{props.currentQuestionCategory ? props.currentQuestionCategory : "Random"}</span>    
                 </div>
                 <div className="player-info-container">

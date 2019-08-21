@@ -27,7 +27,9 @@ export interface PlayerInfo {
     avatar: string,
     health: number,
     id: string,
-    nickName: string
+    nickName: string,
+    correctAnswers: number,
+    wrongAnswers: number
 }
 
 export interface GameState {
@@ -130,10 +132,11 @@ export const gameReducer: Reducer<GameState, GameActions> = (
         case GameActionTypes.RESOLVE_ROUND: {
             if(state.playerInfo) {
                 state.playerInfo.health -= action.resolveData[state.playerInfo.id].damage;
+                action.resolveData[state.playerInfo.id].damage > 0 ? state.playerInfo.wrongAnswers++ : state.playerInfo.correctAnswers++;
                 Object.keys(state.opponents).forEach((key) => {
                     state.opponents[key].health -= action.resolveData[key].damage;
+                    action.resolveData[key].damage > 0 ? state.opponents[key].wrongAnswers++ : state.opponents[key].correctAnswers++;
                 })
-
             }
             
             return {

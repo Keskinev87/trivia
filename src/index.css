@@ -1,25 +1,46 @@
-.game-section .game-info-container .game-progress, .game-section .game-info-container .current-question-category, .game-section .player-info-container, .game-section .player-avatar {
+.game-section .answer-name {
+  width: 8.33%;
+  float: left;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.auth-section .avatar-selector {
+  width: 16.66%;
+  float: left;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.game-section .game-info-container .game-progress, .game-section .game-info-container .current-question-category, .game-section .player-info-container, .game-section .player-avatar, .game-section .question-container .ranged-answer {
   width: 33.33%;
   float: left;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
 
-.auth-section, .menu-section, .game-section, .loading-section, .auth-section .auth-tab, .auth-section .auth-form button, .auth-section .form-group input, .menu-section button, .game-section .resolve-round-container .resolve-player-container, .game-section .player-stats, .game-section .form-group input, .game-section button {
+.game-section .resolve-round-container .resolve-player-container .player-resolve-status {
+  width: 41.66%;
+  float: left;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.auth-section, .menu-section, .game-section, .loading-section, .auth-section .auth-tab, .auth-section .auth-form button, .auth-section .form-group input, .menu-section button, .game-section .resolve-round-container .resolve-player-container .player-avatar-container, .game-section .player-stats, .game-section .form-group input, .game-section button {
   width: 50%;
   float: left;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
 
-.auth-section .auth-form {
+.auth-section .auth-form, .auth-section .avatars-container {
   width: 66.66%;
   float: left;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
 
-.game-section .player-stats .player-health-container, .game-section .question-container, .game-section .answer-container {
+.game-section .resolve-round-container .resolve-player-container, .game-section .player-stats .player-health-container, .game-section .question-container, .game-section .answer-container {
   width: 83.33%;
   float: left;
   -webkit-box-sizing: border-box;
@@ -33,19 +54,27 @@
           box-sizing: border-box;
 }
 
-.game-section .player-avatar, .game-section .player-stats, .game-section .player-stats .player-health-container, .game-section .question-container, .game-section .answer-container {
+.game-section .resolve-round-container .resolve-player-container, .game-section .resolve-round-container .resolve-player-container .player-resolve-status, .game-section .player-avatar, .game-section .player-stats, .game-section .question-container, .game-section .question-container .ranged-answer.opponent1 {
   margin-left: 8.33%;
 }
 
-.auth-section .auth-form {
+.auth-section .auth-form, .auth-section .avatars-container, .game-section .question-container .ranged-answer.opponent2 {
   margin-left: 16.66%;
 }
 
-.auth-section, .menu-section, .game-section, .loading-section, .auth-section .auth-form button, .auth-section .form-group input, .menu-section button, .game-section .resolve-round-container .resolve-player-container, .game-section .form-group input, .game-section button {
+.auth-section, .menu-section, .game-section, .loading-section, .auth-section .auth-form button, .auth-section .form-group input, .menu-section button, .game-section .form-group input, .game-section button {
   margin-left: 25%;
 }
 
-.auth-section .auth-nav::after, .auth-section .form-group::after, .game-section .game-info-container, .game-section .question-container, .game-section .form-group::after {
+.game-section .question-container .ranged-answer-container .correct-answer {
+  margin-left: 33.33%;
+}
+
+.auth-section .avatar-selector {
+  margin-left: 41.66%;
+}
+
+.auth-section .auth-nav::after, .auth-section .auth-form, .auth-section .form-group::after, .game-section .game-info-container, .game-section .player-stats .player-name, .game-section .player-answers-container, .game-section .question-container, .game-section .form-group::after {
   content: "";
   clear: both;
   display: table;
@@ -84,7 +113,7 @@ body {
   width: 120px;
   margin-left: auto;
   margin-right: auto;
-  background-image: url("images/settings.svg");
+  background-image: url("images/logo.png");
   background-size: cover;
   -webkit-animation: spin 6s linear infinite;
   animation: spin 6s linear infinite;
@@ -118,10 +147,7 @@ body {
 }
 
 .auth-section .auth-form {
-  position: absolute;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+  margin-top: 30px;
   padding-top: 30px;
   padding-bottom: 50px;
   background-color: #374355;
@@ -141,6 +167,7 @@ body {
 
 .auth-section .form-group {
   margin-top: 20px;
+  position: relative;
 }
 
 .auth-section .form-group label {
@@ -149,6 +176,23 @@ body {
 
 .auth-section .form-group input {
   height: 30px;
+}
+
+.auth-section .avatar-selector {
+  height: 50px;
+}
+
+.auth-section .avatars-container {
+  position: absolute;
+  top: 70px;
+  background-color: #242831;
+  text-align: left;
+  border-radius: 5px;
+}
+
+.auth-section .avatars-container .avatar-image {
+  display: inline-block;
+  height: 50px;
 }
 
 .menu-section {
@@ -187,8 +231,12 @@ body {
   border-right: 1px solid #adb9c9;
 }
 
-.game-section .game-info-container .current-question-category span:nth-child(1), .game-section .game-info-container .game-progress span:nth-child(1) {
+.game-section .game-info-container .current-question-category .block, .game-section .game-info-container .game-progress .block {
   display: block;
+}
+
+.game-section .game-info-container .current-question-category .inline, .game-section .game-info-container .game-progress .inline {
+  display: inline-block;
 }
 
 .game-section .players-announcement-container {
@@ -205,19 +253,27 @@ body {
   top: 40%;
 }
 
+.game-section .resolve-round-container .resolve-player-container .player-resolve-status {
+  padding-top: 20px;
+}
+
 .game-section .player-avatar {
   margin-top: 5px;
   margin-bottom: 5px;
   height: 70px;
 }
 
+.game-section .player-stats {
+  text-align: left;
+}
+
 .game-section .player-stats .player-name {
-  display: block;
   font-weight: bold;
   font-size: 18px;
 }
 
 .game-section .player-stats .player-health-container {
+  display: block;
   height: 12px;
   background-color: #373f4b;
 }
@@ -269,6 +325,26 @@ body {
   pointer-events: none;
 }
 
+.game-section .question-container .ranged-answer-container {
+  display: block;
+  margin-top: 20px;
+}
+
+.game-section .question-container .ranged-answer-container h3 {
+  text-align: center;
+}
+
+.game-section .question-container .ranged-answer-container .correct-answer {
+  background-color: #33bf6b;
+}
+
+.game-section .question-container .ranged-answer {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
 .game-section .question-container .own-answer {
   background-color: #8293a7;
 }
@@ -305,14 +381,6 @@ body {
   text-align: center;
 }
 
-.game-section .question-container .correct {
-  color: #33bf6b;
-}
-
-.game-section .question-container .wrong {
-  color: #d1335b;
-}
-
 .game-section .question-container .correct-answer {
   -webkit-animation: blink 1s linear 3;
   animation: blink 1s linear 3;
@@ -321,11 +389,18 @@ body {
 .game-section .question-body, .game-section .answer-container {
   background-color: #374254;
   color: white;
-  padding: 10px 20px 10px 20px;
+  padding: 10px 0 10px 0;
   margin-top: 20px;
   margin-bottom: 20px;
   text-align: center;
   border-radius: 5px;
+}
+
+.game-section .answer-name {
+  padding: 10px 0 10px 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .game-section .answer-container {
@@ -347,6 +422,14 @@ body {
 .game-section button {
   margin-bottom: 20px;
   margin-top: 10px;
+}
+
+.game-section .correct {
+  color: #33bf6b;
+}
+
+.game-section .wrong {
+  color: #d1335b;
 }
 
 @keyframes blink {

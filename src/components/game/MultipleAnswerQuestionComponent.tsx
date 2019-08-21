@@ -2,7 +2,6 @@ import React from 'react';
 import AnswerComponent from './AnswerComponent';
 
 export interface QuestionProps {
-    id?: any, 
     active: boolean;
     answer: string | undefined | null;
     correctAnswer: string | undefined;
@@ -22,10 +21,10 @@ function MultipleAnswerQuestionComponent(props: QuestionProps) {
                 <div className="question-body">
                     <p>{props.question.body}</p>
                 </div>
-                <AnswerComponent {...Object.assign({id:'answerA'}, props)}/>
-                <AnswerComponent {...Object.assign({id:'answerB'}, props)}/>
-                <AnswerComponent {...Object.assign({id:'answerC'}, props)}/>
-                <AnswerComponent {...Object.assign({id:'answerD'}, props)}/>
+                <div><div className="answer-name">A</div><AnswerComponent {...Object.assign({id:'answerA'}, props)}/></div>
+                <div><div className="answer-name">B</div><AnswerComponent {...Object.assign({id:'answerB'}, props)}/></div>
+                <div><div className="answer-name">C</div><AnswerComponent {...Object.assign({id:'answerC'}, props)}/></div>
+                <div><div className="answer-name">D</div><AnswerComponent {...Object.assign({id:'answerD'}, props)}/></div>
                 {resolveAnswer && <span className={correctAnswer ? "resolved correct" : "resolved wrong"}>{correctAnswer ? "Correct Answer" : "Wrong Answer"}</span>}
             </div>
         )

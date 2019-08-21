@@ -1,27 +1,35 @@
 import React from 'react';
 import { service } from '../../services/socket-service';
-import { QuestionProps } from './MultipleAnswerQuestionComponent'
 
-function AnswerComponent(questionProps: QuestionProps) {
+interface AnswerProps {
+    id: string, 
+    active: boolean;
+    answer: string | undefined | null;
+    correctAnswer: string | undefined;
+    question: any;
+    opponents: any;
+}
+
+function AnswerComponent(props: AnswerProps) {
     let elementClass: string = 'answer-container';
     
-    if (!questionProps.active)
+    if (!props.active)
         elementClass += ' disabled';
-    if(questionProps.answer && questionProps.answer === questionProps.id) {
+    if(props.answer && props.answer === props.id) {
         elementClass += ' own-answer';
     }
-    if(questionProps.correctAnswer === questionProps.id)
+    if(props.correctAnswer === props.id)
         elementClass += ' correct-answer';
-    if(questionProps && questionProps.opponents) {
-        Object.keys(questionProps.opponents).forEach((key, index) => {
-            console.log(questionProps, questionProps.id)
-            if(questionProps.opponents[key].currentAnswer === questionProps.id)
+    if(props && props.opponents) {
+        Object.keys(props.opponents).forEach((key, index) => {
+            console.log(props, props.id)
+            if(props.opponents[key].currentAnswer === props.id)
                 elementClass += ` opponent${index + 1}`
         })
     }
     return (
-       <div className={elementClass} id={questionProps.id} onClick={questionProps.active ? service.sendMultipleAnswer : void(0)}>
-        {questionProps.question[questionProps.id]}
+       <div className={elementClass} id={props.id} onClick={props.active ? service.sendMultipleAnswer : void(0)}>
+        {props.question[props.id]}
        </div>
     )
 }

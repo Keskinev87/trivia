@@ -2,33 +2,98 @@ import React from 'react';
 import { AppState } from '../../store/Store';
 import { connect } from 'react-redux';
 import { service } from '../../services/socket-service';
+import AvatarImage from './AvatarImage';
+import boy1 from '../../images/boy1.svg';
+import boy2 from '../../images/boy2.svg';
+import boy3 from '../../images/boy3.svg';
+import boy4 from '../../images/boy4.svg';
+import girl1 from '../../images/girl1.svg';
+import girl2 from '../../images/girl2.svg';
+import girl3 from '../../images/girl3.svg';
+import girl4 from '../../images/girl4.svg';
+import empty from '../../images/empty.svg';
+import { UserState } from '../../reducers/userReducer';
 
-class Signup extends React.Component<any, any> {
+let avatars: any = {
+    boy1: boy1,
+    boy2: boy2,
+    boy3: boy3,
+    boy4: boy4,
+    girl1: girl1,
+    girl2: girl2,
+    girl3: girl3,
+    girl4: girl4,
+    empty: empty
+}
+
+interface UserProps {
+    userState: UserState;
+}
+
+interface SignupProps {
+    email: string,
+    password: string,
+    nickName: string,
+    avatar: string,
+    showAvatars: boolean
+}
+
+class Signup extends React.Component<UserProps, any> {
     constructor(props:any) {
         super(props);
         
         this.state = {
-            email:'',
-            password:'',
-            nickName:''
+            email: this.props.userState.signupData.email,
+            password: this.props.userState.signupData.password,
+            nickName: this.props.userState.signupData.nickName,
+            avatar:this.props.userState.signupData.avatar,
+            showAvatars: false
         };
+        this.handleShowAvatars = this.handleShowAvatars.bind(this);
+        this.handleSelectAvatar = this.handleSelectAvatar.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange(event: any) {
-        let name: any = event.target && event.target.name;
+    handleShowAvatars() {
         this.setState({
-            [name]:event.target.value
+            showAvatars: !this.state.showAvatars
+        })
+    }
+
+    handleSelectAvatar(event:any) {
+        this.setState({
+            avatar: event.target.id
+        })
+        this.handleShowAvatars();
+    }
+
+    handleChange(event: any) {
+        let name: string = event.target && event.target.name;
+        let value: string = event.target.value;
+        this.setState({
+            [name]:value
         })
     }
 
     handleSubmit(event : any) {
         event.preventDefault();
-        service.trySignup(this.state.email, this.state.password, this.state.nickName);
+        service.trySignup(this.state.email, this.state.password, this.state.nickName, this.state.avatar);
     }
 
     render() {
+        console.log("Signup state is")
+        console.log(this.props.userState)
+        let avatarImages:any = [];
+        Object.keys(avatars).forEach((key) => {
+            let avatarProps = {
+                key: key,
+                value: key,
+                src: avatars[key],
+                onClick: this.handleSelectAvatar
+            }
+            avatarImages.push(avatarProps);
+        })
         return (
             <form onSubmit={this.handleSubmit}>
                 <h2>Signup</h2>
@@ -46,16 +111,12 @@ class Signup extends React.Component<any, any> {
                 </div>
                 <div className="form-group">
                     <label htmlFor='avatar'>Avatar</label>
-                    <select>
-                        <option value="boy1">boy1</option>
-                        <option value="boy2">boy2</option>
-                        <option value="boy3">boy3</option>
-                        <option value="boy4">boy4</option>
-                        <option value="girl1">girl1</option>
-                        <option value="girl2">girl1</option>
-                        <option value="girl3">girl1</option>
-                        <option value="girl4">girl1</option>
-                    </select>
+                    <img className="avatar-selector" src={avatars[this.state.avatar]} alt="avatar-selector" onClick={this.handleShowAvatars}></img>
+                    <div className="avatars-container">
+                        {this.state.showAvatars && avatarImages.map((image: any) => {
+                            return <AvatarImage {...image} />
+                        })}
+                    </div>
                 </div>
                 {this.props.userState.isError && <p>{this.props.userState.error}</p>}
                 <button type="submit" value="Submit">Signup</button>

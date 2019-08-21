@@ -1,7 +1,9 @@
 import { User } from '../models/User';
 import { Friend } from '../models/Friend';
+import { Intents, SignupData, LoginData } from '../reducers/userReducer';
 
 export enum UserActionTypes {
+    CHANGE_INTENT = "CHANGE_INTENT",
     TRY_LOGIN = "TRY_LOGIN",
     LOGIN_SUCCESS = "LOGIN_SUCCESS",
     LOGIN_FAILED = "LOGIN_FAILED",
@@ -22,19 +24,25 @@ export enum UserActionTypes {
     JOIN_RANDOM_ROOM_FAIL = ""
 }
 
+export interface ChangeIntent {
+    type: UserActionTypes.CHANGE_INTENT;
+    intent: Intents
+}
+
 export interface UserTryLogin {
     type: UserActionTypes.TRY_LOGIN;
+    loginData: LoginData;
 }
 
 export interface UserLoginSuccess {
     type: UserActionTypes.LOGIN_SUCCESS;
     user: User;
-    token: String;
+    token: string;
 }
 
 export interface UserLoginFailed {
     type: UserActionTypes.LOGIN_FAILED;
-    error: String;
+    error: string;
 }
 
 export interface UserLogout {
@@ -43,6 +51,7 @@ export interface UserLogout {
 
 export interface TrySignup {
     type: UserActionTypes.TRY_SIGNUP;
+    signupData: SignupData
 }
 
 export interface SignupSuccess {
@@ -51,7 +60,7 @@ export interface SignupSuccess {
 
 export interface SignupFailed {
     type: UserActionTypes.SIGNUP_FAILED;
-    reason: String;
+    error: string;
 }
 
 export interface FriendIsOnline {
@@ -94,6 +103,6 @@ export interface ExitGame {
 
 
 
-export type UserActions = UserTryLogin | UserLoginSuccess | UserLoginFailed | UserLogout| TrySignup | SignupSuccess | SignupFailed |
+export type UserActions = ChangeIntent | UserTryLogin | UserLoginSuccess | UserLoginFailed | UserLogout| TrySignup | SignupSuccess | SignupFailed |
  FriendIsOnline | FriendIsOffline | SearchingForGame| StartRandomGame | TryJoinRandomRoom | CancelJoinRandomRoom | JoinRandomRoomSuccess | JoinRandomRoomFail |
  ExitGame // | next action

@@ -157,6 +157,14 @@ function attachSocketEventListeners() {
 }
 
 export const service: any = {
+    setIntent: (e: any) => {
+        console.log("Target is")
+        console.log(e.target)
+        store.dispatch({
+            type:UserActionTypes.CHANGE_INTENT,
+            intent: e.target.id ? e.target.id : e.target.parentNode.id
+        })
+    },
     getUser: () => {
         console.log("Trying to get user")
         socket.emit('get user')
@@ -167,14 +175,18 @@ export const service: any = {
     tryLogin: (email: string, password: string) => {
         store.dispatch({
             type:UserActionTypes.TRY_LOGIN,
+            loginData: {email, password}
         })
         socket.emit("login", {email: email, password: password});
     },
-    trySignup: (email: string, password: string, nickName: string) => {
+    trySignup: (email: string, password: string, nickName: string, avatar: string) => {
         store.dispatch({
             type:UserActionTypes.TRY_SIGNUP,
+            signupData: {
+                email, password, nickName, avatar
+            }
         })
-        socket.emit("signup", {email: email, password: password, nickName: nickName});
+        socket.emit("signup", {email: email, password: password, nickName: nickName, avatar: avatar});
     },
     //game services
     searchForRandomGame: () => {

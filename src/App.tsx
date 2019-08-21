@@ -37,7 +37,7 @@ class App extends React.Component<AppProps> {
         element = <Game />;
         break;
       default: 
-        element = LoginSignup;
+        element = <LoginSignup />;
         break;
     }
     return(

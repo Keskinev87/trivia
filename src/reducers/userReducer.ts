@@ -12,20 +12,51 @@ export enum PlayerStatus {
     RECONNECTING = "RECONNECTING",
 }
 
+export enum Intents {
+    LOGIN = "LOGIN",
+    SIGNUP = "SIGNUP"
+}
+
+export interface SignupData {
+    email: string,
+    password: string,
+    nickName: string,
+    avatar: string
+}
+
+export interface LoginData {
+    email: string,
+    password: string
+}
+
 export interface UserState {
     user: User | undefined,
-    token: String | undefined,
+    intent: Intents,
+    signupData: SignupData,
+    loginData: LoginData,
+    token: string | undefined,
     status: PlayerStatus,
-    challengeRoomId: String | undefined,
+    challengeRoomId: string | undefined,
     isLoading: Boolean,
     isError: Boolean,
-    error: String,
-    email: String,
-    password: String
+    error: string,
+    email: string,
+    password: string
 }
 
 const initialUserState: UserState = {
     user: undefined,
+    intent: Intents.LOGIN,
+    signupData: {
+        email: '',
+        password: '',
+        nickName: '',
+        avatar: 'empty'
+    },
+    loginData: {
+        email: '',
+        password: ''
+    },
     token: undefined,
     status: PlayerStatus.IDLE,
     challengeRoomId: undefined,
@@ -41,6 +72,12 @@ export const userReducer: Reducer<UserState, UserActions> = (
     action
 ) => {
     switch (action.type) {
+        case UserActionTypes.CHANGE_INTENT: {
+            return {
+                ...state,
+                intent: Intents[action.intent]
+            }
+        }
         case UserActionTypes.TRY_LOGIN: {
             return {
                 ...state,
@@ -59,6 +96,7 @@ export const userReducer: Reducer<UserState, UserActions> = (
             console.log("Login was succ")
             return {
                 ...state,
+                loginData: initialUserState.loginData,
                 isLoading: false,
                 isError: false,
                 user: action.user,
@@ -69,6 +107,7 @@ export const userReducer: Reducer<UserState, UserActions> = (
         case UserActionTypes.TRY_SIGNUP: {
             return {
                 ...state,
+                signupData: action.signupData,
                 isLoading: true
             }
         }
@@ -77,12 +116,13 @@ export const userReducer: Reducer<UserState, UserActions> = (
                 ...state,
                 isLoading: false,
                 isError: true,
-                error: action.reason
+                error: action.error
             }
         }
         case UserActionTypes.SIGNUP_SUCCESS: {
             return {
                 ...state,
+                signupData: initialUserState.signupData,
                 isLoading: false,
                 isError: false,
                 error: ''

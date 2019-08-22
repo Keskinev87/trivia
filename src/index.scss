@@ -16,40 +16,34 @@ $secondOpponentColor:#a143b1;
 $correctAnswerColor: #33bf6b;
 $wrongAnswerColor:#d1335b;
 
-%col-1 {width: 8.33%; float: left; box-sizing: border-box;}
-%col-2 {width: 16.66%; float: left; box-sizing: border-box;}
-%col-3 {width: 25%; float: left; box-sizing: border-box;}
-%col-4 {width: 33.33%; float: left; box-sizing: border-box;}
-%col-5 {width: 41.66%; float: left; box-sizing: border-box;}
-%col-6 {width: 50%; float: left; box-sizing: border-box;}
-%col-7 {width: 58.33%; float: left; box-sizing: border-box;}
-%col-8 {width: 66.66%; float: left; box-sizing: border-box;}
-%col-9 {width: 75%; float: left; box-sizing: border-box;}
-%col-10 {width: 83.33%; float: left; box-sizing: border-box;}
-%col-11 {width: 91.66%; float: left; box-sizing: border-box;}
-%col-12 {width: 100%; float: left; box-sizing: border-box;}
+@mixin col-1 {width: 8.33%; float: left; box-sizing: border-box;}
+@mixin col-2 {width: 16.66%; float: left; box-sizing: border-box;}
+@mixin col-3 {width: 25%; float: left; box-sizing: border-box;}
+@mixin col-4 {width: 33.33%; float: left; box-sizing: border-box;}
+@mixin col-5 {width: 41.66%; float: left; box-sizing: border-box;}
+@mixin col-6 {width: 50%; float: left; box-sizing: border-box;}
+@mixin col-7 {width: 58.33%; float: left; box-sizing: border-box;}
+@mixin col-8 {width: 66.66%; float: left; box-sizing: border-box;}
+@mixin col-9 {width: 75%; float: left; box-sizing: border-box;}
+@mixin col-10 {width: 83.33%; float: left; box-sizing: border-box;}
+@mixin col-11 {width: 91.66%; float: left; box-sizing: border-box;}
+@mixin col-12 {width: 100%; float: left; box-sizing: border-box;}
 
-%col-offset-1 {margin-left: 8.33%;}
-%col-offset-2 {margin-left: 16.66%;}
-%col-offset-3 {margin-left: 25%;}
-%col-offset-4 {margin-left: 33.33%;}
-%col-offset-5 {margin-left: 41.66%;}
-%col-offset-6 {margin-left: 50%;}
-%col-offset-7 {margin-left: 58.33%;}
-%col-offset-8 {margin-left: 66.66%;}
-%col-offset-9 {margin-left: 75%;}
-%col-offset-10 {margin-left: 83.33%;}
-%col-offset-11 {margin-left: 91.66%;}
-%col-offset-12 {margin-left: 100%;}
-
-%row::after{
-    content: "";
-    clear: both;
-    display: table;
-}
+@mixin col-offset-1 {margin-left: 8.33%;}
+@mixin col-offset-2 {margin-left: 16.66%;}
+@mixin col-offset-3 {margin-left: 25%;}
+@mixin col-offset-4 {margin-left: 33.33%;}
+@mixin col-offset-5 {margin-left: 41.66%;}
+@mixin col-offset-6 {margin-left: 50%;}
+@mixin col-offset-7 {margin-left: 58.33%;}
+@mixin col-offset-8 {margin-left: 66.66%;}
+@mixin col-offset-9 {margin-left: 75%;}
+@mixin col-offset-10 {margin-left: 83.33%;}
+@mixin col-offset-11 {margin-left: 91.66%;}
+@mixin col-offset-12 {margin-left: 100%;}
 
 
-%button {
+@mixin button {
     background-color: $btncolor;
     border: none;
     padding: 10px 15px;
@@ -61,7 +55,22 @@ $wrongAnswerColor:#d1335b;
     cursor: pointer;
 }
 
+@mixin for-size($size) {
+  @if $size == phone {
+    @media (max-width: 599px) { @content; }
+  } @else if $size == tablet-portrait {
+    @media (min-width: 600px) { @content; }
+  } @else if $size == tablet-landscape {
+    @media (min-width: 900px) { @content; }
+  } @else if $size == desktop {
+    @media (min-width: 1200px) { @content; }
+  } @else if $size == big-desktop {
+    @media (min-width: 1800px) { @content; }
+  }
+}
+
 body {
+  position: relative;
   background-color: $bodybgcolor;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -72,8 +81,8 @@ body {
 }
 
 // .main {
-//   @extend %col-10;
-//   @extend %col-offset-1;
+//   @includecol-10;
+//   @include col-offset-1;
 //   background-color: $bgcolor;
 // }
 
@@ -101,17 +110,32 @@ body {
 
 .auth-section, .menu-section, .game-section, .loading-section {
   position: relative;
-  @extend %col-6;
-  @extend %col-offset-3;
-  min-height: 600px;
+  height: 100vh;
   background-color: $bgcolor;
   color: $lighttextcolor;
   // border: 1px solid $bordercolor;
+  @include for-size(phone) {    
+    @include col-12;
+  };
+  @include for-size(tablet-portrait) {
+    @include col-12;
+  };
+  @include for-size(tablet-landscape) {
+    @include col-12;
+  };
+  @include for-size(desktop) {
+    @include col-8;
+    @include col-offset-2;
+  };
+  @include for-size(big-desktop) {
+    @include col-6;
+    @include col-offset-3;
+  };
 }
 
 .auth-section {
   .auth-nav {
-    @extend %row;
+    display: block;
   }
 
   h2{
@@ -119,7 +143,7 @@ body {
   }
 
   .auth-tab {
-    @extend%col-6;
+    @include col-6;
     text-align: center;
     padding-top: 10px;
     padding-bottom: 15px;
@@ -136,62 +160,115 @@ body {
   }
 
   .auth-form {
-    @extend %col-8;
-    @extend %col-offset-2;
-    @extend %row::after;
+    display: block;
     margin-top: 30px;
     padding-top: 30px;
     padding-bottom: 50px;
     background-color: $generaluibgcolor;
     color: $darktextcolor;
     text-align: center;
-
-    input {
-      background-color: $inputbgcolor;
-      border-radius: 5px;
-      border: none;
-    }
+    @include for-size(phone) {    
+      @include col-10;
+      @include col-offset-1;
+    };
+    @include for-size(tablet-portrait) {
+      @include col-10;
+      @include col-offset-1;
+    };
+    @include for-size(tablet-landscape) {
+      @include col-10;
+      @include col-offset-1;
+    };
+    @include for-size(desktop) {
+      @include col-8;
+      @include col-offset-2;
+    };
+    @include for-size(big-desktop) {
+      @include col-8;
+      @include col-offset-2;
+    };
 
     button {
       margin-top: 20px;
-      @extend%button;
-      @extend%col-6;
-      @extend%col-offset-3;
+      @include button;
+      @include col-6;
+      @include col-offset-3;
     }
   }
 
   .form-group {
-    @extend %row;
+    display: block;
     margin-top: 20px;
     position: relative;
+    @include col-12;
     label {
       display: block;
     }
 
     input{
+      background-color: $inputbgcolor;
+      border-radius: 5px;
+      border: none;
       height: 30px;
-      @extend %col-6;
-      @extend %col-offset-3;
+      @include for-size(phone) {    
+        @include col-8;
+        @include col-offset-2;
+      };
+      @include for-size(tablet-portrait) {
+        @include col-6;
+        @include col-offset-3;
+      };
+      @include for-size(tablet-landscape) {
+        @include col-6;
+        @include col-offset-3;
+      };
+      @include for-size(desktop) {
+        @include col-6;
+        @include col-offset-3;
+      };
+      @include for-size(big-desktop) {
+        @include col-6;
+        @include col-offset-3;
+      };
     }
   }
 
   .avatar-selector {
-    @extend %col-2;
-    @extend %col-offset-5;
+    @include col-2;
+    @include col-offset-5;
     height: 50px;
   }
   
   .avatars-container {
-    @extend %col-8;
-    @extend %col-offset-2;
     position: absolute;
     top: 70px;
     background-color: $bgcolor;
     text-align: left;
     border-radius: 5px;
+    @include for-size(phone) {    
+      @include col-10;
+      @include col-offset-1;
+    };
+    @include for-size(tablet-portrait) {
+      @include col-6;
+      @include col-offset-3;
+    };
+    @include for-size(tablet-landscape) {
+      @include col-6;
+      @include col-offset-3;
+    };
+    @include for-size(desktop) {
+      @include col-6;
+      @include col-offset-3;
+    };
+    @include for-size(big-desktop) {
+      @include col-6;
+      @include col-offset-3;
+    };
+
     .avatar-image {
-      display: inline-block;
-      height: 50px;
+      @include col-3;
+      cursor: pointer;
     }
   }
 
@@ -202,9 +279,9 @@ body {
   flex-direction: column;
   justify-content: center;
   button {
-    @extend %button;
-    @extend%col-6;
-    @extend%col-offset-3;
+    @include button;
+    @include col-6;
+    @include col-offset-3;
     margin-top: 20px;
     margin-bottom: 20px;
   }
@@ -212,22 +289,21 @@ body {
 
 .game-section {
   .game-info-container {
-    @extend %row::after;
-    @extend %col-12;
+    display: block;
+    @include col-12;
     background-color: $generaluibgcolor;
     padding-top: 10px;
     padding-bottom: 10px;
     color: #adb9c9;
     text-align: center;
-    font-size: 20px;
-    font-weight: bold;
+    font-size: 18px;
 
     .game-progress, .current-question-category, .player-info-container {
-      height: 80px;
+      height: 10vh;
     }
 
     .game-progress, .current-question-category {
-      @extend %col-4;
+      @include col-4;
       border-right: 1px solid #adb9c9;
     }
 
@@ -243,9 +319,9 @@ body {
   }
 
   .players-announcement-container {
-    @extend %col-12;
+    @include col-12;
     position: absolute;
-    top:40%;
+    top:20%;
 
     h2{
       text-align: center;
@@ -253,47 +329,116 @@ body {
   }
 
   .resolve-round-container {
-    @extend %col-12;
+    @include col-12;
     position: absolute;
     top:40%;
     .resolve-player-container {
-      @extend %col-10;
-      @extend %col-offset-1;
+      @include col-10;
+      @include col-offset-1;
       .player-avatar-container {
-        @extend %col-6;
+        @include col-6;
       }
       .player-resolve-status {
         padding-top: 20px;
-        @extend %col-5;
-        @extend %col-offset-1;
+        @include col-5;
+        @include col-offset-1;
       }
+    }
+    .damaged {
+      -webkit-animation:blink 0.3s linear 5;
+      -moz-animation:blink 0.3s linear 5;
+      animation: blink 0.3s linear 5;
+    }
+  }
+
+  .resolve-game-container {
+    @include col-12;
+    position: absolute;
+    top: 20%;
+
+    .resolve-game-player-container {
+      @include col-4;
+    }
+
+    .player-prize-icon {
+      display: block;
+      @include col-6;
+      @include col-offset-6;
+    }
+
+    .winner {
+      height: 120px;
+      margin-bottom: 0;
+    }
+
+    .second {
+      height: 100px;
+      margin-top: 20px;
+    }
+
+    .third {
+      height: 80px;
+      margin-top: 40px;
     }
   }
 
   .player-info-container {
-    @extend %col-4;
+    @include col-4;
   }
   .player-avatar {
-    @extend %col-4;
-    @extend %col-offset-1;
+    @include for-size(phone) {    
+      @include col-4;
+    };
+    @include for-size(tablet-portrait) {
+      @include col-4;
+      @include col-offset-1;
+    };
+    @include for-size(tablet-landscape) {
+      @include col-4;
+      @include col-offset-1;
+    };
+    @include for-size(desktop) {
+      @include col-4;
+      @include col-offset-1;
+    };
+    @include for-size(big-desktop) {
+      @include col-4;
+      @include col-offset-1;
+    };
     margin-top: 5px;
     margin-bottom: 5px;
-    height: 70px;
+    height: auto;
   }
 
   .player-stats {
-    @extend %col-6;
-    @extend %col-offset-1;
+    @include for-size(phone) {    
+      @include col-8;
+    };
+    @include for-size(tablet-portrait) {
+      @include col-6;
+      @include col-offset-1;
+    };
+    @include for-size(tablet-landscape) {
+      @include col-6;
+      @include col-offset-1;
+    };
+    @include for-size(desktop) {
+      @include col-6;
+      @include col-offset-1;
+    };
+    @include for-size(big-desktop) {
+      @include col-6;
+      @include col-offset-1;
+    };
     text-align: left;
     .player-name {
-      @extend %row::after;
-      font-weight: bold;
-      font-size: 18px;
+      display: block;
+      font-size: 80%;
     }
 
     .player-health-container {
       display:block;
-      @extend %col-10;
+      @include col-10;
       height: 12px;
       background-color: #373f4b;
 
@@ -330,13 +475,20 @@ body {
   }
 
   .player-answers-container {
-    @extend %row::after;
+    display: block;
+    .block {
+      display: block;
+    }
+    span {
+      font-weight: lighter;
+      font-size: 50%;
+    }
   }
   
   .question-container {
-    @extend %row::after;
-    @extend %col-10;
-    @extend %col-offset-1;
+    display: block;
+    @include col-10;
+    @include col-offset-1;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -354,12 +506,12 @@ body {
 
       .correct-answer {
         background-color: $correctAnswerColor;
-        @extend %col-offset-4;
+        @include col-offset-4;
       }
     }
 
     .ranged-answer {
-      @extend %col-4;
+      @include col-4;
       padding-top: 20px;
       padding-bottom: 20px;
       border-radius: 5px;
@@ -367,11 +519,11 @@ body {
     }
 
     .ranged-answer.opponent1 {
-      @extend %col-offset-1;
+      @include col-offset-1;
     }
 
     .ranged-answer.opponent2 {
-      @extend %col-offset-2;
+      @include col-offset-2;
     }
   
     .own-answer {
@@ -424,7 +576,7 @@ body {
   }
 
   .answer-name{
-    @extend %col-1;
+    @include col-1;
     padding: 10px 0 10px 0;
     margin-top: 20px;
     margin-bottom: 20px;
@@ -432,12 +584,12 @@ body {
   }
 
   .answer-container {
-    @extend %col-10;
+    @include col-10;
     cursor: pointer;
   }
 
   .form-group {
-    @extend %row;
+    display: block;
     margin-top: 20px;
     label {
       display: block;
@@ -445,17 +597,17 @@ body {
 
     input{
       height: 30px;
-      @extend %col-6;
-      @extend %col-offset-3;
+      @include col-6;
+      @include col-offset-3;
     }
   }
   
   button {
     margin-bottom: 20px;
     margin-top: 10px;
-    @extend%button;
-    @extend%col-6;
-    @extend%col-offset-3;
+    @include button;
+    @include col-6;
+    @include col-offset-3;
   }
 
   .correct {

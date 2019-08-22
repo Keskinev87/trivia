@@ -26,6 +26,7 @@ interface AvatarProps {
     nickName: string,
     avatar?: string,
     health: number,
+    damaged?: boolean,
     correctAnswers: number,
     wrongAnswers: number
 }
@@ -40,11 +41,12 @@ function PlayerAvatar(props: AvatarProps) {
             <img className="player-avatar" alt="avatar" src={props.avatar ? avatars[props.avatar] : avatars[empty]}></img>
             <div className={"player-stats " + props.class}>
                 <div className="player-name">{props.nickName}</div>
-                <div className="player-health-container"><div className={"player-health " + props.class} style={healthStyle}></div></div>
+                <div className="player-health-container">
+                    <div className={`player-health ${props.class} ${props.damaged ? ' damaged' : ''}`} style={healthStyle}></div>
+                </div>
                 <div className="player-answers-container">
-                    <span className="inline correct">{props.correctAnswers}</span>
-                    <span>/</span>
-                    <span className="inline wrong">{props.wrongAnswers}</span>
+                    <span className="block correct">Correct: {props.correctAnswers}</span>
+                    <span className="block wrong">Wrong: {props.wrongAnswers}</span>
                 </div>
             </div>
         </div>

@@ -9,23 +9,29 @@ export interface ResolveRoundProps {
  }
  
  function ResolveRoundComponent(props: ResolveRoundProps) {
-     let opponentKeys = Object.keys(props.opponents);
-     let playerKey:string;
-     props.playerInfo ? playerKey = props.playerInfo.id : playerKey = '123'
-      
-     let opponentOneProps = {
-        ...props.opponents[opponentKeys[0]],
-       class: "opponent1"
-     }
-     let opponentTwoProps = {
-        ...props.opponents[opponentKeys[1]],
-        class: "opponent2"
-     }
+    let opponentKeys = Object.keys(props.opponents);
+    let playerKey:string;
+    props.playerInfo ? playerKey = props.playerInfo.id : playerKey = '123'
+    
+    let opponentOneProps = {
+    ...props.opponents[opponentKeys[0]],
+    class: "opponent1"
+    }
+    let opponentTwoProps = {
+    ...props.opponents[opponentKeys[1]],
+    class: "opponent2"
+    }
+     
+    if(props.resolveData[opponentKeys[0]].damage > 0)
+        opponentOneProps.damaged = true
+
+    if(props.resolveData[opponentKeys[0]].damage > 0)
+        opponentTwoProps.damaged = true
 
     return (
     <div className="resolve-round-container">
         <div className={props.resolveData[playerKey].damage > 0 ? "resolve-player-container wrong" : "resolve-player-container correct"}>
-            <PlayerAvatar {...Object.assign({class:'player'}, props.playerInfo)} />
+            <PlayerAvatar {...Object.assign({class:'player'}, props.playerInfo, props.resolveData[playerKey].damage > 0 ? {damaged: true} : {})} />
             <div className="player-resolve-status">{props.resolveData[playerKey].damage > 0 ? `Takes ${props.resolveData[playerKey].damage} damage` : "Answered correctly"}</div>
         </div>
         <div className={props.resolveData[opponentKeys[0]].damage > 0 ? "resolve-player-container wrong" : "resolve-player-container correct"}>

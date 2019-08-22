@@ -3,17 +3,21 @@ import io from 'socket.io-client';
 import { UserActionTypes } from '../actions/UserActions';
 import { User } from '../models/User';
 import { GameActionTypes } from '../actions/GameActions';
+let connectionEndPoint = 'localhost:3001';
 
+if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    connectionEndPoint = 'http://192.168.1.138:3001/';
+}
 var socket: any;
 let token = localStorage.getItem('token');
-socket = io('localhost:3001', {query: token ? `auth_token=${token}` : '', reconnection: true});
+socket = io(connectionEndPoint, {query: token ? `auth_token=${token}` : '', reconnection: true});
 attachSocketEventListeners();
 console.log("Socket initialized")
 
 function attachSocketEventListeners() {
     socket.on("login success", (data: any) => {
         localStorage.setItem("token", data.token);
-        socket = io.connect('localhost:3001', {query: `auth_token=${data.token}`, reconnection: true});
+        socket = io.connect(connectionEndPoint, {query: `auth_token=${data.token}`, reconnection: true});
         attachSocketEventListeners();
         store.dispatch({
             type: UserActionTypes.LOGIN_SUCCESS,
@@ -66,7 +70,7 @@ function attachSocketEventListeners() {
     })
     
     socket.on("logout success", () => {
-        socket = io.connect('localhost:3001');
+        socket = io.connect(connectionEndPoint);
         attachSocketEventListeners();
         store.dispatch({
           type: UserActionTypes.LOGOUT
@@ -106,6 +110,15 @@ function attachSocketEventListeners() {
         store.dispatch({
             type: GameActionTypes.SHOW_QUESTION
         });
+    })
+
+    socket.on("resolve game", (resolveData: any) => {
+        console.log("The resolve game data is")
+        console.log(resolveData)
+        store.dispatch({
+            type: GameActionTypes.RESOLVE_GAME,
+            resolveData: resolveData
+        })
     })
     
     socket.on("game over", () => {

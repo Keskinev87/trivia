@@ -12,6 +12,7 @@ import Button from './shared/Button';
 import GeneralLoader from'./shared/GeneralLoader';
 import GameInfoComponent from './game/GameInfoComponent';
 import ResolveRoundContainer from './game/ResolveRoundComponent';
+import ResolveGameComponent from './game/ResolveGameComponent';
 
 interface AppProps {
   userState: UserState,
@@ -121,6 +122,18 @@ class Game extends React.Component<AppProps> {
           resolveData: this.props.gameState.resolveData
         }
         element = <ResolveRoundContainer {...resolveRoundProps} />
+        break;
+      }
+      case GameStatus.RESOLVING_GAME: {
+        if (playerInfo && this.props.gameState.resolveGameData) {
+          let resolveGameProps = {
+            playerInfo: playerInfo,
+            opponents: opponents,
+            resolveGameData: this.props.gameState.resolveGameData
+          }
+          
+           element = <ResolveGameComponent {...resolveGameProps} />
+        }
         break;
       }
       case GameStatus.GAME_OVER: {

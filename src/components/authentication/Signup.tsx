@@ -49,10 +49,18 @@ class Signup extends React.Component<UserProps, any> {
             avatar:this.props.userState.signupData.avatar,
             showAvatars: false
         };
+        this.closeAvatars = this.closeAvatars.bind(this);
         this.handleShowAvatars = this.handleShowAvatars.bind(this);
         this.handleSelectAvatar = this.handleSelectAvatar.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    closeAvatars() {
+        if (this.state.showAvatars)
+            this.setState({
+                showAvatars: false
+            })
     }
 
     handleShowAvatars() {
@@ -95,7 +103,7 @@ class Signup extends React.Component<UserProps, any> {
             avatarImages.push(avatarProps);
         })
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} onClick={this.closeAvatars}>
                 <h2>Signup</h2>
                 <div className="form-group">
                     <label htmlFor='email'>Email</label>

@@ -14,6 +14,7 @@ export enum GameStatus {
     RESOLVING_ANSWERS = "RESOLVING_ANSWERS",
     RESOLVING_ROUND = "RESOLVING_ROUND",
     GETTING_NEXT_QUESTION = "GETTING_NEXT_QUESTION",
+    RESOLVING_GAME = "RESOLVING_GAME",
     GAME_OVER = "GAME_OVER"
 }
 
@@ -42,6 +43,7 @@ export interface GameState {
     correctAnswer: string | undefined,
     opponents: any,
     resolveData: any,
+    resolveGameData: any,
     isLoading: Boolean,
     isError: Boolean,
     error: string | undefined
@@ -57,6 +59,7 @@ const initialGameState: GameState = {
     correctAnswer: undefined,
     opponents: undefined,
     resolveData: undefined,
+    resolveGameData: undefined,
     isLoading: false,
     isError: false,
     error: undefined
@@ -161,6 +164,15 @@ export const gameReducer: Reducer<GameState, GameActions> = (
                 currentAnswer: undefined,
                 correctAnswer: undefined,
                 resolveData: undefined
+            }
+        }
+        case GameActionTypes.RESOLVE_GAME: {
+            console.log("Resolve game action dispatched")
+            console.log(action.resolveData)
+            return {
+                ...state,
+                status: GameStatus.RESOLVING_GAME,
+                resolveGameData: action.resolveData
             }
         }
         case GameActionTypes.GAME_OVER: {

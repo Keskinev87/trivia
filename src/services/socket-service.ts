@@ -121,12 +121,12 @@ function attachSocketEventListeners() {
         })
     })
     
-    socket.on("game over", () => {
-        console.log("Game is over")
-        store.dispatch({
-            type: GameActionTypes.GAME_OVER
-        });
-    })
+    // socket.on("game over", () => {
+    //     console.log("Game is over")
+    //     store.dispatch({
+    //         type: GameActionTypes.GAME_OVER
+    //     });
+    // })
 
     socket.on('resolve round', (data: any) => {
         console.log("Should resolve round now")

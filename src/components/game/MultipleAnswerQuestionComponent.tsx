@@ -3,6 +3,7 @@ import AnswerComponent from './AnswerComponent';
 
 export interface QuestionProps {
     active: boolean;
+    waitingForAnswers: boolean;
     answer: string | undefined | null;
     correctAnswer: string | undefined;
     question: any;

@@ -4,6 +4,7 @@ import { service } from '../../services/socket-service';
 export interface QuestionProps {
     id?: any, 
     active: boolean;
+    waitingForAnswers: boolean;
     answer: string | undefined | null;
     correctAnswer: string | undefined;
     question: any;
@@ -38,7 +39,8 @@ function RangeQuestionComponent(props: QuestionProps) {
                     <h3 className="correct">The correct answer is</h3>
                     <div className="ranged-answer correct-answer">{props.correctAnswer}</div>
                 </div>}
-            {firstOpponentAnswer && secondOpponentAnswer && 
+            {props.waitingForAnswers && <div className="question-announcement"><span>Waiting for other players to answer...</span></div>}
+            {!props.active && !props.waitingForAnswers && 
                 <div className="ranged-answer-container">
                     {firstOpponentAnswer && <div className="ranged-answer opponent1">{firstOpponentAnswer}</div>}
                     {secondOpponentAnswer && <div className="ranged-answer opponent2">{secondOpponentAnswer}</div>}

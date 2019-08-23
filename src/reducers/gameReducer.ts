@@ -175,12 +175,6 @@ export const gameReducer: Reducer<GameState, GameActions> = (
                 resolveGameData: action.resolveData
             }
         }
-        case GameActionTypes.GAME_OVER: {
-            return {
-                ...state,
-                status: GameStatus.GAME_OVER
-            }
-        }
         case GameActionTypes.RESET_GAME_STATE: {
             return {
                 ...initialGameState

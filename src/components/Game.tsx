@@ -8,7 +8,6 @@ import { GameState, GameStatus } from '../reducers/gameReducer';
 import PlayerAvatar from './game/PlayerAvatar';
 import MultipleAnswerQuestionComponent from './game/MultipleAnswerQuestionComponent';
 import RangeQuestionComponent from './game/RangeQuestionComponent';
-import Button from './shared/Button';
 import GeneralLoader from'./shared/GeneralLoader';
 import GameInfoComponent from './game/GameInfoComponent';
 import ResolveRoundContainer from './game/ResolveRoundComponent';
@@ -81,6 +80,7 @@ class Game extends React.Component<AppProps> {
         showGameInfo = true;
         let props = {
           active: true,
+          waitingForAnswers: false,
           question: this.props.gameState.currentQuestion,
           answer: undefined,
           correctAnswer: undefined,
@@ -94,6 +94,7 @@ class Game extends React.Component<AppProps> {
         showGameInfo = true;
         let props = {
           active: false,
+          waitingForAnswers: true,
           question: this.props.gameState.currentQuestion,
           answer: this.props.gameState.currentAnswer,
           correctAnswer: undefined,
@@ -106,6 +107,7 @@ class Game extends React.Component<AppProps> {
         showGameInfo = true;
         let props = {
           active: false,
+          waitingForAnswers: false,
           question: this.props.gameState.currentQuestion,
           answer: this.props.gameState.currentAnswer,
           correctAnswer: this.props.gameState.correctAnswer,
@@ -134,13 +136,6 @@ class Game extends React.Component<AppProps> {
           
            element = <ResolveGameComponent {...resolveGameProps} />
         }
-        break;
-      }
-      case GameStatus.GAME_OVER: {
-        element = <div>
-          <h1>Game Over Screen</h1>
-          <Button {...{btnName: "Return to lobby", onClick: service.endGame}}/>
-        </div>
         break;
       }
       default: {

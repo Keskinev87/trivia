@@ -11,6 +11,7 @@ $ownAnswerColor: #8293a7;
 $inactivecolor: #374254;
 $activecolor: #8293a7;
 $playerColor: #33bf6b;
+$playerStatsColor: #adb9c9;
 $firstOpponentColor:#53657d;
 $secondOpponentColor:#a143b1;
 $correctAnswerColor: #33bf6b;
@@ -345,9 +346,9 @@ body {
       }
     }
     .damaged {
-      -webkit-animation:blink 0.3s linear 5;
-      -moz-animation:blink 0.3s linear 5;
-      animation: blink 0.3s linear 5;
+      -webkit-animation:blink 0.1s linear 5;
+      -moz-animation:blink 0.1s linear 5;
+      animation: blink 0.1s linear 5;
     }
   }
 
@@ -359,26 +360,30 @@ body {
     .resolve-game-player-container {
       @include col-4;
     }
-
-    .player-prize-icon {
-      display: block;
-      @include col-6;
-      @include col-offset-6;
+    .player-prize-icons-container {
+      @include col-12;
+      .player-prize-icon {
+        display: block;
+        @include col-4;
+      }
+      .winner {
+        height: 120px;
+        margin-bottom: 0;
+      }
+  
+      .second {
+        height: 100px;
+        margin-top: 20px;
+      }
+  
+      .third {
+        height: 80px;
+        margin-top: 40px;
+      }
     }
-
-    .winner {
-      height: 120px;
-      margin-bottom: 0;
-    }
-
-    .second {
-      height: 100px;
-      margin-top: 20px;
-    }
-
-    .third {
-      height: 80px;
-      margin-top: 40px;
+    .resolve-announcement {
+      @include col-12;
+      text-align: center;
     }
   }
 
@@ -394,15 +399,15 @@ body {
       @include col-offset-1;
     };
     @include for-size(tablet-landscape) {
-      @include col-4;
+      @include col-3;
       @include col-offset-1;
     };
     @include for-size(desktop) {
-      @include col-4;
+      @include col-3;
       @include col-offset-1;
     };
     @include for-size(big-desktop) {
-      @include col-4;
+      @include col-3;
       @include col-offset-1;
     };
     margin-top: 5px;
@@ -413,27 +418,42 @@ body {
   .player-stats {
     @include for-size(phone) {    
       @include col-8;
+      .player-answers-container {
+        font-size: 50%;
+      }
     };
     @include for-size(tablet-portrait) {
       @include col-6;
       @include col-offset-1;
+      .player-answers-container {
+        font-size: 60%;
+      }
     };
     @include for-size(tablet-landscape) {
       @include col-6;
       @include col-offset-1;
+      .player-answers-container {
+        font-size: 70%;
+      }
     };
     @include for-size(desktop) {
       @include col-6;
       @include col-offset-1;
+      .player-answers-container {
+        font-size: 80%;
+      }
     };
     @include for-size(big-desktop) {
       @include col-6;
       @include col-offset-1;
+      .player-answers-container {
+        font-size: 80%;
+      }
     };
     text-align: left;
+    color: $playerStatsColor;
     .player-name {
       display: block;
-      font-size: 80%;
     }
 
     .player-health-container {
@@ -481,7 +501,6 @@ body {
     }
     span {
       font-weight: lighter;
-      font-size: 50%;
     }
   }
   
@@ -508,6 +527,11 @@ body {
         background-color: $correctAnswerColor;
         @include col-offset-4;
       }
+    }
+
+    .question-announcement {
+      @include col-12;
+      text-align: center;
     }
 
     .ranged-answer {

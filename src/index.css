@@ -444,8 +444,8 @@ body {
 }
 
 .game-section .resolve-round-container .damaged {
-  -webkit-animation: blink 0.3s linear 5;
-  animation: blink 0.3s linear 5;
+  -webkit-animation: blink 0.1s linear 5;
+  animation: blink 0.1s linear 5;
 }
 
 .game-section .resolve-game-container {
@@ -464,28 +464,42 @@ body {
           box-sizing: border-box;
 }
 
-.game-section .resolve-game-container .player-prize-icon {
-  display: block;
-  width: 50%;
+.game-section .resolve-game-container .player-prize-icons-container {
+  width: 100%;
   float: left;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  margin-left: 50%;
 }
 
-.game-section .resolve-game-container .winner {
+.game-section .resolve-game-container .player-prize-icons-container .player-prize-icon {
+  display: block;
+  width: 33.33%;
+  float: left;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.game-section .resolve-game-container .player-prize-icons-container .winner {
   height: 120px;
   margin-bottom: 0;
 }
 
-.game-section .resolve-game-container .second {
+.game-section .resolve-game-container .player-prize-icons-container .second {
   height: 100px;
   margin-top: 20px;
 }
 
-.game-section .resolve-game-container .third {
+.game-section .resolve-game-container .player-prize-icons-container .third {
   height: 80px;
   margin-top: 40px;
+}
+
+.game-section .resolve-game-container .resolve-announcement {
+  width: 100%;
+  float: left;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  text-align: center;
 }
 
 .game-section .player-info-container {
@@ -522,7 +536,7 @@ body {
 
 @media (min-width: 900px) {
   .game-section .player-avatar {
-    width: 33.33%;
+    width: 25%;
     float: left;
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
@@ -532,7 +546,7 @@ body {
 
 @media (min-width: 1200px) {
   .game-section .player-avatar {
-    width: 33.33%;
+    width: 25%;
     float: left;
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
@@ -542,7 +556,7 @@ body {
 
 @media (min-width: 1800px) {
   .game-section .player-avatar {
-    width: 33.33%;
+    width: 25%;
     float: left;
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
@@ -552,6 +566,7 @@ body {
 
 .game-section .player-stats {
   text-align: left;
+  color: #adb9c9;
 }
 
 @media (max-width: 599px) {
@@ -560,6 +575,9 @@ body {
     float: left;
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
+  }
+  .game-section .player-stats .player-answers-container {
+    font-size: 50%;
   }
 }
 
@@ -571,6 +589,9 @@ body {
             box-sizing: border-box;
     margin-left: 8.33%;
   }
+  .game-section .player-stats .player-answers-container {
+    font-size: 60%;
+  }
 }
 
 @media (min-width: 900px) {
@@ -580,6 +601,9 @@ body {
     -webkit-box-sizing: border-box;
             box-sizing: border-box;
     margin-left: 8.33%;
+  }
+  .game-section .player-stats .player-answers-container {
+    font-size: 70%;
   }
 }
 
@@ -591,6 +615,9 @@ body {
             box-sizing: border-box;
     margin-left: 8.33%;
   }
+  .game-section .player-stats .player-answers-container {
+    font-size: 80%;
+  }
 }
 
 @media (min-width: 1800px) {
@@ -601,11 +628,13 @@ body {
             box-sizing: border-box;
     margin-left: 8.33%;
   }
+  .game-section .player-stats .player-answers-container {
+    font-size: 80%;
+  }
 }
 
 .game-section .player-stats .player-name {
   display: block;
-  font-size: 80%;
 }
 
 .game-section .player-stats .player-health-container {
@@ -658,7 +687,6 @@ body {
 
 .game-section .player-answers-container span {
   font-weight: lighter;
-  font-size: 50%;
 }
 
 .game-section .question-container {
@@ -696,6 +724,14 @@ body {
 .game-section .question-container .ranged-answer-container .correct-answer {
   background-color: #33bf6b;
   margin-left: 33.33%;
+}
+
+.game-section .question-container .question-announcement {
+  width: 100%;
+  float: left;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  text-align: center;
 }
 
 .game-section .question-container .ranged-answer {

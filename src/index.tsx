@@ -6,17 +6,17 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import { Store } from 'redux';
 import configureStore, { AppState } from './store/Store';
-import { service } from './services/socket-service'
+import { service } from './services/socket-service';
 
 interface AppProps {
     store: Store<AppState>
 }
 
 const Root: React.SFC<AppProps> = props => {
-    service.getUser();
+    service.init();
     return (
         <Provider store={props.store}>
-           <App /> 
+           <App />
         </Provider>
     )
 }

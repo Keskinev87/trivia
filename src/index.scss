@@ -109,6 +109,11 @@ body {
   }
 }
 
+.main {
+  position: relative;
+  height: 100vh;
+}
+
 .auth-section, .menu-section, .game-section, .loading-section {
   position: relative;
   height: 100vh;
@@ -346,9 +351,9 @@ body {
       }
     }
     .damaged {
-      -webkit-animation:blink 0.1s linear 5;
-      -moz-animation:blink 0.1s linear 5;
-      animation: blink 0.1s linear 5;
+      -webkit-animation:blink 1s linear 5;
+      -moz-animation:blink 1s linear 5;
+      animation: blink 1s linear 5;
     }
   }
 

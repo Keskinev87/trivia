@@ -32,7 +32,7 @@ function RangeQuestionComponent(props: QuestionProps) {
                 <div className="form-group">
                     <input className={props.active ? "" : "disabled"} autoFocus type="number" name="answer" id="ranged-question-answer" /> 
                 </div>
-                <button type="submit" value="Submit">Submit</button>
+                <button className={props.active ? "" : "disabled"} type="submit" value="Submit">Submit</button>
             </form>
             {props.correctAnswer && 
                 <div className="ranged-answer-container">

@@ -27,6 +27,11 @@ body {
   animation: spin 6s linear infinite;
 }
 
+.main {
+  position: relative;
+  height: 100vh;
+}
+
 .auth-section, .menu-section, .game-section, .loading-section {
   position: relative;
   height: 100vh;
@@ -444,8 +449,8 @@ body {
 }
 
 .game-section .resolve-round-container .damaged {
-  -webkit-animation: blink 0.1s linear 5;
-  animation: blink 0.1s linear 5;
+  -webkit-animation: blink 1s linear 5;
+  animation: blink 1s linear 5;
 }
 
 .game-section .resolve-game-container {

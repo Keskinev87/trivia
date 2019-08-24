@@ -3,16 +3,106 @@ import io from 'socket.io-client';
 import { UserActionTypes } from '../actions/UserActions';
 import { User } from '../models/User';
 import { GameActionTypes } from '../actions/GameActions';
+import { GeneralAppActionTypes } from '../actions/GeneralAppActions';
 let connectionEndPoint = 'localhost:3001';
 
 if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
     connectionEndPoint = 'http://192.168.1.138:3001/';
 }
 var socket: any;
-let token = localStorage.getItem('token');
-socket = io(connectionEndPoint, {query: token ? `auth_token=${token}` : '', reconnection: true});
-attachSocketEventListeners();
-console.log("Socket initialized")
+
+export const service: any = {
+    init: () => {
+        console.log("Initing")
+        let token = localStorage.getItem('token');
+        socket = io(connectionEndPoint, {query: token ? `auth_token=${token}` : '', reconnection: true});
+        console.log(socket)
+        if(socket.disconnected===false) {
+            store.dispatch({
+                type: GeneralAppActionTypes.ERROR,
+                message: "It seems you have opened the game on another device or tab of your browser. Only one connection is allowed at a time. Please close the other window id you want to continue..."
+            })
+        } else {
+            attachSocketEventListeners();
+            console.log("Socket initialized");
+            service.getUser();
+        }
+        console.log("Socket initialized");
+    },
+    setIntent: (e: any) => {
+        console.log("Target is")
+        console.log(e.target)
+        store.dispatch({
+            type:UserActionTypes.CHANGE_INTENT,
+            intent: e.target.id ? e.target.id : e.target.parentNode.id
+        })
+    },
+    getUser: () => {
+        console.log("Trying to get user")
+        socket.emit('get user')
+        store.dispatch({
+            type:UserActionTypes.TRY_LOGIN
+        })
+    },
+    tryLogin: (email: string, password: string) => {
+        store.dispatch({
+            type:UserActionTypes.TRY_LOGIN,
+            loginData: {email, password}
+        })
+        socket.emit("login", {email: email, password: password});
+    },
+    trySignup: (email: string, password: string, nickName: string, avatar: string) => {
+        store.dispatch({
+            type:UserActionTypes.TRY_SIGNUP,
+            signupData: {
+                email, password, nickName, avatar
+            }
+        })
+        socket.emit("signup", {email: email, password: password, nickName: nickName, avatar: avatar});
+    },
+    //game services
+    searchForRandomGame: () => {
+        console.log("Will search for random game")
+        console.log(socket)
+        socket.emit("join random game")
+        store.dispatch({
+            type: UserActionTypes.SEARCHING_FOR_GAME
+        })
+        store.dispatch({
+            type: GameActionTypes.REQUEST_RANDOM_GAME_SEARCH
+        })
+    },
+    getQuestion: () => {
+        console.log("Getting question");
+        socket.emit("get question");
+    },
+    sendMultipleAnswer: (event: any) => {
+        console.log(event.target.id);
+        store.dispatch({
+            type: GameActionTypes.SEND_ANSWER,
+            answer: event.target.id
+        })
+        socket.emit('set multiple answer', {answer: event.target.id});
+    },
+    sendRangedAnswer: (event: any) => {
+        event.preventDefault();
+        let answer = (document.getElementById("ranged-question-answer") as HTMLInputElement).value;
+        store.dispatch({
+            type: GameActionTypes.SEND_ANSWER,
+            answer: event.target.id
+        })
+        socket.emit('set ranged answer', {answer: answer});
+    },
+    endGame: () => {
+        console.log("Ending game");
+        store.dispatch({
+            type: UserActionTypes.EXIT_GAME
+        });
+        store.dispatch({
+            type: GameActionTypes.RESET_GAME_STATE
+        })
+    }
+}
 
 function attachSocketEventListeners() {
     socket.on("login success", (data: any) => {
@@ -165,82 +255,5 @@ function attachSocketEventListeners() {
         //         playersAnswers: data.playersAnswers
         //     })
         // }
-    })
-    
-}
-
-export const service: any = {
-    setIntent: (e: any) => {
-        console.log("Target is")
-        console.log(e.target)
-        store.dispatch({
-            type:UserActionTypes.CHANGE_INTENT,
-            intent: e.target.id ? e.target.id : e.target.parentNode.id
-        })
-    },
-    getUser: () => {
-        console.log("Trying to get user")
-        socket.emit('get user')
-        store.dispatch({
-            type:UserActionTypes.TRY_LOGIN
-        })
-    },
-    tryLogin: (email: string, password: string) => {
-        store.dispatch({
-            type:UserActionTypes.TRY_LOGIN,
-            loginData: {email, password}
-        })
-        socket.emit("login", {email: email, password: password});
-    },
-    trySignup: (email: string, password: string, nickName: string, avatar: string) => {
-        store.dispatch({
-            type:UserActionTypes.TRY_SIGNUP,
-            signupData: {
-                email, password, nickName, avatar
-            }
-        })
-        socket.emit("signup", {email: email, password: password, nickName: nickName, avatar: avatar});
-    },
-    //game services
-    searchForRandomGame: () => {
-        console.log("Will search for random game")
-        console.log(socket)
-        socket.emit("join random game")
-        store.dispatch({
-            type: UserActionTypes.SEARCHING_FOR_GAME
-        })
-        store.dispatch({
-            type: GameActionTypes.REQUEST_RANDOM_GAME_SEARCH
-        })
-    },
-    getQuestion: () => {
-        console.log("Getting question");
-        socket.emit("get question");
-    },
-    sendMultipleAnswer: (event: any) => {
-        console.log(event.target.id);
-        store.dispatch({
-            type: GameActionTypes.SEND_ANSWER,
-            answer: event.target.id
-        })
-        socket.emit('set multiple answer', {answer: event.target.id});
-    },
-    sendRangedAnswer: (event: any) => {
-        event.preventDefault();
-        let answer = (document.getElementById("ranged-question-answer") as HTMLInputElement).value;
-        store.dispatch({
-            type: GameActionTypes.SEND_ANSWER,
-            answer: event.target.id
-        })
-        socket.emit('set ranged answer', {answer: answer});
-    },
-    endGame: () => {
-        console.log("Ending game");
-        store.dispatch({
-            type: UserActionTypes.EXIT_GAME
-        });
-        store.dispatch({
-            type: GameActionTypes.RESET_GAME_STATE
-        })
-    }
+    }) 
 }

@@ -31,7 +31,7 @@ export interface ResolveRoundProps {
     return (
     <div className="resolve-round-container">
         <div className={props.resolveData[playerKey].damage > 0 ? "resolve-player-container wrong" : "resolve-player-container correct"}>
-            <PlayerAvatar {...Object.assign({class:'player'}, props.playerInfo, props.resolveData[playerKey].damage > 0 ? {damaged: true} : {})} />
+            <PlayerAvatar {...Object.assign({class:'player'}, props.playerInfo, props.resolveData[playerKey].damage > 0 ? {damaged: true} : {damaged: false})} />
             <div className="player-resolve-status">{props.resolveData[playerKey].damage > 0 ? `Takes ${props.resolveData[playerKey].damage} damage` : "Answered correctly"}</div>
         </div>
         <div className={props.resolveData[opponentKeys[0]].damage > 0 ? "resolve-player-container wrong" : "resolve-player-container correct"}>

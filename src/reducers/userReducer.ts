@@ -122,6 +122,7 @@ export const userReducer: Reducer<UserState, UserActions> = (
         case UserActionTypes.SIGNUP_SUCCESS: {
             return {
                 ...state,
+                intent: Intents.LOGIN,
                 signupData: initialUserState.signupData,
                 isLoading: false,
                 isError: false,

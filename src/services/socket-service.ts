@@ -4,11 +4,14 @@ import { UserActionTypes } from '../actions/UserActions';
 import { User } from '../models/User';
 import { GameActionTypes } from '../actions/GameActions';
 import { GeneralAppActionTypes } from '../actions/GeneralAppActions';
-let connectionEndPoint = 'https://trivia-gladiators-server.herokuapp.com/';
+let env = 'development';
+let connectionEndPoint: string;
 
-// if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-//     connectionEndPoint = 'http://192.168.1.138:3001/';
-// }
+env === "production" ? connectionEndPoint = 'https://trivia-gladiators-server.herokuapp.com/' : connectionEndPoint = 'localhost:3001';
+
+if( env === "development" && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+    connectionEndPoint = 'http://192.168.1.138:3001/';
+}
 var socket: any;
 
 export const service: any = {

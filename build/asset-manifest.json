@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.a55e5d63.chunk.css",
+    "main.js": "/static/js/main.5a4deaf2.chunk.js",
+    "main.js.map": "/static/js/main.5a4deaf2.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
+    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
+    "static/js/2.85bf0d14.chunk.js": "/static/js/2.85bf0d14.chunk.js",
+    "static/js/2.85bf0d14.chunk.js.map": "/static/js/2.85bf0d14.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.036c8db2d975c49d5c4f0c146656765d.js": "/precache-manifest.036c8db2d975c49d5c4f0c146656765d.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.a55e5d63.chunk.css.map": "/static/css/main.a55e5d63.chunk.css.map",
+    "static/media/boy1.svg": "/static/media/boy1.16ed2e05.svg",
+    "static/media/boy2.svg": "/static/media/boy2.1fac4474.svg",
+    "static/media/boy3.svg": "/static/media/boy3.4b8aec94.svg",
+    "static/media/boy4.svg": "/static/media/boy4.fd5ad395.svg",
+    "static/media/cloudRainIcon.svg": "/static/media/cloudRainIcon.b678b658.svg",
+    "static/media/cupBronze.svg": "/static/media/cupBronze.68f6fe6c.svg",
+    "static/media/cupGold.svg": "/static/media/cupGold.6347c36c.svg",
+    "static/media/cupSilver.svg": "/static/media/cupSilver.02942480.svg",
+    "static/media/empty.svg": "/static/media/empty.aa4125d9.svg",
+    "static/media/girl1.svg": "/static/media/girl1.77c17ebe.svg",
+    "static/media/girl2.svg": "/static/media/girl2.05259861.svg",
+    "static/media/girl3.svg": "/static/media/girl3.5def5f67.svg",
+    "static/media/girl4.svg": "/static/media/girl4.5580008b.svg",
+    "static/media/index.css": "/static/media/logo.371c7e98.png"
+  }
+}

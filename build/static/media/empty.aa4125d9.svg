@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 500 500" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
+    <g id="Boy1" transform="matrix(2.12089,0,0,2.12089,-157.685,-116.18)">
+        <path d="M304.741,172.654C304.741,110.554 254.323,60.137 192.224,60.137C130.124,60.137 79.707,110.554 79.707,172.654C79.707,234.754 130.124,285.171 192.224,285.171C254.323,285.171 304.741,234.754 304.741,172.654Z" style="fill:rgb(101,113,129);fill-opacity:0;"/>
+        <clipPath id="_clip1">
+            <path d="M304.741,172.654C304.741,110.554 254.323,60.137 192.224,60.137C130.124,60.137 79.707,110.554 79.707,172.654C79.707,234.754 130.124,285.171 192.224,285.171C254.323,285.171 304.741,234.754 304.741,172.654Z"/>
+        </clipPath>
+        <g clip-path="url(#_clip1)">
+            <path id="CircleBackground" d="M304.741,172.654C304.741,110.554 254.323,60.137 192.224,60.137C130.124,60.137 79.707,110.554 79.707,172.654C79.707,234.754 130.124,285.171 192.224,285.171C254.323,285.171 304.741,234.754 304.741,172.654Z" style="fill:rgb(101,113,129);"/>
+        </g>
+    </g>
+</svg>

@@ -6,6 +6,7 @@ import { AppState } from '../store/Store';
 import Button from './shared/Button';
 import { service } from '../services/socket-service';
 import { GameState } from '../reducers/gameReducer';
+import logo from '../images/logo.png';
 
 interface AppProps {
   dispatch: any,
@@ -18,19 +19,23 @@ class Menu extends React.Component<AppProps> {
   render() {
    
     let randomBtnProps = {
-      btnName: "Random Game",
+      btnName: "Play",
       onClick: service.searchForRandomGame
     }
-    let friendBtnProps = {
-      btnName: "Challenge Friend",
-      onClick: service.challengeFriend
-    }
+    // let friendBtnProps = {
+    //   btnName: "Challenge Friend",
+    //   onClick: service.challengeFriend
+    // }
     
     return(
       <div className="menu-section">
+        <div className="logo-container">
+          <img className="logo-big" src={logo} alt="trivia-logo"></img>
+        </div>
+        <h1>Trivia Gladiators</h1>
         <div>
           <Button {...randomBtnProps} />
-          <Button {...friendBtnProps} />
+          {/* <Button {...friendBtnProps} /> */}
         </div>
       </div>
     )

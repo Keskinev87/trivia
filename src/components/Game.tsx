@@ -10,7 +10,7 @@ import MultipleAnswerQuestionComponent from './game/MultipleAnswerQuestionCompon
 import RangeQuestionComponent from './game/RangeQuestionComponent';
 import GeneralLoader from'./shared/GeneralLoader';
 import GameInfoComponent from './game/GameInfoComponent';
-import ResolveRoundContainer from './game/ResolveRoundComponent';
+import ResolveRoundComponent from './game/ResolveRoundComponent';
 import ResolveGameComponent from './game/ResolveGameComponent';
 
 interface AppProps {
@@ -119,11 +119,12 @@ class Game extends React.Component<AppProps> {
       case GameStatus.RESOLVING_ROUND: {
         showGameInfo = true;
         let resolveRoundProps = {
+          questionType: question && question.questionType,
           playerInfo: playerInfo,
           opponents: opponents,
           resolveData: this.props.gameState.resolveData
         }
-        element = <ResolveRoundContainer {...resolveRoundProps} />
+        element = <ResolveRoundComponent {...resolveRoundProps} />
         break;
       }
       case GameStatus.RESOLVING_GAME: {

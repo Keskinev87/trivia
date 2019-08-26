@@ -799,6 +799,23 @@ body {
   animation: blink 1s linear 3;
 }
 
+.game-section .question-container .timer-container {
+  width: 66.66%;
+  float: left;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin-left: 16.66%;
+  text-align: center;
+}
+
+.game-section .question-container .timer-container .timer {
+  height: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  -webkit-animation: widthChange 30s linear 1;
+          animation: widthChange 30s linear 1;
+}
+
 .game-section .question-body, .game-section .answer-container {
   background-color: #374254;
   color: white;
@@ -906,6 +923,36 @@ body {
   100% {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
+  }
+}
+
+@keyframes widthChange {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+  0% {
+    background-color: #33bf6b;
+  }
+  80% {
+    background-color: #d1335b;
+  }
+}
+
+@-webkit-keyframes widthChange {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+  0% {
+    background-color: #33bf6b;
+  }
+  80% {
+    background-color: #d1335b;
   }
 }
 /*# sourceMappingURL=index.css.map */

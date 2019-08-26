@@ -1,5 +1,6 @@
 import React from 'react';
 import AnswerComponent from './AnswerComponent';
+import Timer from './Timer';
 
 export interface QuestionProps {
     active: boolean;
@@ -26,6 +27,12 @@ function MultipleAnswerQuestionComponent(props: QuestionProps) {
                 <div><div className="answer-name">B</div><AnswerComponent {...Object.assign({id:'answerB'}, props)}/></div>
                 <div><div className="answer-name">C</div><AnswerComponent {...Object.assign({id:'answerC'}, props)}/></div>
                 <div><div className="answer-name">D</div><AnswerComponent {...Object.assign({id:'answerD'}, props)}/></div>
+                {props.active &&
+                    <div className="timer-container">
+                        <div className="timer"></div>
+                        <Timer {...{seconds: 30}} />
+                    </div>
+                }
                 {resolveAnswer && <span className={correctAnswer ? "resolved correct" : "resolved wrong"}>{correctAnswer ? "Correct Answer" : "Wrong Answer"}</span>}
             </div>
         )

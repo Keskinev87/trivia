@@ -45,6 +45,12 @@ function RangeQuestionComponent(props: QuestionProps) {
                     {firstOpponentAnswer && <div className="ranged-answer opponent1">{firstOpponentAnswer}</div>}
                     {secondOpponentAnswer && <div className="ranged-answer opponent2">{secondOpponentAnswer}</div>}
                 </div>}
+            {props.active &&
+                <div className="timer-container">
+                    <div className="timer"></div>
+                    <Timer {...{seconds: 30}} />
+                </div>
+            }
         </div>
     )
 }

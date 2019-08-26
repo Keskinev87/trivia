@@ -23,7 +23,7 @@ class App extends React.Component<AppProps> {
     let userState = this.props.userState;
     let element: any;
     if (this.props.generalAppState.isError) {
-      element = <div>{this.props.generalAppState.error}</div>
+      element = <div className="general-error-message">{this.props.generalAppState.error}</div>
     } else {
       switch (true) {
         case userState.isLoading:

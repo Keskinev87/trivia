@@ -7,7 +7,7 @@ $lighttextcolor: #f8f8f8;
 $darktextcolor: #f8f8f8;
 $bordercolor: #d3e3fc;
 $hovercolor: #f5e6cc;
-$ownAnswerColor: #8293a7;
+$ownAnswerColor: #ff9100;
 $inactivecolor: #374254;
 $activecolor: #8293a7;
 $playerColor: #33bf6b;
@@ -81,6 +81,9 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.general-error-message {
+  color: $lighttextcolor;
+}
 // .main {
 //   @includecol-10;
 //   @include col-offset-1;
@@ -574,19 +577,6 @@ body {
       border-radius: 5px;
       text-align: center;
     }
-
-    .ranged-answer.opponent1 {
-      @include col-offset-1;
-    }
-
-    .ranged-answer.opponent2 {
-      @include col-offset-2;
-    }
-  
-    .own-answer {
-      background-color: $ownAnswerColor;
-    }
-  
     .opponent1 {
       background-color: $firstOpponentColor;
     }
@@ -594,6 +584,21 @@ body {
     .opponent2 {
       background-color: $secondOpponentColor;
     }
+
+    .ranged-answer.opponent1-color {
+      @include col-offset-1;
+      color: $firstOpponentColor;
+    }
+
+    .ranged-answer.opponent2-color {
+      @include col-offset-2;
+      color: $secondOpponentColor;
+    }
+  
+    .own-answer {
+      background-color: $ownAnswerColor;
+    }
+  
   
     .own-answer.opponent1 {
       background-image: linear-gradient(to right, 

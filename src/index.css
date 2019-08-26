@@ -7,6 +7,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.general-error-message {
+  color: #f8f8f8;
+}
+
 .loader {
   position: absolute;
   left: 50%;
@@ -803,18 +807,6 @@ body {
   text-align: center;
 }
 
-.game-section .question-container .ranged-answer.opponent1 {
-  margin-left: 8.33%;
-}
-
-.game-section .question-container .ranged-answer.opponent2 {
-  margin-left: 16.66%;
-}
-
-.game-section .question-container .own-answer {
-  background-color: #8293a7;
-}
-
 .game-section .question-container .opponent1 {
   background-color: #53657d;
 }
@@ -823,14 +815,28 @@ body {
   background-color: #a143b1;
 }
 
+.game-section .question-container .ranged-answer.opponent1-color {
+  margin-left: 8.33%;
+  color: #53657d;
+}
+
+.game-section .question-container .ranged-answer.opponent2-color {
+  margin-left: 16.66%;
+  color: #a143b1;
+}
+
+.game-section .question-container .own-answer {
+  background-color: #ff9100;
+}
+
 .game-section .question-container .own-answer.opponent1 {
-  background-image: -webkit-gradient(linear, left top, right top, color-stop(50%, #8293a7), color-stop(50%, #53657d));
-  background-image: linear-gradient(to right, #8293a7 50%, #53657d 50%);
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(50%, #ff9100), color-stop(50%, #53657d));
+  background-image: linear-gradient(to right, #ff9100 50%, #53657d 50%);
 }
 
 .game-section .question-container .own-answer.opponent2 {
-  background-image: -webkit-gradient(linear, left top, right top, color-stop(50%, #8293a7), color-stop(50%, #a143b1));
-  background-image: linear-gradient(to right, #8293a7 50%, #a143b1 50%);
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(50%, #ff9100), color-stop(50%, #a143b1));
+  background-image: linear-gradient(to right, #ff9100 50%, #a143b1 50%);
 }
 
 .game-section .question-container .opponent1.opponent2 {
@@ -839,8 +845,8 @@ body {
 }
 
 .game-section .question-container .own-answer.opponent1.opponent2 {
-  background-image: -webkit-gradient(linear, left top, right top, color-stop(33%, #8293a7), color-stop(33%, #53657d), color-stop(66%, #53657d), color-stop(66%, #a143b1));
-  background-image: linear-gradient(to right, #8293a7 33%, #53657d 33%, #53657d 66%, #a143b1 66%);
+  background-image: -webkit-gradient(linear, left top, right top, color-stop(33%, #ff9100), color-stop(33%, #53657d), color-stop(66%, #53657d), color-stop(66%, #a143b1));
+  background-image: linear-gradient(to right, #ff9100 33%, #53657d 33%, #53657d 66%, #a143b1 66%);
 }
 
 .game-section .question-container .resolved {

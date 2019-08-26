@@ -281,14 +281,42 @@ body {
 }
 
 .menu-section {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  text-align: center;
+
+  .logo-container {
+    margin-top: 10vh;
+    @include col-12;
+  }
+
+  .logo-big {
+    @include for-size(phone) {    
+      @include col-6;
+      @include col-offset-3;
+    };
+    @include for-size(tablet-portrait) {
+      @include col-4;
+      @include col-offset-4;
+    };
+    @include for-size(tablet-landscape) {
+      @include col-2;
+      @include col-offset-5;
+    };
+    @include for-size(desktop) {
+      @include col-2;
+      @include col-offset-5;
+    };
+    @include for-size(big-desktop) {
+      @include col-2;
+      @include col-offset-5;
+    };
+    height: auto;
+  }
+
   button {
     @include button;
     @include col-6;
     @include col-offset-3;
-    margin-top: 20px;
+    margin-top: 50px;
     margin-bottom: 20px;
   }
 }

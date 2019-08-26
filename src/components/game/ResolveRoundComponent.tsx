@@ -25,7 +25,7 @@ export interface ResolveRoundProps {
     if(props.resolveData[opponentKeys[0]].damage > 0)
         opponentOneProps.damaged = true
 
-    if(props.resolveData[opponentKeys[0]].damage > 0)
+    if(props.resolveData[opponentKeys[1]].damage > 0)
         opponentTwoProps.damaged = true
 
     return (

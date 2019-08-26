@@ -30,7 +30,7 @@ function MultipleAnswerQuestionComponent(props: QuestionProps) {
                 {props.active &&
                     <div className="timer-container">
                         <div className="timer"></div>
-                        <Timer {...{seconds: 30}} />
+                        <Timer {...{seconds: 20}} />
                     </div>
                 }
                 {resolveAnswer && <span className={correctAnswer ? "resolved correct" : "resolved wrong"}>{correctAnswer ? "Correct Answer" : "Wrong Answer"}</span>}

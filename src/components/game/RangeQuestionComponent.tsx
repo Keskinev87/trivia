@@ -1,5 +1,6 @@
 import React from 'react';
 import { service } from '../../services/socket-service';
+import Timer from './Timer';
 
 export interface QuestionProps {
     id?: any, 
@@ -48,7 +49,7 @@ function RangeQuestionComponent(props: QuestionProps) {
             {props.active &&
                 <div className="timer-container">
                     <div className="timer"></div>
-                    <Timer {...{seconds: 30}} />
+                    <Timer {...{seconds: 20}} />
                 </div>
             }
         </div>

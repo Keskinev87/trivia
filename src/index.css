@@ -812,8 +812,8 @@ body {
   height: 10px;
   margin-left: auto;
   margin-right: auto;
-  -webkit-animation: widthChange 30s linear 1;
-          animation: widthChange 30s linear 1;
+  -webkit-animation: widthChange 20s linear 1;
+          animation: widthChange 20s linear 1;
 }
 
 .game-section .question-body, .game-section .answer-container {
@@ -929,14 +929,10 @@ body {
 @keyframes widthChange {
   from {
     width: 100%;
+    background-color: #33bf6b;
   }
   to {
     width: 0%;
-  }
-  0% {
-    background-color: #33bf6b;
-  }
-  80% {
     background-color: #d1335b;
   }
 }

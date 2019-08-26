@@ -602,7 +602,7 @@ body {
         height: 10px;
         margin-left: auto;
         margin-right: auto;
-        animation: widthChange 30s linear 1;
+        animation: widthChange 20s linear 1;
       }
     }
   }
@@ -676,10 +676,10 @@ body {
 @-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
 @keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
 @keyframes widthChange {
-  from {width: 100%;}
-  to {width: 0%;}
-  0%{background-color: $correctAnswerColor;}
-  80%{background-color: $wrongAnswerColor;}
+  from {width: 100%; background-color: $correctAnswerColor;}
+  to {width: 0%; background-color: $wrongAnswerColor;}
+  // 0%{background-color: $correctAnswerColor;}
+  // 80%{background-color: $wrongAnswerColor;}
 }
 @-moz-keyframes widthChange {
   from {width: 100%;}

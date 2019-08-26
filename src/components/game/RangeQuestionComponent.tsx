@@ -18,12 +18,19 @@ function RangeQuestionComponent(props: QuestionProps) {
     console.log("The state players in question are")
     console.log(props.opponents)
     let firstOpponentAnswer:any = undefined;
+    let firstOpponentName:string = '';
     let secondOpponentAnswer: any = undefined;
+    let secondOpponentName:string = '';
     props.opponents && Object.keys(props.opponents).forEach((key, index) => {
-        if(index === 0)
+        if(index === 0) {
             firstOpponentAnswer = props.opponents[key].currentAnswer;
-        if(index === 1)
+            firstOpponentName = props.opponents[key].nickName;
+        }
+        if(index === 1) {
             secondOpponentAnswer = props.opponents[key].currentAnswer;
+            secondOpponentName = props.opponents[key].nickName;
+        }
+            
     })
     return (
         <div className="question-container">
@@ -44,8 +51,8 @@ function RangeQuestionComponent(props: QuestionProps) {
             {props.waitingForAnswers && <div className="question-announcement"><span>Waiting for other players to answer...</span></div>}
             {!props.active && !props.waitingForAnswers && 
                 <div className="ranged-answer-container">
-                    {firstOpponentAnswer && <div className="ranged-answer opponent1">{firstOpponentAnswer}</div>}
-                    {secondOpponentAnswer && <div className="ranged-answer opponent2">{secondOpponentAnswer}</div>}
+                    {firstOpponentAnswer && <div className="ranged-answer opponent1-color"><span>{firstOpponentName} answered: </span>{firstOpponentAnswer || "no answer"}</div>}
+                    {secondOpponentAnswer && <div className="ranged-answer opponent2-color"><span>{secondOpponentName} answered: </span>{secondOpponentAnswer || "no answer"}</div>}
                 </div>}
             {props.active &&
                 <div className="timer-container">

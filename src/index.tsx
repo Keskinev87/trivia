@@ -1,4 +1,5 @@
 import React from 'react';
+import Helmet from 'react-helmet';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
@@ -13,9 +14,13 @@ interface AppProps {
 }
 
 const Root: React.SFC<AppProps> = props => {
+    const title:string = "Trivia Gladiators"
     service.init();
     return (
         <Provider store={props.store}>
+        <Helmet>
+            <title>{title}</title>
+        </Helmet>
            <App />
         </Provider>
     )

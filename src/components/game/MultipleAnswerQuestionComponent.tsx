@@ -33,6 +33,7 @@ function MultipleAnswerQuestionComponent(props: QuestionProps) {
                         <Timer {...{seconds: 20}} />
                     </div>
                 }
+                {props.waitingForAnswers && <div className="question-announcement"><span>Waiting for other players to answer...</span></div>}
                 {resolveAnswer && <span className={correctAnswer ? "resolved correct" : "resolved wrong"}>{correctAnswer ? "Correct Answer" : "Wrong Answer"}</span>}
             </div>
         )

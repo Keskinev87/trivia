@@ -531,7 +531,7 @@ body {
   }
 
   .player-answers-container {
-    display: block;
+    @include col-10;
     .block {
       display: block;
     }

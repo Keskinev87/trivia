@@ -740,7 +740,10 @@ body {
 }
 
 .game-section .player-answers-container {
-  display: block;
+  width: 83.33%;
+  float: left;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
 .game-section .player-answers-container .block {

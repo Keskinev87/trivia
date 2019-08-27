@@ -21,7 +21,7 @@ function MultipleAnswerQuestionComponent(props: QuestionProps) {
         return (
             <div className="question-container">
                 <div className="question-body">
-                    <p>{props.question.body}</p>
+                    <p id="question-body">{props.question.body}</p>
                 </div>
                 <div><div className="answer-name">A</div><AnswerComponent {...Object.assign({id:'answerA'}, props)}/></div>
                 <div><div className="answer-name">B</div><AnswerComponent {...Object.assign({id:'answerB'}, props)}/></div>

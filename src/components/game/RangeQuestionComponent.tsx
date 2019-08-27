@@ -35,7 +35,7 @@ function RangeQuestionComponent(props: QuestionProps) {
     return (
         <div className="question-container">
             <div className="question-body">
-                <p>{props.question.body}</p>
+                <p id="question-body">{props.question.body}</p>
             </div>
             <form onSubmit={service.sendRangedAnswer}>
                 <div className="form-group">

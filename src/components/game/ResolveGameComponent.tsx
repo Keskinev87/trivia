@@ -64,7 +64,7 @@ function ResolveGameComponent(props: ResolveGameProps) {
                     {props.resolveGameData[props.playerInfo.id] === 'third' && "You finished third"}
                 </span>
             </div>
-            <Button {...{btnName: "Return to lobby", onClick: service.endGame}}/>
+            <Button {...{id:"return-to-lobby-btn", btnName: "Return to lobby", onClick: service.endGame}}/>
         </div>
     )
 }

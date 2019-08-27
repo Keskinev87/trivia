@@ -32,7 +32,7 @@ class Timer extends React.Component<timeProps, timeState> {
     }
 
     updateTime() {
-        console.log(this.state.seconds)
+        // console.log(this.state.seconds)
         if(this.state.seconds > 0)
             this.setState({
                 seconds: this.state.seconds - 1

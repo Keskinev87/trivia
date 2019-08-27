@@ -23,7 +23,7 @@ export const generalAppReducer: Reducer<GeneralAppState, GeneralAppActions> = (
                 error: action.message
             }
         default: {
-            console.log("App action defaulted");
+            // console.log("App action defaulted");
             return state;
         }
             

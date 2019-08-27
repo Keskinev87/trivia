@@ -12,8 +12,8 @@ export interface QuestionProps {
 }
 
 function MultipleAnswerQuestionComponent(props: QuestionProps) {
-    console.log("Rendering question")
-    console.log("Correct answer", props.correctAnswer);
+    // console.log("Rendering question")
+    // console.log("Correct answer", props.correctAnswer);
     let resolveAnswer: boolean;
     let correctAnswer: boolean;
     props.answer && props.correctAnswer ? resolveAnswer = true : resolveAnswer = false;

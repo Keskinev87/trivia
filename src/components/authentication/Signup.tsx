@@ -90,8 +90,8 @@ class Signup extends React.Component<UserProps, any> {
     }
 
     render() {
-        console.log("Signup state is")
-        console.log(this.props.userState)
+        // console.log("Signup state is")
+        // console.log(this.props.userState)
         let avatarImages:any = [];
         Object.keys(avatars).forEach((key) => {
             let avatarProps = {

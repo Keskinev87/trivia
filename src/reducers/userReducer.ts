@@ -155,7 +155,7 @@ export const userReducer: Reducer<UserState, UserActions> = (
             }
         }
         default: {
-            console.log("Defaulted");
+            // console.log("Defaulted");
             return state;
         }
     }

@@ -4,7 +4,7 @@ import { UserActionTypes } from '../actions/UserActions';
 import { User } from '../models/User';
 import { GameActionTypes } from '../actions/GameActions';
 import { GeneralAppActionTypes } from '../actions/GeneralAppActions';
-let env = 'development';
+let env = 'production';
 let connectionEndPoint: string;
 
 env === "production" ? connectionEndPoint = 'https://trivia-gladiators-server.herokuapp.com/' : connectionEndPoint = 'localhost:3001';
@@ -16,10 +16,10 @@ var socket: any;
 
 export const service: any = {
     init: () => {
-        console.log("Initing")
+        // console.log("Initing")
         let token = localStorage.getItem('token');
         socket = io(connectionEndPoint, {query: token ? `auth_token=${token}` : '', reconnection: true});
-        console.log(socket)
+        // console.log(socket)
         if(socket.disconnected===false) {
             store.dispatch({
                 type: GeneralAppActionTypes.ERROR,
@@ -27,21 +27,21 @@ export const service: any = {
             })
         } else {
             attachSocketEventListeners();
-            console.log("Socket initialized");
+            // console.log("Socket initialized");
             service.getUser();
         }
-        console.log("Socket initialized");
+        // console.log("Socket initialized");
     },
     setIntent: (e: any) => {
-        console.log("Target is")
-        console.log(e.target)
+        // console.log("Target is")
+        // console.log(e.target)
         store.dispatch({
             type:UserActionTypes.CHANGE_INTENT,
             intent: e.target.id ? e.target.id : e.target.parentNode.id
         })
     },
     getUser: () => {
-        console.log("Trying to get user")
+        // console.log("Trying to get user")
         socket.emit('get user')
         store.dispatch({
             type:UserActionTypes.TRY_LOGIN
@@ -65,8 +65,8 @@ export const service: any = {
     },
     //game services
     searchForRandomGame: () => {
-        console.log("Will search for random game")
-        console.log(socket)
+        // console.log("Will search for random game")
+        // console.log(socket)
         socket.emit("join random game")
         store.dispatch({
             type: UserActionTypes.SEARCHING_FOR_GAME
@@ -76,11 +76,11 @@ export const service: any = {
         })
     },
     getQuestion: () => {
-        console.log("Getting question");
+        // console.log("Getting question");
         socket.emit("get question");
     },
     sendMultipleAnswer: (event: any) => {
-        console.log(event.target.id);
+        // console.log(event.target.id);
         store.dispatch({
             type: GameActionTypes.SEND_ANSWER,
             answer: event.target.id
@@ -120,8 +120,8 @@ function attachSocketEventListeners() {
     })
     
     socket.on("login failed", (data: any) => {
-        console.log("error")
-        console.log(data.reason)
+        // console.log("error")
+        // console.log(data.reason)
         store.dispatch({
             type: UserActionTypes.LOGIN_FAILED,
             error: data.reason
@@ -129,8 +129,8 @@ function attachSocketEventListeners() {
     });
     
     socket.on("user", (user: User) => {
-        console.log("Got user")
-        console.log(user)
+        // console.log("Got user")
+        // console.log(user)
         user ? 
         store.dispatch({
           user: user,
@@ -147,8 +147,8 @@ function attachSocketEventListeners() {
       //if the login succeeds, reconnect the socket in order to add the token to it. 
     
     socket.on("signup failed", (data: any) => {
-        console.log("error")
-        console.log(data.reason)
+        // console.log("error")
+        // console.log(data.reason)
         store.dispatch({
             type: UserActionTypes.SIGNUP_FAILED,
             error: data.reason
@@ -172,7 +172,7 @@ function attachSocketEventListeners() {
     // GAME EVENTS
     socket.on("random game created", (data: any) => {
         console.log("Game was created")
-        console.log(data)
+        // console.log(data)
         store.dispatch({
             type: GameActionTypes.CREATE_RANDOM_GAME,
             roomId: data.roomId,
@@ -190,8 +190,8 @@ function attachSocketEventListeners() {
     });
     
     socket.on("new question", (data:any) => {
-        console.log("QUestion is");
-        console.log(data.question);
+        // console.log("QUestion is");
+        // console.log(data.question);
         store.dispatch({
             type: GameActionTypes.RECEIVED_QUESTION,
             question: data.question
@@ -206,8 +206,8 @@ function attachSocketEventListeners() {
     })
 
     socket.on("resolve game", (resolveData: any) => {
-        console.log("The resolve game data is")
-        console.log(resolveData)
+        // console.log("The resolve game data is")
+        // console.log(resolveData)
         store.dispatch({
             type: GameActionTypes.RESOLVE_GAME,
             resolveData: resolveData
@@ -222,8 +222,8 @@ function attachSocketEventListeners() {
     // })
 
     socket.on('resolve round', (data: any) => {
-        console.log("Should resolve round now")
-        console.log(data)
+        // console.log("Should resolve round now")
+        // console.log(data)
         store.dispatch({
             type: GameActionTypes.RESOLVE_ROUND,
             resolveData: data
@@ -238,12 +238,12 @@ function attachSocketEventListeners() {
     })
 
     socket.on("show answer", (data: any) => {
-        console.log("The answer is")
-        console.log(data.correctAnswer)
-        console.log("Your answer is");
-        console.log(store.getState().gameState)
-        console.log("Other players' answers")
-        console.log(data.opponentsAnswers)
+        // console.log("The answer is")
+        // console.log(data.correctAnswer)
+        // console.log("Your answer is");
+        // console.log(store.getState().gameState)
+        // console.log("Other players' answers")
+        // console.log(data.opponentsAnswers)
         // if(data.answer === store.getState().gameState.currentAnswer) {
             // console.log("Right answer")
             store.dispatch({

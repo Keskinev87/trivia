@@ -181,7 +181,7 @@ export const gameReducer: Reducer<GameState, GameActions> = (
             }
         }
         default: {
-            console.log("Defaulted");
+            // console.log("Defaulted");
             return state;
         }
     }

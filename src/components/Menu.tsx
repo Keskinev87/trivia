@@ -19,6 +19,7 @@ class Menu extends React.Component<AppProps> {
   render() {
    
     let randomBtnProps = {
+      id: "play-random-game-btn",
       btnName: "Play",
       onClick: service.searchForRandomGame
     }

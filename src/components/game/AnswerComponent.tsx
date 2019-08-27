@@ -22,7 +22,7 @@ function AnswerComponent(props: AnswerProps) {
         elementClass += ' correct-answer';
     if(props && props.opponents) {
         Object.keys(props.opponents).forEach((key, index) => {
-            console.log(props, props.id)
+            // console.log(props, props.id)
             if(props.opponents[key].currentAnswer === props.id)
                 elementClass += ` opponent${index + 1}`
         })

@@ -41,7 +41,7 @@ class Game extends React.Component<AppProps> {
     let showGameInfo = false;
     let gameInfoProps: any;
 
-    console.log("Status is", status)
+    // console.log("Status is", status)
     switch (status) {
       case GameStatus.SEARCHING_FOR_GAME: {
         element = <GeneralLoader text="Searching for a game..." />;
@@ -86,7 +86,7 @@ class Game extends React.Component<AppProps> {
           correctAnswer: undefined,
           opponents: undefined
         }
-        console.log("Question type is", question && question.questionType)
+        // console.log("Question type is", question && question.questionType)
         element = question && question.questionType === "multiple" ? <MultipleAnswerQuestionComponent {...props}/> : <RangeQuestionComponent {...props} />;
         break;
       }

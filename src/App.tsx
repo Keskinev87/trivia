@@ -19,7 +19,7 @@ interface AppProps {
 
 class App extends React.Component<AppProps> {
   render() {
-    console.log("Rendering App")
+    // console.log("Rendering App")
     let userState = this.props.userState;
     let element: any;
     if (this.props.generalAppState.isError) {

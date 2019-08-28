@@ -14,7 +14,9 @@ export enum PlayerStatus {
 
 export enum Intents {
     LOGIN = "LOGIN",
-    SIGNUP = "SIGNUP"
+    SIGNUP = "SIGNUP",
+    INSTRUCTIONS = "INSTRUCTIONS",
+    MENU = "MENU"
 }
 
 export interface SignupData {
@@ -99,6 +101,7 @@ export const userReducer: Reducer<UserState, UserActions> = (
                 loginData: initialUserState.loginData,
                 isLoading: false,
                 isError: false,
+                intent: Intents.MENU,
                 user: action.user,
                 token: action.token,
                 error: ''

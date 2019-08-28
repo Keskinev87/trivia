@@ -407,6 +407,19 @@ body {
   }
 }
 
+.menu-section h3 {
+  text-align: center;
+}
+
+.menu-section .instructions-container {
+  width: 66.66%;
+  float: left;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin-left: 16.66%;
+  text-align: justify;
+}
+
 .menu-section button {
   background-color: #8293a7;
   border: none;

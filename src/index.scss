@@ -315,6 +315,16 @@ body {
     height: auto;
   }
 
+  h3 {
+    text-align: center;
+  }
+  
+  .instructions-container {
+    @include col-8;
+    @include col-offset-2;
+    text-align: justify;
+  }
+
   button {
     @include button;
     @include col-6;

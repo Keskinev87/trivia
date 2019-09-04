@@ -53,10 +53,9 @@ class Menu extends React.Component<AppProps> {
         {this.props.userState.intent === Intents.INSTRUCTIONS &&
           <div className="instructions-container">
             <h3>Instructions</h3>
-            <p>NOTES FOR REVIEW OF THE GAME - The game is played by 3 players online. 2 bots are running constantly between 09:00 - 18:00 for demo.
-              As an alternative you can just open three different browsers and login from them with three different accounts
-              (the game prevents the same user to connect multiple times). Or just play with real people. Since this is alpha version,
-               you can create an account with any email address. You don't have to confirm the registration after that.</p>
+            <p>NOTES FOR REVIEW OF THE GAME - This is an alpha version. The questions are not many - only enough for a demo. You will play versus bots. 
+              Of course - the game allows multiplayer with real people but I don't expect you to search for two other players in order to test the app. 
+            </p>
             <p>The game consists of 10 questions - 5 multiple answer questions and 5 where you have to give the closest numerical answer.
               You have 20 seconds for each question. Can you answer them all?
             </p>

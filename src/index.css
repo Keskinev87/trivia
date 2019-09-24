@@ -894,7 +894,7 @@ body {
 .game-section .question-body, .game-section .answer-container {
   background-color: #374254;
   color: white;
-  padding: 10px 0 10px 0;
+  padding: 10px;
   margin-top: 20px;
   margin-bottom: 20px;
   text-align: center;

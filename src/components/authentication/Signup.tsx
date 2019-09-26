@@ -127,7 +127,7 @@ class Signup extends React.Component<UserProps, any> {
                     </div>
                 </div>
                 {this.props.userState.isError && <p>{this.props.userState.error}</p>}
-                <button type="submit" value="Submit">Signup</button>
+                <button className="auth-submit" type="submit" value="Submit">Signup</button>
             </form>
         )
     }

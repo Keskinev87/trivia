@@ -4,7 +4,7 @@ import { UserActionTypes } from '../actions/UserActions';
 import { User } from '../models/User';
 import { GameActionTypes } from '../actions/GameActions';
 import { GeneralAppActionTypes } from '../actions/GeneralAppActions';
-let env = 'production';
+let env = 'development';
 let connectionEndPoint: string;
 
 env === "production" ? connectionEndPoint = 'https://trivia-gladiators-server.herokuapp.com/' : connectionEndPoint = 'localhost:3001';
@@ -53,6 +53,12 @@ export const service: any = {
             loginData: {email, password}
         })
         socket.emit("login", {email: email, password: password});
+    },
+    tryLoginWithFacebook: (data: any ) => {
+        store.dispatch({
+            type: UserActionTypes.TRY_LOGIN
+        })
+        socket.emit("login facebook", data);
     },
     trySignup: (email: string, password: string, nickName: string, avatar: string) => {
         store.dispatch({

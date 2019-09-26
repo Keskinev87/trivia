@@ -197,7 +197,7 @@ body {
       @include col-offset-2;
     };
 
-    button {
+    .auth-submit {
       margin-top: 20px;
       @include button;
       @include col-6;

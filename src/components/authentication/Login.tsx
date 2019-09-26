@@ -2,6 +2,19 @@ import React from 'react';
 import { AppState } from '../../store/Store';
 import { connect } from 'react-redux';
 import { service } from '../../services/socket-service';
+import FacebookLogin from 'react-facebook-login';
+
+interface fbData {
+    accessToken: string,
+    data_access_expiration_time: number,
+    email: string,
+    expiresIn: number,
+    id: string,
+    name: string
+    signedRequest: string,
+    userID: string
+}
+
 
 class Login extends React.Component<any, any> {
     constructor(props:any) {
@@ -13,6 +26,7 @@ class Login extends React.Component<any, any> {
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleFacebookLogin = this.handleFacebookLogin.bind(this);
     }
 
     handleChange(event: any) {
@@ -27,6 +41,14 @@ class Login extends React.Component<any, any> {
         service.tryLogin(this.state.email, this.state.password)
     }
 
+    handleFacebookLogin(result: fbData) {
+        console.log("Facebook result is");
+        console.log(result);
+        service.tryLoginWithFacebook(result);
+    }
+
+
+
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
@@ -40,7 +62,13 @@ class Login extends React.Component<any, any> {
                     <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
                 </div>
                 {this.props.userState.isError && <p>{this.props.userState.error}</p>}
-                <button type="submit" value="Submit">Login</button>
+                <button className="auth-submit" type="submit" value="Submit">Login</button>
+                <FacebookLogin
+                    appId="676275349561535"
+                    autoLoad={true}
+                    fields="name,email"
+                    // onClick={componentClicked}
+                    callback={this.handleFacebookLogin} />
             </form>
         )
     }

@@ -178,7 +178,7 @@ body {
   }
 }
 
-.auth-section .auth-form button {
+.auth-section .auth-form .auth-submit {
   margin-top: 20px;
   background-color: #8293a7;
   border: none;

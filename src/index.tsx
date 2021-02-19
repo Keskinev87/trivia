@@ -4,10 +4,11 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { Provider } from 'react-redux';
+ 
 import { Store } from 'redux';
 import configureStore, { AppState } from './store/Store';
 import { service } from './services/socket-service';
+import { Provider } from 'react-redux';
 
 interface AppProps {
     store: Store<AppState>
